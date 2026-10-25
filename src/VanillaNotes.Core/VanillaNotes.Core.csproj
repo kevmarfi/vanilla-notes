@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Markdig" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" />
+    <PackageReference Include="SQLite3MC.PCLRaw.bundle" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- The migrations travel inside the assembly, named by their set and their file. -->
+    <EmbeddedResource Include="Data/Migrations/**/*.sql" LogicalName="Migrations/%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,24 @@
+<!-- The one window of the application: the page it shows, and the dialog in front over a shade, as the dialogs of the web version over its page. A dialog opened from another hides it until it is closed, so that one card is seen at a time. -->
+<Window x:Class="VanillaNotes.App.Views.ShellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:VanillaNotes.App.Controls"
+        Style="{StaticResource AppWindow}" Title="{Binding Page.ProfileName, StringFormat='{}{0} · Vanilla Notes', FallbackValue='Vanilla Notes'}"
+        Width="{StaticResource MainWidth}" Height="{StaticResource MainHeight}" MinWidth="{StaticResource MainMinWidth}" MinHeight="{StaticResource MainMinHeight}" WindowStartupLocation="CenterScreen"
+        Icon="/Assets/app.ico">
+    <Grid>
+        <ContentControl Content="{Binding Page}" Focusable="False" IsEnabled="{Binding IsPageActive}" />
+        <ItemsControl ItemsSource="{Binding Dialogs}" Focusable="False">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <controls:DialogLayer Content="{Binding Dialog}" Visibility="{Binding IsFront, Converter={StaticResource Visible}}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Window>

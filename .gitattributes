@@ -1,0 +1,13 @@
+# CRLF line endings for every text file, as .editorconfig sets
+* text=auto eol=crlf
+
+# Binaries: no line-ending conversion, no diff
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.db binary
+*.zip binary

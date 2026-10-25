@@ -1,0 +1,75 @@
+<!-- The notes asked for: the heading and a new note, or emptying the trash; how many; the cards; and more of the list. -->
+<UserControl x:Class="VanillaNotes.App.Views.NoteListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:VanillaNotes.App.Controls"
+        xmlns:vm="clr-namespace:VanillaNotes.App.ViewModels">
+    <DockPanel Margin="{StaticResource NoteListMargin}">
+        <DockPanel DockPanel.Dock="Top" Margin="{StaticResource ListHeaderMargin}">
+            <Button DockPanel.Dock="Right" Style="{StaticResource DangerButton}" Padding="{StaticResource SmallButtonPadding}" Command="{Binding EmptyTrashCommand}"
+                    Visibility="{Binding CanEmptyTrash, Converter={StaticResource Visible}}">
+                <StackPanel Orientation="Horizontal">
+                    <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconTrash}" Margin="{StaticResource GapRightSm}" />
+                    <TextBlock Text="{Binding [list.emptyTrash], Source={StaticResource Texts}}" FontSize="{StaticResource TextSm}" />
+                </StackPanel>
+            </Button>
+            <Button DockPanel.Dock="Right" Style="{StaticResource PrimaryButton}" Padding="{StaticResource SmallButtonPadding}" Command="{Binding NewNoteCommand}"
+                    ToolTip="{Binding [list.newNote.help], Source={StaticResource Texts}}" Visibility="{Binding IsTrash, Converter={StaticResource Hidden}}">
+                <StackPanel Orientation="Horizontal">
+                    <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPlus}" Margin="{StaticResource GapRightSm}" />
+                    <TextBlock Text="{Binding [list.newNote], Source={StaticResource Texts}}" FontSize="{StaticResource TextSm}" />
+                </StackPanel>
+            </Button>
+            <TextBlock Text="{Binding Heading}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+        </DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="{Binding CountText}" Style="{StaticResource MutedText}" Margin="{StaticResource CaptionMargin}" />
+        <TextBlock DockPanel.Dock="Top" Text="{Binding Failure}" Style="{StaticResource ErrorText}" Margin="{StaticResource CaptionMargin}" Visibility="{Binding HasFailure, Converter={StaticResource Visible}}" />
+        <Border DockPanel.Dock="Top" BorderBrush="{DynamicResource Border}" BorderThickness="1" CornerRadius="{StaticResource RadiusLg}" Padding="{StaticResource EmptyListPadding}" Margin="{StaticResource GapRightSm}"
+                Visibility="{Binding IsEmpty, Converter={StaticResource Visible}}">
+            <DockPanel>
+                <ContentControl Style="{StaticResource Icon}" Content="{StaticResource IconNotes}" Foreground="{DynamicResource Accent}" Margin="{StaticResource GapRightMd}" />
+                <TextBlock Text="{Binding EmptyText}" Style="{StaticResource MutedText}" />
+            </DockPanel>
+        </Border>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="{StaticResource ScrollGutterPadding}">
+            <StackPanel>
+                <ListBox Style="{StaticResource BareList}" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource NoteCard}">
+                            <Setter Property="controls:Dropping.Note" Value="{Binding Id}" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vm:NoteItemViewModel}">
+                            <StackPanel>
+                                <DockPanel>
+                                    <ContentControl DockPanel.Dock="Right" Style="{StaticResource IconXs}" Content="{StaticResource IconPin}" Foreground="{DynamicResource Accent}" VerticalAlignment="Center"
+                                                    Margin="{StaticResource GapLeftSm}" Visibility="{Binding IsPinned, Converter={StaticResource Visible}}"
+                                                    ToolTip="{Binding [list.pinned], Source={StaticResource Texts}}" />
+                                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                </DockPanel>
+                                <TextBlock Text="{Binding DateText}" Style="{StaticResource MutedText}" Margin="{StaticResource GapAboveXs}" />
+                                <TextBlock Text="{Binding Snippet}" Style="{StaticResource MutedText}" MaxHeight="{StaticResource SnippetMaxHeight}" TextTrimming="CharacterEllipsis" Margin="{StaticResource GapAboveXs}"
+                                           Visibility="{Binding HasSnippet, Converter={StaticResource Visible}}" />
+                                <ItemsControl ItemsSource="{Binding Tags}" Margin="{StaticResource GapAboveXs}" Visibility="{Binding HasTags, Converter={StaticResource Visible}}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <controls:TagChip TagName="{Binding}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Content="{Binding [list.loadMore], Source={StaticResource Texts}}" Command="{Binding LoadMoreCommand}" HorizontalAlignment="Stretch" Margin="{StaticResource GapBelowSm}"
+                        Visibility="{Binding HasMore, Converter={StaticResource Visible}}" />
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

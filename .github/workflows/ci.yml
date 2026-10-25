@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Build and tests
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      # The exact SDK of global.json, not its roll-forward: a channel is fetched only
+      # through aka.ms, with no fallback, and that link fails on the day of a release.
+      - id: sdk
+        shell: pwsh
+        run: '"version=$((Get-Content global.json | ConvertFrom-Json).sdk.version)" >> $env:GITHUB_OUTPUT'
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ steps.sdk.outputs.version }}
+      # Exit code 8 means no test ran, as before the first tests of Core created.
+      - run: dotnet build tests/VanillaNotes.Core.Tests
+      - run: dotnet test --project tests/VanillaNotes.Core.Tests --no-build --ignore-exit-code 8

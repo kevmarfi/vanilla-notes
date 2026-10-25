@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/VanillaNotes.App/VanillaNotes.App.csproj" />
+    <Project Path="src/VanillaNotes.Core/VanillaNotes.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/VanillaNotes.App.Tests/VanillaNotes.App.Tests.csproj" />
+    <Project Path="tests/VanillaNotes.Core.Tests/VanillaNotes.Core.Tests.csproj" />
+  </Folder>
+</Solution>

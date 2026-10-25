@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets/app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>VanillaNotes</AssemblyName>
+    <RootNamespace>VanillaNotes.App</RootNamespace>
+    <Product>Vanilla Notes</Product>
+    <AssemblyTitle>Vanilla Notes</AssemblyTitle>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AvalonEdit" />
+    <PackageReference Include="ColorCode.Core" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="Markdig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets/app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../VanillaNotes.Core/VanillaNotes.Core.csproj" />
+  </ItemGroup>
+</Project>

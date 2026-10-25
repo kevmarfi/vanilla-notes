@@ -1,0 +1,11 @@
+<!-- A row of buttons for the values of one choice, with the one chosen marked. -->
+<UserControl x:Class="VanillaNotes.App.Controls.TogglePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Name="Root">
+    <ListBox Style="{StaticResource Toggle}"
+             ItemsSource="{Binding Options, ElementName=Root}"
+             DisplayMemberPath="Value"
+             SelectedValuePath="Key"
+             SelectedValue="{Binding SelectedKey, ElementName=Root, Mode=TwoWay}" />
+</UserControl>

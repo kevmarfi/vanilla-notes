@@ -1,0 +1,57 @@
+<!-- The first page: the profiles of this machine, opening one, and making one, and restoring a backup; a card on the background, as the sign-in of the web version. -->
+<UserControl x:Class="VanillaNotes.App.Views.ProfileChooserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:VanillaNotes.App.Controls"
+             xmlns:vm="clr-namespace:VanillaNotes.App.ViewModels">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{StaticResource Card}" Width="{StaticResource CardWidth}" Margin="{StaticResource CardPageMargin}" VerticalAlignment="Center">
+            <StackPanel>
+                <Border Width="{StaticResource BrandBadgeSize}" Height="{StaticResource BrandBadgeSize}" CornerRadius="{StaticResource RadiusLg}"
+                        Background="{DynamicResource AccentSoft}" HorizontalAlignment="Center" ToolTip="{Binding [app.name], Source={StaticResource Texts}}">
+                    <ContentControl Style="{StaticResource IconLg}" Content="{StaticResource IconLeaf}" Foreground="{DynamicResource Accent}" />
+                </Border>
+                <TextBlock Text="{Binding [profiles.heading], Source={StaticResource Texts}}" Style="{StaticResource Heading}" HorizontalAlignment="Center" Margin="{StaticResource CardHeadingMargin}" />
+                <TextBlock Text="{Binding [profiles.intro], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" TextAlignment="Center" Margin="{StaticResource GapBelowXl}" />
+                <Border Background="{DynamicResource Bg}" BorderBrush="{DynamicResource Border}" BorderThickness="1" CornerRadius="{StaticResource Radius}"
+                        Padding="{StaticResource ProfileListPadding}" Margin="{StaticResource GapBelowLg}"
+                        Visibility="{Binding Profiles.Count, Converter={StaticResource Hidden}}">
+                    <ScrollViewer MaxHeight="{StaticResource ProfileListMaxHeight}" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding Profiles}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource ProfileRow}" Command="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}">
+                                        <DockPanel>
+                                            <Border DockPanel.Dock="Left" Width="{StaticResource AvatarSize}" Height="{StaticResource AvatarSize}" CornerRadius="{StaticResource RadiusPill}"
+                                                    Background="{Binding Name, Converter={StaticResource TagColor}, ConverterParameter=Bg}" Margin="{StaticResource AvatarMargin}">
+                                                <TextBlock Text="{Binding Name, Converter={StaticResource Initial}}" Foreground="{Binding Name, Converter={StaticResource TagColor}, ConverterParameter=Text}"
+                                                           FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                            <ContentControl DockPanel.Dock="Right" Style="{StaticResource IconSm}" Content="{StaticResource IconLock}" VerticalAlignment="Center"
+                                                            Foreground="{DynamicResource TextMuted}" ToolTip="{Binding [profiles.locked], Source={StaticResource Texts}}"
+                                                            Visibility="{Binding HasPassword, Converter={StaticResource Visible}}" />
+                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                                        </DockPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Border>
+                <TextBlock Text="{Binding [profiles.empty], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" TextAlignment="Center" Margin="{StaticResource GapBelowLg}"
+                           Visibility="{Binding Profiles.Count, Converter={StaticResource VisibleWhenZero}}" />
+                <TextBlock Text="{Binding Failure}" Style="{StaticResource ErrorText}" Margin="{StaticResource GapBelowMd}" Visibility="{Binding HasFailure, Converter={StaticResource Visible}}" />
+                <Button Style="{StaticResource NewProfileButton}" Command="{Binding CreateCommand}" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal">
+                        <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPlus}" Foreground="{DynamicResource Accent}" Margin="{StaticResource GapRightSm}" />
+                        <TextBlock Text="{Binding [profiles.new], Source={StaticResource Texts}}" />
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource LinkButton}" Content="{Binding [profiles.restore], Source={StaticResource Texts}}" Command="{Binding RestoreBackupCommand}"
+                        HorizontalAlignment="Center" Margin="{StaticResource GapAboveMd}" ToolTip="{Binding [profiles.restore.help], Source={StaticResource Texts}}" />
+                <TextBlock Text="{Binding [profiles.restore.working], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" TextAlignment="Center" Margin="{StaticResource GapAboveSm}"
+                           Visibility="{Binding IsRestoring, Converter={StaticResource Visible}}" />
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</UserControl>

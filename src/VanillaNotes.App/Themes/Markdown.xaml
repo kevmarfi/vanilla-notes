@@ -1,0 +1,30 @@
+<!--
+    How formatted Markdown looks, after markdown.css of the web version. The document of a note is
+    built in code, with its colors and sizes taken by key from the tokens and the theme; what is
+    here is the frame it is shown in.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- The frame a formatted note is read in: no frame, no toolbar, only the scroll. -->
+    <Style x:Key="MarkdownViewer" TargetType="FlowDocumentScrollViewer">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="IsToolBarVisible" Value="False" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    <!-- The rich-text box of the visual way of writing. -->
+    <Style x:Key="VisualBox" TargetType="RichTextBox">
+        <Setter Property="Background" Value="{DynamicResource Surface}" />
+        <Setter Property="Foreground" Value="{DynamicResource Text}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="12" />
+        <Setter Property="CaretBrush" Value="{DynamicResource Text}" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="AcceptsTab" Value="True" />
+    </Style>
+</ResourceDictionary>

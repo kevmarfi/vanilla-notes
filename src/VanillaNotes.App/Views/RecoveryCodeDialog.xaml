@@ -1,0 +1,37 @@
+<!-- The recovery code, shown once: to copy from beside it, or to save as a file or send by the mail program of the person, side by side under it. -->
+<UserControl x:Class="VanillaNotes.App.Views.RecoveryCodeDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:VanillaNotes.App.Controls"
+             xmlns:vm="clr-namespace:VanillaNotes.App.ViewModels">
+    <StackPanel Style="{StaticResource WideDialogBody}">
+        <TextBlock Text="{Binding [code.heading], Source={StaticResource Texts}}" Style="{StaticResource Heading}" Margin="{StaticResource GapBelowSm}" />
+        <TextBlock Text="{Binding [code.intro], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" Margin="{StaticResource GapBelowLg}" />
+        <Border Background="{DynamicResource CodeBg}" CornerRadius="{StaticResource Radius}" Padding="{StaticResource PanelPadding}">
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Style="{StaticResource QuietButton}" Content="{Binding [code.copy], Source={StaticResource Texts}}" Command="{Binding CopyCommand}" VerticalAlignment="Center" />
+                <TextBox Text="{Binding Code, Mode=OneWay}" IsReadOnly="True" Style="{StaticResource BareTextBox}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                         FontFamily="{StaticResource FontMono}" FontSize="{StaticResource TextLg}" FontWeight="SemiBold" />
+            </DockPanel>
+        </Border>
+        <UniformGrid Columns="2" Margin="{StaticResource GapAboveMd}">
+            <Button Command="{Binding SaveCommand}" Margin="{StaticResource GapRightSm}">
+                <StackPanel Orientation="Horizontal">
+                    <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconDownload}" Margin="{StaticResource GapRightSm}" />
+                    <TextBlock Text="{Binding [code.save], Source={StaticResource Texts}}" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding EmailCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconMail}" Margin="{StaticResource GapRightSm}" />
+                    <TextBlock Text="{Binding [code.email], Source={StaticResource Texts}}" />
+                </StackPanel>
+            </Button>
+        </UniformGrid>
+        <TextBlock Text="{Binding Status}" Style="{StaticResource MutedText}" Margin="{StaticResource GapAboveSm}"
+                   Visibility="{Binding Status.Length, Converter={StaticResource Hidden}}" />
+        <StackPanel Style="{StaticResource DialogButtons}">
+            <Button Content="{Binding [code.done], Source={StaticResource Texts}}" Command="{Binding DoneCommand}" IsDefault="True" Style="{StaticResource PrimaryButton}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

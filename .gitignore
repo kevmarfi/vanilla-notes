@@ -1,0 +1,22 @@
+# Build output
+bin/
+obj/
+/publish/
+
+# Editors: per-user state
+.vs/
+*.user
+*.suo
+
+# Kept on the machine, not in the repository
+/.claude/
+/.vscode/
+/docs/
+/CLAUDE.md
+
+# Logs
+*.log
+
+# Operating system
+.DS_Store
+Thumbs.db

@@ -1,0 +1,50 @@
+<!-- The workspace: the brand bar, the sidebar, and the bar of the profile, with the settings and closing the profile, on the left; the list of notes; and the open note. Its keys work from anywhere in the window, ahead of the editor of the note, while no dialog is open. -->
+<UserControl x:Class="VanillaNotes.App.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:VanillaNotes.App.Controls"
+             xmlns:vm="clr-namespace:VanillaNotes.App.ViewModels"
+             controls:Shortcuts.IsAhead="True">
+    <UserControl.InputBindings>
+        <KeyBinding Gesture="Ctrl+N" Command="{Binding NoteList.NewNoteCommand}" />
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding Editor.SaveCommand}" />
+        <KeyBinding Gesture="Ctrl+E" Command="{Binding Editor.NextModeCommand}" />
+        <KeyBinding Gesture="Ctrl+P" Command="{Binding Editor.PrintCommand}" />
+        <KeyBinding Gesture="Ctrl+OemComma" Command="{Binding OpenSettingsCommand}" />
+    </UserControl.InputBindings>
+    <Grid IsEnabled="{Binding IsIdle}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{StaticResource SidebarWidth}" />
+            <ColumnDefinition Width="{StaticResource NoteListWidth}" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Background="{DynamicResource Surface}" BorderBrush="{DynamicResource Border}" BorderThickness="0,0,1,0">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="{StaticResource BrandMargin}">
+                    <ContentControl Style="{StaticResource IconLg}" Content="{StaticResource IconLeaf}" Foreground="{DynamicResource Accent}" />
+                    <TextBlock Text="{Binding [app.name], Source={StaticResource Texts}}" FontSize="{StaticResource TextLg}" FontWeight="SemiBold" Margin="{StaticResource GapLeftSm}" VerticalAlignment="Center" />
+                </StackPanel>
+                <Border DockPanel.Dock="Bottom" BorderBrush="{DynamicResource Border}" BorderThickness="0,1,0,0" Padding="{StaticResource ProfileBarPadding}">
+                    <DockPanel>
+                        <Button DockPanel.Dock="Right" Style="{StaticResource IconButton}" Command="{Binding CloseProfileCommand}"
+                                ToolTip="{Binding [workspace.signOut], Source={StaticResource Texts}}" AutomationProperties.Name="{Binding [workspace.signOut], Source={StaticResource Texts}}">
+                            <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconSignOut}" />
+                        </Button>
+                        <Button Style="{StaticResource QuietButton}" Padding="{StaticResource CompactButtonPadding}" HorizontalContentAlignment="Left" Command="{Binding OpenSettingsCommand}"
+                                ToolTip="{Binding [settings.open.help], Source={StaticResource Texts}}">
+                            <StackPanel Orientation="Horizontal">
+                                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconSettings}" Margin="{StaticResource GapRightSm}" />
+                                <TextBlock Text="{Binding [settings.title], Source={StaticResource Texts}}" />
+                            </StackPanel>
+                        </Button>
+                    </DockPanel>
+                </Border>
+                <ContentControl Content="{Binding Sidebar}" Focusable="False" />
+            </DockPanel>
+        </Border>
+        <ContentControl Grid.Column="1" Content="{Binding NoteList}" Focusable="False" />
+        <Border Grid.Column="2" Background="{DynamicResource Surface}" BorderBrush="{DynamicResource Border}" BorderThickness="1,0,0,0">
+            <ContentControl Content="{Binding Editor}" Focusable="False" />
+        </Border>
+    </Grid>
+</UserControl>

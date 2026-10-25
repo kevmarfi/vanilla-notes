@@ -1,0 +1,423 @@
+<!-- The settings of the open profile, each with a button that shows its explanation: how the interface looks, how notes are written, and the list of notes; the profile, with forms that open under its rows; then taking the notes out, bringing in the notes of the web version, and the backups of this machine. -->
+<UserControl x:Class="VanillaNotes.App.Views.SettingsDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:VanillaNotes.App.Controls"
+             xmlns:vm="clr-namespace:VanillaNotes.App.ViewModels"
+             Style="{StaticResource SettingsDialog}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Focusable="False">
+        <StackPanel Style="{StaticResource SettingsBody}">
+            <TextBlock Text="{Binding [settings.title], Source={StaticResource Texts}}" Style="{StaticResource Heading}" />
+
+            <Border Style="{StaticResource SettingsSection}">
+                <TextBlock Text="{Binding [settings.appearance], Source={StaticResource Texts}}" Style="{StaticResource SectionHeading}" />
+            </Border>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.theme], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="ThemeHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <controls:TogglePicker Grid.Column="1" Options="{Binding Themes}" SelectedKey="{Binding Theme}" HorizontalAlignment="Left" />
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=ThemeHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.theme.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.language], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="LanguageHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <controls:TogglePicker Grid.Column="1" Options="{Binding Languages}" SelectedKey="{Binding Language}" HorizontalAlignment="Left" />
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=LanguageHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.language.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.textSize], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="TextSizeHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <controls:TogglePicker Grid.Column="1" Options="{Binding TextSizes}" SelectedKey="{Binding TextSize}" HorizontalAlignment="Left" />
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=TextSizeHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.textSize.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource SettingsSection}">
+                <TextBlock Text="{Binding [settings.editor], Source={StaticResource Texts}}" Style="{StaticResource SectionHeading}" />
+            </Border>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.editorMode], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="EditorModeHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <controls:TogglePicker Grid.Column="1" Options="{Binding EditorModes}" SelectedKey="{Binding EditorMode}" HorizontalAlignment="Left" />
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=EditorModeHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.editorMode.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.spellcheck], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="SpellcheckHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <controls:TogglePicker Grid.Column="1" Options="{Binding Switch}" SelectedKey="{Binding Spellcheck}" HorizontalAlignment="Left" />
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=SpellcheckHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.spellcheck.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource SettingsSection}">
+                <TextBlock Text="{Binding [settings.noteList], Source={StaticResource Texts}}" Style="{StaticResource SectionHeading}" />
+            </Border>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.dates], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="DatesHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <controls:TogglePicker Grid.Column="1" Options="{Binding DateStyles}" SelectedKey="{Binding DateStyle}" HorizontalAlignment="Left" />
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=DatesHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.dates.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.order], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="OrderHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <controls:TogglePicker Grid.Column="1" Options="{Binding NoteOrders}" SelectedKey="{Binding NoteOrder}" HorizontalAlignment="Left" />
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=OrderHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.order.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource SettingsSection}">
+                <TextBlock Text="{Binding [settings.profile], Source={StaticResource Texts}}" Style="{StaticResource SectionHeading}" />
+            </Border>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.name], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="NameHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <DockPanel Grid.Column="1">
+                    <Button DockPanel.Dock="Right" Content="{Binding [settings.name.submit], Source={StaticResource Texts}}" Command="{Binding RenameCommand}" Padding="{StaticResource SmallButtonPadding}" Margin="{StaticResource GapLeftSm}" />
+                    <TextBox Text="{Binding ProfileName, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" AutomationProperties.Name="{Binding [settings.name], Source={StaticResource Texts}}" />
+                </DockPanel>
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=NameHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.name.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.password], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="PasswordHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Visibility="{Binding IsFormClosed, Converter={StaticResource Visible}}">
+                    <Button Content="{Binding [settings.password.set], Source={StaticResource Texts}}" Padding="{StaticResource SmallButtonPadding}"
+                            Command="{Binding OpenProfileFormCommand}" CommandParameter="{x:Static vm:SettingsViewModel+ProfileForm.SetPassword}"
+                            Visibility="{Binding HasNoPassword, Converter={StaticResource Visible}}" />
+                    <Button Content="{Binding [settings.password.open], Source={StaticResource Texts}}" Padding="{StaticResource SmallButtonPadding}"
+                            Command="{Binding OpenProfileFormCommand}" CommandParameter="{x:Static vm:SettingsViewModel+ProfileForm.ChangePassword}"
+                            Visibility="{Binding HasPassword, Converter={StaticResource Visible}}" />
+                </StackPanel>
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=PasswordHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.password.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <StackPanel Style="{StaticResource SettingsForm}" Visibility="{Binding IsSettingPassword, Converter={StaticResource Visible}}">
+                <Border Style="{StaticResource Notice}" Margin="{StaticResource GapBelowMd}">
+                    <TextBlock Text="{Binding [newProfile.withPassword], Source={StaticResource Texts}}" TextWrapping="Wrap" FontSize="{StaticResource TextSm}" />
+                </Border>
+                <TextBlock Text="{Binding [settings.password.new], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
+                <PasswordBox controls:PasswordBoxBinding.Password="{Binding NewPassword}" />
+                <TextBlock Text="{Binding [login.passwordHint], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" Margin="{StaticResource HintMargin}" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="{Binding [settings.cancel], Source={StaticResource Texts}}" Command="{Binding CloseProfileFormCommand}" Margin="{StaticResource GapRightSm}" />
+                    <Button Content="{Binding [settings.password.setSubmit], Source={StaticResource Texts}}" Command="{Binding SetPasswordCommand}" Style="{StaticResource PrimaryButton}" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Style="{StaticResource SettingsForm}" Visibility="{Binding IsChangingPassword, Converter={StaticResource Visible}}">
+                <TextBlock Text="{Binding [settings.password.current], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
+                <PasswordBox controls:PasswordBoxBinding.Password="{Binding CurrentPassword}" Margin="{StaticResource GapBelowMd}" />
+                <TextBlock Text="{Binding [settings.password.new], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
+                <PasswordBox controls:PasswordBoxBinding.Password="{Binding NewPassword}" />
+                <TextBlock Text="{Binding [login.passwordHint], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" Margin="{StaticResource HintMargin}" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="{Binding [settings.cancel], Source={StaticResource Texts}}" Command="{Binding CloseProfileFormCommand}" Margin="{StaticResource GapRightSm}" />
+                    <Button Content="{Binding [settings.password.submit], Source={StaticResource Texts}}" Command="{Binding ChangePasswordCommand}" Style="{StaticResource PrimaryButton}" />
+                </StackPanel>
+            </StackPanel>
+            <Grid Style="{StaticResource SettingRow}" Visibility="{Binding HasPassword, Converter={StaticResource Visible}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.lock], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="LockHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <controls:TogglePicker Grid.Column="1" Options="{Binding LockTimes}" SelectedKey="{Binding LockAfter}" HorizontalAlignment="Left" />
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=LockHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.lock.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <Grid Style="{StaticResource SettingRow}" Visibility="{Binding CanOfferHello, Converter={StaticResource Visible}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.hello], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="HelloHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Visibility="{Binding IsFormClosed, Converter={StaticResource Visible}}">
+                    <Button Content="{Binding [settings.hello.on], Source={StaticResource Texts}}" Padding="{StaticResource SmallButtonPadding}"
+                            Command="{Binding OpenProfileFormCommand}" CommandParameter="{x:Static vm:SettingsViewModel+ProfileForm.TurnOnHello}"
+                            Visibility="{Binding HasNoHello, Converter={StaticResource Visible}}" />
+                    <Button Content="{Binding [settings.hello.off], Source={StaticResource Texts}}" Padding="{StaticResource SmallButtonPadding}"
+                            Command="{Binding TurnOffHelloCommand}" Visibility="{Binding HasHello, Converter={StaticResource Visible}}" />
+                </StackPanel>
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=HelloHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.hello.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <StackPanel Style="{StaticResource SettingsForm}" Visibility="{Binding IsTurningOnHello, Converter={StaticResource Visible}}">
+                <TextBlock Text="{Binding [settings.password.current], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
+                <PasswordBox controls:PasswordBoxBinding.Password="{Binding CurrentPassword}" Margin="{StaticResource GapBelowMd}" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="{Binding [settings.cancel], Source={StaticResource Texts}}" Command="{Binding CloseProfileFormCommand}" Margin="{StaticResource GapRightSm}" />
+                    <Button Content="{Binding [settings.hello.submit], Source={StaticResource Texts}}" Command="{Binding TurnOnHelloCommand}" Style="{StaticResource PrimaryButton}" />
+                </StackPanel>
+            </StackPanel>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.delete], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="DeleteHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <Button Grid.Column="1" Content="{Binding [settings.delete.open], Source={StaticResource Texts}}" Style="{StaticResource DangerButton}" Padding="{StaticResource SmallButtonPadding}" HorizontalAlignment="Left"
+                        Command="{Binding OpenProfileFormCommand}" CommandParameter="{x:Static vm:SettingsViewModel+ProfileForm.Delete}"
+                        Visibility="{Binding IsFormClosed, Converter={StaticResource Visible}}" />
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=DeleteHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.delete.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <StackPanel Style="{StaticResource SettingsForm}" Visibility="{Binding IsDeleting, Converter={StaticResource Visible}}">
+                <Border Style="{StaticResource Notice}" Background="{DynamicResource DangerSoft}" Margin="{StaticResource GapBelowMd}">
+                    <TextBlock Text="{Binding [settings.delete.warning], Source={StaticResource Texts}}" Foreground="{DynamicResource Danger}" TextWrapping="Wrap" FontSize="{StaticResource TextSm}" />
+                </Border>
+                <StackPanel Visibility="{Binding HasPassword, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.password.current], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
+                    <PasswordBox controls:PasswordBoxBinding.Password="{Binding CurrentPassword}" Margin="{StaticResource GapBelowMd}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="{Binding [settings.cancel], Source={StaticResource Texts}}" Command="{Binding CloseProfileFormCommand}" Margin="{StaticResource GapRightSm}" />
+                    <Button Content="{Binding [settings.delete.submit], Source={StaticResource Texts}}" Command="{Binding DeleteProfileCommand}" Style="{StaticResource DangerButton}" />
+                </StackPanel>
+            </StackPanel>
+
+            <Border Style="{StaticResource SettingsSection}">
+                <TextBlock Text="{Binding [settings.data], Source={StaticResource Texts}}" Style="{StaticResource SectionHeading}" />
+            </Border>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.export], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="ExportHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Left">
+                    <controls:TogglePicker Options="{Binding ExportFormats}" SelectedKey="{Binding ExportChoice}" HorizontalAlignment="Left" />
+                    <Button Command="{Binding ExportCommand}" Padding="{StaticResource SmallButtonPadding}" Margin="{StaticResource GapAboveSm}" HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconDownload}" Margin="{StaticResource GapRightSm}" />
+                            <TextBlock Text="{Binding [settings.export.download], Source={StaticResource Texts}}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=ExportHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.export.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.import], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="ImportHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Button Command="{Binding ImportCommand}" Content="{Binding [settings.import.action], Source={StaticResource Texts}}" Padding="{StaticResource SmallButtonPadding}" Margin="{StaticResource GapRightSm}" />
+                    <Button Command="{Binding ImportFolderCommand}" Content="{Binding [settings.importFolder.action], Source={StaticResource Texts}}" Padding="{StaticResource SmallButtonPadding}" />
+                </StackPanel>
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=ImportHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.import.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.backup], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="BackupHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <Button Grid.Column="1" Command="{Binding BackUpCommand}" Content="{Binding [settings.backup.action], Source={StaticResource Texts}}" Padding="{StaticResource SmallButtonPadding}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=BackupHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.backup.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <ItemsControl ItemsSource="{Binding Backups}" Focusable="False" AutomationProperties.Name="{Binding [settings.backup.list], Source={StaticResource Texts}}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel Margin="{StaticResource GapBelowSm}">
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                <Button Style="{StaticResource AttachmentAction}" Content="{Binding [settings.restore.action], Source={StaticResource Texts}}"
+                                        Command="{Binding DataContext.RestoreCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                <Button Style="{StaticResource AttachmentAction}" Foreground="{DynamicResource Danger}" Content="{Binding [settings.backup.delete], Source={StaticResource Texts}}"
+                                        Command="{Binding DataContext.DeleteBackupCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding DateText}" FontSize="{StaticResource TextSm}" />
+                                <TextBlock Text="{Binding SizeText}" Style="{StaticResource MutedText}" Margin="{StaticResource GapLeftSm}" />
+                                <TextBlock Text="{Binding [settings.backup.automatic], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" Margin="{StaticResource GapLeftSm}"
+                                           Visibility="{Binding IsAutomatic, Converter={StaticResource Visible}}" />
+                            </StackPanel>
+                        </DockPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock Text="{Binding [settings.backup.none], Source={StaticResource Texts}}" Style="{StaticResource MutedText}"
+                       Visibility="{Binding Backups.Count, Converter={StaticResource VisibleWhenZero}}" />
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource SettingControlWidth}" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.diagnostics], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="DiagnosticsHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <Button Grid.Column="1" Command="{Binding CopyDiagnosticsCommand}" Content="{Binding [settings.diagnostics.action], Source={StaticResource Texts}}" Padding="{StaticResource SmallButtonPadding}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=DiagnosticsHelp, Converter={StaticResource Visible}}">
+                    <TextBlock Text="{Binding [settings.diagnostics.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+                </Border>
+            </Grid>
+            <TextBlock Text="{Binding Outcome}" Style="{StaticResource MutedText}" Margin="{StaticResource GapAboveMd}" Visibility="{Binding HasOutcome, Converter={StaticResource Visible}}" />
+
+            <TextBlock Text="{Binding Failure}" Style="{StaticResource ErrorText}" Margin="{StaticResource GapAboveMd}" Visibility="{Binding HasFailure, Converter={StaticResource Visible}}" />
+            <TextBlock Text="{Binding [settings.note], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" Margin="{StaticResource GapAboveMd}" />
+            <StackPanel Style="{StaticResource DialogButtons}">
+                <Button Content="{Binding [settings.done], Source={StaticResource Texts}}" Command="{Binding DoneCommand}" IsCancel="True" IsDefault="True" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

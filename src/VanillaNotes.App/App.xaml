@@ -1,0 +1,67 @@
+<!-- The application: the resource dictionaries, the converters every view uses, and which view shows each page, each dialog, and each area of the workspace. -->
+<Application x:Class="VanillaNotes.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:VanillaNotes.App.ViewModels"
+             xmlns:views="clr-namespace:VanillaNotes.App.Views"
+             xmlns:converters="clr-namespace:VanillaNotes.App.Converters"
+             ShutdownMode="OnLastWindowClose">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Light.xaml" />
+                <ResourceDictionary Source="Themes/Tokens.xaml" />
+                <ResourceDictionary Source="Themes/Icons.xaml" />
+                <ResourceDictionary Source="Themes/Base.xaml" />
+                <ResourceDictionary Source="Themes/Buttons.xaml" />
+                <ResourceDictionary Source="Themes/Lists.xaml" />
+                <ResourceDictionary Source="Themes/Dialogs.xaml" />
+                <ResourceDictionary Source="Themes/Markdown.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Shown when true, collapsed when false. -->
+            <BooleanToVisibilityConverter x:Key="Visible" />
+
+            <!-- The opposite: collapsed when true, shown when false. -->
+            <converters:VisibilityConverter x:Key="Hidden" WhenTrue="Collapsed" WhenFalse="Visible" />
+
+            <!-- Shown when a number is zero: an empty list, an empty box. -->
+            <converters:VisibilityConverter x:Key="VisibleWhenZero" WhenTrue="Visible" WhenFalse="Collapsed" />
+
+            <converters:TagColorConverter x:Key="TagColor" />
+            <converters:DateTextConverter x:Key="DateText" />
+            <converters:InitialConverter x:Key="Initial" />
+
+            <DataTemplate DataType="{x:Type vm:ProfileChooserViewModel}">
+                <views:ProfileChooserView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:MainViewModel}">
+                <views:MainView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:MessageViewModel}">
+                <views:MessageDialog />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:NewProfileViewModel}">
+                <views:NewProfileDialog />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:ProfilePasswordViewModel}">
+                <views:ProfilePasswordDialog />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:RecoveryCodeViewModel}">
+                <views:RecoveryCodeDialog />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+                <views:SettingsDialog />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SidebarViewModel}">
+                <views:SidebarView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:NoteListViewModel}">
+                <views:NoteListView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:NoteEditorViewModel}">
+                <views:NoteEditorView />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

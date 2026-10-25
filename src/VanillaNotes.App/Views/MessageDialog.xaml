@@ -1,0 +1,17 @@
+<!-- A question or a notice, in the style of the application; with a box when an answer is typed. -->
+<UserControl x:Class="VanillaNotes.App.Views.MessageDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:VanillaNotes.App.Controls"
+             xmlns:vm="clr-namespace:VanillaNotes.App.ViewModels">
+    <StackPanel Style="{StaticResource DialogBody}">
+        <TextBlock Text="{Binding Text}" TextWrapping="Wrap" />
+        <TextBox Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource GapAboveMd}"
+                 Visibility="{Binding HasInput, Converter={StaticResource Visible}}" />
+        <StackPanel Style="{StaticResource DialogButtons}">
+            <Button Content="{Binding CancelText}" Command="{Binding CancelCommand}" IsCancel="True" Margin="{StaticResource GapRightSm}"
+                    Visibility="{Binding HasCancel, Converter={StaticResource Visible}}" />
+            <Button Content="{Binding ConfirmText}" Command="{Binding ConfirmCommand}" IsDefault="True" Style="{StaticResource ConfirmButton}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

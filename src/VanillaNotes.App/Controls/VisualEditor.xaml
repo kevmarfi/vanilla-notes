@@ -1,0 +1,43 @@
+<!-- The visual way of writing: the rich-text editor, with its toolbar of formats. Markdown in, Markdown out. -->
+<UserControl x:Class="VanillaNotes.App.Controls.VisualEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="{StaticResource GapBelowSm}">
+            <Button Style="{StaticResource QuietButton}" Padding="{StaticResource CompactButtonPadding}" Tag="paragraph" Click="OnFormat" Content="{Binding [editor.style.paragraph], Source={StaticResource Texts}}" />
+            <Button Style="{StaticResource QuietButton}" Padding="{StaticResource CompactButtonPadding}" Tag="heading1" Click="OnFormat" Content="H1" ToolTip="{Binding [editor.style.heading1], Source={StaticResource Texts}}" />
+            <Button Style="{StaticResource QuietButton}" Padding="{StaticResource CompactButtonPadding}" Tag="heading2" Click="OnFormat" Content="H2" ToolTip="{Binding [editor.style.heading2], Source={StaticResource Texts}}" />
+            <Button Style="{StaticResource IconButton}" Tag="bold" Click="OnFormat" ToolTip="{Binding [editor.format.bold], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconBold}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="italic" Click="OnFormat" ToolTip="{Binding [editor.format.italic], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconItalic}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="strike" Click="OnFormat" ToolTip="{Binding [editor.format.strike], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconStrike}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="bulletList" Click="OnFormat" ToolTip="{Binding [editor.format.bulletList], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconBulletList}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="orderedList" Click="OnFormat" ToolTip="{Binding [editor.format.orderedList], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconOrderedList}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="taskList" Click="OnFormat" ToolTip="{Binding [editor.format.taskList], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconTaskList}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="link" Click="OnFormat" ToolTip="{Binding [editor.format.link], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconLink}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="blockquote" Click="OnFormat" ToolTip="{Binding [editor.format.blockquote], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconBlockquote}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="codeBlock" Click="OnFormat" ToolTip="{Binding [editor.format.codeBlock], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconCodeBlock}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="horizontalRule" Click="OnFormat" ToolTip="{Binding [editor.format.horizontalRule], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconHorizontalRule}" />
+            </Button>
+        </StackPanel>
+        <RichTextBox x:Name="Box" Style="{StaticResource VisualBox}" IsDocumentEnabled="False" />
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,30 @@
+<!-- Name, language, and password of a new profile, with what a password means for its data, and whether Windows Hello may open it. -->
+<UserControl x:Class="VanillaNotes.App.Views.NewProfileDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:VanillaNotes.App.Controls"
+             xmlns:vm="clr-namespace:VanillaNotes.App.ViewModels">
+    <StackPanel Style="{StaticResource DialogBody}">
+        <TextBlock Text="{Binding [newProfile.heading], Source={StaticResource Texts}}" Style="{StaticResource Heading}" Margin="{StaticResource GapBelowLg}" />
+        <TextBlock Text="{Binding [newProfile.name], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
+        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource GapBelowMd}" />
+        <TextBlock Text="{Binding [language.label], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
+        <controls:TogglePicker Options="{Binding Languages}" SelectedKey="{Binding Language}" HorizontalAlignment="Left" Margin="{StaticResource GapBelowMd}" />
+        <TextBlock Text="{Binding [newProfile.password], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
+        <PasswordBox controls:PasswordBoxBinding.Password="{Binding Password}" />
+        <TextBlock Text="{Binding [login.passwordHint], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" Margin="{StaticResource HintMargin}" />
+        <Border Style="{StaticResource Notice}">
+            <TextBlock Text="{Binding [newProfile.withPassword], Source={StaticResource Texts}}" TextWrapping="Wrap" FontSize="{StaticResource TextSm}" />
+        </Border>
+        <StackPanel Margin="{StaticResource GapAboveMd}" Visibility="{Binding IsHelloAvailable, Converter={StaticResource Visible}}">
+            <TextBlock Text="{Binding [settings.hello], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
+            <controls:TogglePicker Options="{Binding Switch}" SelectedKey="{Binding Hello}" HorizontalAlignment="Left" />
+            <TextBlock Text="{Binding [newProfile.hello.hint], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" Margin="{StaticResource GapAboveXs}" />
+        </StackPanel>
+        <TextBlock Text="{Binding Failure}" Style="{StaticResource ErrorText}" Margin="{StaticResource GapAboveMd}" Visibility="{Binding HasFailure, Converter={StaticResource Visible}}" />
+        <StackPanel Style="{StaticResource DialogButtons}">
+            <Button Content="{Binding [dialog.cancel], Source={StaticResource Texts}}" Command="{Binding CancelCommand}" IsCancel="True" Margin="{StaticResource GapRightSm}" />
+            <Button Content="{Binding [newProfile.submit], Source={StaticResource Texts}}" Command="{Binding CreateCommand}" IsDefault="True" Style="{StaticResource PrimaryButton}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

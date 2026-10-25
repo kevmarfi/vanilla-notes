@@ -1,0 +1,96 @@
+<!-- The Markdown source of a note, with its toolbar of formats, the bar to find and replace in it, and its preview beside it. -->
+<UserControl x:Class="VanillaNotes.App.Controls.SourceEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:VanillaNotes.App.Controls"
+             xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+             x:Name="Root">
+    <UserControl.Resources>
+        <!-- The menu of the right button; the suggestions for a word not known go first, put in when it opens. -->
+        <ContextMenu x:Key="EditorMenu">
+            <MenuItem x:Name="AddWord" Header="{Binding [editor.spelling.add], Source={StaticResource Texts}}" />
+            <Separator x:Name="SpellingEnd" />
+            <MenuItem Command="ApplicationCommands.Cut" Header="{Binding [editor.cut], Source={StaticResource Texts}}" />
+            <MenuItem Command="ApplicationCommands.Copy" Header="{Binding [editor.copy], Source={StaticResource Texts}}" />
+            <MenuItem Command="ApplicationCommands.Paste" Header="{Binding [editor.paste], Source={StaticResource Texts}}" />
+        </ContextMenu>
+    </UserControl.Resources>
+    <DockPanel>
+        <WrapPanel x:Name="Toolbar" DockPanel.Dock="Top" Orientation="Horizontal" Margin="{StaticResource GapBelowSm}">
+            <Button Style="{StaticResource IconButton}" Tag="bold" Click="OnFormat" ToolTip="{Binding [editor.format.bold], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconBold}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="italic" Click="OnFormat" ToolTip="{Binding [editor.format.italic], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconItalic}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="strike" Click="OnFormat" ToolTip="{Binding [editor.format.strike], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconStrike}" />
+            </Button>
+            <Button Style="{StaticResource QuietButton}" Padding="{StaticResource CompactButtonPadding}" Tag="heading1" Click="OnFormat" Content="H1" ToolTip="{Binding [editor.style.heading1], Source={StaticResource Texts}}" />
+            <Button Style="{StaticResource QuietButton}" Padding="{StaticResource CompactButtonPadding}" Tag="heading2" Click="OnFormat" Content="H2" ToolTip="{Binding [editor.style.heading2], Source={StaticResource Texts}}" />
+            <Button Style="{StaticResource IconButton}" Tag="bulletList" Click="OnFormat" ToolTip="{Binding [editor.format.bulletList], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconBulletList}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="orderedList" Click="OnFormat" ToolTip="{Binding [editor.format.orderedList], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconOrderedList}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="taskList" Click="OnFormat" ToolTip="{Binding [editor.format.taskList], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconTaskList}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="link" Click="OnFormat" ToolTip="{Binding [editor.format.link], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconLink}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="blockquote" Click="OnFormat" ToolTip="{Binding [editor.format.blockquote], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconBlockquote}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="codeBlock" Click="OnFormat" ToolTip="{Binding [editor.format.codeBlock], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconCodeBlock}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="horizontalRule" Click="OnFormat" ToolTip="{Binding [editor.format.horizontalRule], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconHorizontalRule}" />
+            </Button>
+            <Button Style="{StaticResource IconButton}" Click="OnOpenFind" ToolTip="{Binding [editor.find.open], Source={StaticResource Texts}}">
+                <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconSearch}" />
+            </Button>
+        </WrapPanel>
+        <Border x:Name="FindBar" DockPanel.Dock="Top" Style="{StaticResource Notice}" Margin="{StaticResource GapBelowSm}" Visibility="Collapsed" PreviewKeyDown="OnFindKey">
+            <StackPanel>
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock x:Name="NotFound" Text="{Binding [editor.find.notFound], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" VerticalAlignment="Center" Margin="{StaticResource GapRightSm}" Visibility="Collapsed" />
+                        <TextBlock x:Name="Replaced" Style="{StaticResource MutedText}" VerticalAlignment="Center" Margin="{StaticResource GapRightSm}" Visibility="Collapsed">
+                            <Run Text="{Binding [editor.find.replaced], Source={StaticResource Texts}, Mode=OneWay}" /> <Run x:Name="ReplacedCount" />
+                        </TextBlock>
+                        <CheckBox x:Name="MatchCase" Content="{Binding [editor.find.matchCase], Source={StaticResource Texts}}" VerticalAlignment="Center" Margin="{StaticResource GapRightSm}" />
+                        <Button Content="{Binding [editor.find.previous], Source={StaticResource Texts}}" Click="OnFindPrevious" Padding="{StaticResource SmallButtonPadding}" Margin="{StaticResource GapRightSm}" />
+                        <Button Content="{Binding [editor.find.next], Source={StaticResource Texts}}" Click="OnFindNext" Padding="{StaticResource SmallButtonPadding}" Margin="{StaticResource GapRightSm}" />
+                        <Button Style="{StaticResource IconButton}" Click="OnCloseFind" ToolTip="{Binding [editor.find.close], Source={StaticResource Texts}}">
+                            <ContentControl Style="{StaticResource IconXs}" Content="{StaticResource IconClose}" />
+                        </Button>
+                    </StackPanel>
+                    <TextBox x:Name="FindBox" Margin="{StaticResource GapRightSm}" AutomationProperties.Name="{Binding [editor.find.query], Source={StaticResource Texts}}" TextChanged="OnQueryChanged" />
+                </DockPanel>
+                <DockPanel Margin="{StaticResource GapAboveSm}">
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Content="{Binding [editor.find.replace], Source={StaticResource Texts}}" Click="OnReplace" Padding="{StaticResource SmallButtonPadding}" Margin="{StaticResource GapRightSm}" />
+                        <Button Content="{Binding [editor.find.replaceAll], Source={StaticResource Texts}}" Click="OnReplaceAll" Padding="{StaticResource SmallButtonPadding}" />
+                    </StackPanel>
+                    <TextBox x:Name="ReplaceBox" Margin="{StaticResource GapRightSm}" AutomationProperties.Name="{Binding [editor.find.replacement], Source={StaticResource Texts}}" />
+                </DockPanel>
+            </StackPanel>
+        </Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="{StaticResource PaneGap}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <avalonEdit:TextEditor x:Name="Source" Grid.Column="0" Style="{StaticResource SourceBox}"
+                                   AutomationProperties.Name="{Binding [editor.content], Source={StaticResource Texts}}" />
+            <Border Grid.Column="2" BorderBrush="{DynamicResource Border}" BorderThickness="1" CornerRadius="{StaticResource Radius}" Padding="{StaticResource PanelPadding}"
+                    Background="{DynamicResource Surface}">
+                <controls:MarkdownView Markdown="{Binding Text, ElementName=Root}" ImageOf="{Binding ImageOf, ElementName=Root}" />
+            </Border>
+        </Grid>
+    </DockPanel>
+</UserControl>

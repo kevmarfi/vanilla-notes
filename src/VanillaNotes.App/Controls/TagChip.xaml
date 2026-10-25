@@ -1,0 +1,25 @@
+<!-- The chip of a tag, in the pair of colors its name gives it, with a button to take it off when one is wanted. -->
+<UserControl x:Class="VanillaNotes.App.Controls.TagChip"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Name="Root">
+    <Border CornerRadius="{StaticResource RadiusPill}" Padding="{StaticResource ChipPadding}" Margin="{StaticResource ChipMargin}"
+            Background="{Binding TagName, ElementName=Root, Converter={StaticResource TagColor}, ConverterParameter=Bg}">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding TagName, ElementName=Root}" FontSize="{StaticResource TextXs}" VerticalAlignment="Center"
+                       Foreground="{Binding TagName, ElementName=Root, Converter={StaticResource TagColor}, ConverterParameter=Text}" />
+            <Button Command="{Binding RemoveCommand, ElementName=Root}" CommandParameter="{Binding TagName, ElementName=Root}"
+                    Margin="{StaticResource GapLeftXs}" Padding="0" Cursor="Hand" Background="Transparent" BorderThickness="0"
+                    ToolTip="{Binding [editor.removeTag], Source={StaticResource Texts}}"
+                    Visibility="{Binding CanRemove, ElementName=Root, Converter={StaticResource Visible}}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Button.Template>
+                <ContentControl Style="{StaticResource IconXxs}" Content="{StaticResource IconClose}"
+                                Foreground="{Binding TagName, ElementName=Root, Converter={StaticResource TagColor}, ConverterParameter=Text}" />
+            </Button>
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -1,0 +1,183 @@
+<!--
+    What every theme shares: spacing, radii, type sizes, and the typefaces, after the variables of
+    tokens.css of the web version. A size is a double, read with StaticResource.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <sys:Double x:Key="Space1">4</sys:Double>
+    <sys:Double x:Key="Space2">8</sys:Double>
+    <sys:Double x:Key="Space3">12</sys:Double>
+    <sys:Double x:Key="Space4">16</sys:Double>
+    <sys:Double x:Key="Space5">24</sys:Double>
+    <sys:Double x:Key="Space6">32</sys:Double>
+
+    <CornerRadius x:Key="RadiusSm">6</CornerRadius>
+    <CornerRadius x:Key="Radius">8</CornerRadius>
+    <CornerRadius x:Key="RadiusLg">12</CornerRadius>
+    <CornerRadius x:Key="RadiusPill">999</CornerRadius>
+
+    <sys:Double x:Key="TextXs">12</sys:Double>
+    <sys:Double x:Key="TextSm">13</sys:Double>
+    <sys:Double x:Key="TextMd">15</sys:Double>
+    <sys:Double x:Key="TextLg">17</sys:Double>
+    <sys:Double x:Key="TextXl">22</sys:Double>
+    <sys:Double x:Key="Text2xl">26</sys:Double>
+
+    <!-- The size of the text of a note, and of its code; the setting of text size changes both. -->
+    <sys:Double x:Key="NoteText">15</sys:Double>
+    <sys:Double x:Key="NoteCode">13</sys:Double>
+
+    <FontFamily x:Key="Font">Segoe UI</FontFamily>
+    <FontFamily x:Key="FontMono">Cascadia Code, Consolas</FontFamily>
+
+    <!-- The widths of the three areas of the workspace, as in workspace.css of the web version. -->
+    <GridLength x:Key="SidebarWidth">264</GridLength>
+    <GridLength x:Key="NoteListWidth">300</GridLength>
+
+    <!-- The width of the column the control of every setting lines up in. -->
+    <GridLength x:Key="SettingControlWidth">260</GridLength>
+
+    <!-- The room between the Markdown source and its preview. -->
+    <GridLength x:Key="PaneGap">16</GridLength>
+
+    <!-- The room around the parts of the views, on the scale of spacing above. -->
+    <!-- Room to the right of an icon or a button, before what follows it. -->
+    <Thickness x:Key="GapRightSm">0,0,8,0</Thickness>
+    <!-- Larger room to the right, between parts of a row. -->
+    <Thickness x:Key="GapRightMd">0,0,12,0</Thickness>
+    <!-- The room to the right of a choice in a row of the editor. -->
+    <Thickness x:Key="GapRightLg">0,0,16,0</Thickness>
+    <!-- Room to the left of what follows an icon or a box. -->
+    <Thickness x:Key="GapLeftSm">8,0,0,0</Thickness>
+    <!-- Small room to the left, inside a chip. -->
+    <Thickness x:Key="GapLeftXs">4,0,0,0</Thickness>
+    <!-- Room under a part, inside a group. -->
+    <Thickness x:Key="GapBelowSm">0,0,0,8</Thickness>
+    <!-- Room under a part, between groups. -->
+    <Thickness x:Key="GapBelowMd">0,0,0,12</Thickness>
+    <!-- Room under a heading or a row before the content. -->
+    <Thickness x:Key="GapBelowLg">0,0,0,16</Thickness>
+    <!-- Room under the introduction of a card. -->
+    <Thickness x:Key="GapBelowXl">0,0,0,24</Thickness>
+    <!-- Small room above, for a hint or a date. -->
+    <Thickness x:Key="GapAboveXs">0,4,0,0</Thickness>
+    <!-- Room above a link or a status under a group. -->
+    <Thickness x:Key="GapAboveSm">0,8,0,0</Thickness>
+    <!-- Room above a failure or a row of actions. -->
+    <Thickness x:Key="GapAboveMd">0,12,0,0</Thickness>
+    <!-- The room around a tag chip, in a row of them that wraps. -->
+    <Thickness x:Key="ChipMargin">0,0,4,4</Thickness>
+    <!-- The room around the line that says how many notes there are. -->
+    <Thickness x:Key="CaptionMargin">4,0,0,12</Thickness>
+    <!-- The room around the heading of a section of the sidebar. -->
+    <Thickness x:Key="SectionHeadingMargin">12,24,4,4</Thickness>
+    <!-- The room around a failure in the sidebar. -->
+    <Thickness x:Key="SidebarFailureMargin">12,0,12,8</Thickness>
+    <!-- The room around the open note. -->
+    <Thickness x:Key="EditorMargin">24,16,24,16</Thickness>
+    <!-- The room around the list of notes. -->
+    <Thickness x:Key="NoteListMargin">16,16,8,16</Thickness>
+    <!-- The room around the brand at the top of the sidebar. -->
+    <Thickness x:Key="BrandMargin">16,16,12,8</Thickness>
+    <!-- The room above and below the card of the page of profiles. -->
+    <Thickness x:Key="CardPageMargin">0,40</Thickness>
+    <!-- The least room between a dialog and the edges of the window. -->
+    <Thickness x:Key="DialogPageMargin">24</Thickness>
+    <!-- The room around the box that names a new folder. -->
+    <Thickness x:Key="InlineFormMargin">0,4,0,8</Thickness>
+    <!-- The room around the hint under a field. -->
+    <Thickness x:Key="HintMargin">0,4,0,12</Thickness>
+    <!-- The room inside the frame of the list of profiles, around its rows. -->
+    <Thickness x:Key="ProfileListPadding">4</Thickness>
+    <!-- The room between the mark of a profile and its name. -->
+    <Thickness x:Key="AvatarMargin">0,0,12,0</Thickness>
+    <!-- The room around the heading of a card, under the brand. -->
+    <Thickness x:Key="CardHeadingMargin">0,16,0,4</Thickness>
+    <!-- The room around the title of an empty area. -->
+    <Thickness x:Key="EmptyTitleMargin">0,12,0,4</Thickness>
+    <!-- The room around the header of the list of notes. -->
+    <Thickness x:Key="ListHeaderMargin">0,0,8,12</Thickness>
+    <!-- Where the hint of the search sits, over its box. -->
+    <Thickness x:Key="SearchPlaceholderMargin">10,8</Thickness>
+    <!-- Where the hint of a new tag sits, over its box. -->
+    <Thickness x:Key="TagPlaceholderMargin">10,0</Thickness>
+    <!-- The room inside a button of text in a toolbar, or of a quiet action. -->
+    <Thickness x:Key="CompactButtonPadding">8,4</Thickness>
+    <!-- The room inside a small button of text and icon. -->
+    <Thickness x:Key="SmallButtonPadding">12,4</Thickness>
+    <!-- The room inside a button of the bar of the open note. -->
+    <Thickness x:Key="ToolbarButtonPadding">10,5</Thickness>
+    <!-- The room inside a button that holds only a small icon, in a row. -->
+    <Thickness x:Key="TinyButtonPadding">2</Thickness>
+    <!-- The room inside a framed panel: the preview, the read way, a code. -->
+    <Thickness x:Key="PanelPadding">16,12</Thickness>
+    <!-- The room inside the frame that says a list is empty. -->
+    <Thickness x:Key="EmptyListPadding">16</Thickness>
+    <!-- The room inside the box of the search. -->
+    <Thickness x:Key="SearchBoxPadding">8,8</Thickness>
+    <!-- The room inside a small box typed in a row: a tag, a new name. -->
+    <Thickness x:Key="InlineBoxPadding">8,2</Thickness>
+    <!-- The room on both sides of the size of an attached file. -->
+    <Thickness x:Key="AttachmentSizeMargin">4,0</Thickness>
+    <!-- The room inside a tag chip. -->
+    <Thickness x:Key="ChipPadding">8,1</Thickness>
+    <!-- The room inside the sidebar. -->
+    <Thickness x:Key="SidebarPadding">12,8,12,16</Thickness>
+    <!-- The room inside the bar of the open profile. -->
+    <Thickness x:Key="ProfileBarPadding">12,8</Thickness>
+    <!-- The room inside the frame of the search. -->
+    <Thickness x:Key="SearchFramePadding">12,0</Thickness>
+    <!-- The room left for the scroll bar of the list of notes. -->
+    <Thickness x:Key="ScrollGutterPadding">0,0,8,0</Thickness>
+
+    <!-- The sizes of the parts of the views that are not text. -->
+    <!-- The width of the card of the window of profiles. -->
+    <sys:Double x:Key="CardWidth">420</sys:Double>
+    <!-- The side of the square the leaf sits on, at the top of the card of profiles. -->
+    <sys:Double x:Key="BrandBadgeSize">52</sys:Double>
+    <!-- The side of the round mark with the first letter of a profile. -->
+    <sys:Double x:Key="AvatarSize">34</sys:Double>
+    <!-- The most the list of profiles grows before it scrolls: about six profiles. -->
+    <sys:Double x:Key="ProfileListMaxHeight">300</sys:Double>
+    <!-- The least width of the choice of folder of a note. -->
+    <sys:Double x:Key="FolderPickerMinWidth">160</sys:Double>
+    <!-- The least width of the box of a new tag. -->
+    <sys:Double x:Key="TagBoxMinWidth">110</sys:Double>
+    <!-- The most a fragment of a search takes in the list: two lines. -->
+    <sys:Double x:Key="SnippetMaxHeight">36</sys:Double>
+    <!-- The width the window opens at. -->
+    <sys:Double x:Key="MainWidth">1280</sys:Double>
+    <!-- The height the window opens at. -->
+    <sys:Double x:Key="MainHeight">820</sys:Double>
+    <!-- The least width of the window: the three areas of the workspace side by side. -->
+    <sys:Double x:Key="MainMinWidth">900</sys:Double>
+    <!-- The least height of the window. -->
+    <sys:Double x:Key="MainMinHeight">560</sys:Double>
+
+    <!-- The room around and inside the blocks of a note, as markdown.css of the web version gives it. -->
+    <!-- The room under a paragraph, a list, a block of code, or a table. -->
+    <Thickness x:Key="BlockMargin">0,0,0,8</Thickness>
+    <!-- The room above and below a heading of a note. -->
+    <Thickness x:Key="HeadingMargin">0,12,0,4</Thickness>
+    <!-- The room inside a block of code. -->
+    <Thickness x:Key="CodeBlockPadding">12,10,12,10</Thickness>
+    <!-- The line on the left of a quote. -->
+    <Thickness x:Key="QuoteBorder">3,0,0,0</Thickness>
+    <!-- The room between the line of a quote and its text. -->
+    <Thickness x:Key="QuotePadding">12,0,0,0</Thickness>
+    <!-- The room on the left of a list, where its marks go. -->
+    <Thickness x:Key="ListPadding">24,0,0,0</Thickness>
+    <!-- The room above and below a dividing line. -->
+    <Thickness x:Key="RuleMargin">0,8,0,8</Thickness>
+    <!-- The frame of a table: its top and left lines; each cell draws its right and bottom ones. -->
+    <Thickness x:Key="TableBorder">1,1,0,0</Thickness>
+    <!-- The right and bottom lines of a cell of a table. -->
+    <Thickness x:Key="TableCellBorder">0,0,1,1</Thickness>
+    <!-- The room inside a cell of a table. -->
+    <Thickness x:Key="TableCellPadding">10,4,10,4</Thickness>
+    <!-- The widest an image of a note is shown. -->
+    <sys:Double x:Key="NoteImageMaxWidth">480</sys:Double>
+    <!-- The most the name of an attached file takes before it is cut. -->
+    <sys:Double x:Key="AttachmentNameMaxWidth">220</sys:Double>
+</ResourceDictionary>
