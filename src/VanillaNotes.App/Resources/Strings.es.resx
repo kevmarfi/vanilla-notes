@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="app.name" xml:space="preserve">
+    <value>Vanilla Notes</value>
+  </data>
+  <data name="code.copied" xml:space="preserve">
+    <value>Se copió el código.</value>
+  </data>
+  <data name="code.copy" xml:space="preserve">
+    <value>Copiar</value>
+  </data>
+  <data name="code.done" xml:space="preserve">
+    <value>Ya lo guardé</value>
+  </data>
+  <data name="code.email" xml:space="preserve">
+    <value>Enviar por correo</value>
+  </data>
+  <data name="code.emailSubject" xml:space="preserve">
+    <value>Código de recuperación de Vanilla Notes</value>
+  </data>
+  <data name="code.emailWarning" xml:space="preserve">
+    <value>Si lo envías por correo, el código queda en tu buzón como texto plano: cualquiera que lea ese correo puede abrir tus notas.</value>
+  </data>
+  <data name="code.fileName" xml:space="preserve">
+    <value>Código de recuperación de Vanilla Notes</value>
+  </data>
+  <data name="code.fileText" xml:space="preserve">
+    <value>Código de recuperación del perfil {name} de Vanilla Notes: {code}</value>
+  </data>
+  <data name="code.heading" xml:space="preserve">
+    <value>Tu código de recuperación</value>
+  </data>
+  <data name="code.intro" xml:space="preserve">
+    <value>Este código abre el perfil si olvidas la contraseña. Solo se muestra ahora: guárdalo en un lugar seguro, lejos de este equipo.</value>
+  </data>
+  <data name="code.save" xml:space="preserve">
+    <value>Guardar como archivo</value>
+  </data>
+  <data name="code.saved" xml:space="preserve">
+    <value>Se guardó el código.</value>
+  </data>
+  <data name="date.day.one" xml:space="preserve">
+    <value>Ayer</value>
+  </data>
+  <data name="date.day.other" xml:space="preserve">
+    <value>hace {count} días</value>
+  </data>
+  <data name="date.hour.one" xml:space="preserve">
+    <value>hace 1 hora</value>
+  </data>
+  <data name="date.hour.other" xml:space="preserve">
+    <value>hace {count} horas</value>
+  </data>
+  <data name="date.minute.one" xml:space="preserve">
+    <value>hace 1 minuto</value>
+  </data>
+  <data name="date.minute.other" xml:space="preserve">
+    <value>hace {count} minutos</value>
+  </data>
+  <data name="dialog.cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="dialog.confirm" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
+  <data name="dialog.ok" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="editor.addTag" xml:space="preserve">
+    <value>Añadir etiqueta</value>
+  </data>
+  <data name="editor.addTagPlaceholder" xml:space="preserve">
+    <value>+ Etiqueta</value>
+  </data>
+  <data name="editor.attach" xml:space="preserve">
+    <value>Adjuntar</value>
+  </data>
+  <data name="editor.attach.kinds" xml:space="preserve">
+    <value>Imágenes, documentos PDF y archivos de texto</value>
+  </data>
+  <data name="editor.attachment.delete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="editor.attachment.deleteConfirm" xml:space="preserve">
+    <value>¿Eliminar el adjunto "{filename}"?</value>
+  </data>
+  <data name="editor.attachment.insert" xml:space="preserve">
+    <value>Insertar</value>
+  </data>
+  <data name="editor.attachment.save" xml:space="preserve">
+    <value>Guardar una copia</value>
+  </data>
+  <data name="editor.attachments" xml:space="preserve">
+    <value>Adjuntos</value>
+  </data>
+  <data name="editor.conflict" xml:space="preserve">
+    <value>Esta nota se modificó en otro lugar, así que tus cambios no se guardaron.</value>
+  </data>
+  <data name="editor.content" xml:space="preserve">
+    <value>Contenido</value>
+  </data>
+  <data name="editor.copy" xml:space="preserve">
+    <value>Copiar</value>
+  </data>
+  <data name="editor.cut" xml:space="preserve">
+    <value>Cortar</value>
+  </data>
+  <data name="editor.delete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="editor.deleteConfirm" xml:space="preserve">
+    <value>¿Eliminar "{title}" para siempre, con sus adjuntos? Esta acción no se puede deshacer.</value>
+  </data>
+  <data name="editor.deleteForever" xml:space="preserve">
+    <value>Eliminar para siempre</value>
+  </data>
+  <data name="editor.empty.pick.text" xml:space="preserve">
+    <value>Elige una nota de la lista o empieza una nueva.</value>
+  </data>
+  <data name="editor.empty.pick.title" xml:space="preserve">
+    <value>Ninguna nota abierta</value>
+  </data>
+  <data name="editor.empty.start.text" xml:space="preserve">
+    <value>Empieza tu primera nota para verla aquí.</value>
+  </data>
+  <data name="editor.empty.start.title" xml:space="preserve">
+    <value>Aún no hay notas aquí</value>
+  </data>
+  <data name="editor.find.close" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="editor.find.matchCase" xml:space="preserve">
+    <value>Mayúsculas y minúsculas</value>
+  </data>
+  <data name="editor.find.next" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+  <data name="editor.find.notFound" xml:space="preserve">
+    <value>No se encontró</value>
+  </data>
+  <data name="editor.find.open" xml:space="preserve">
+    <value>Buscar y reemplazar (Ctrl+F)</value>
+  </data>
+  <data name="editor.find.previous" xml:space="preserve">
+    <value>Anterior</value>
+  </data>
+  <data name="editor.find.query" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="editor.find.replace" xml:space="preserve">
+    <value>Reemplazar</value>
+  </data>
+  <data name="editor.find.replaceAll" xml:space="preserve">
+    <value>Reemplazar todo</value>
+  </data>
+  <data name="editor.find.replaced" xml:space="preserve">
+    <value>Reemplazos:</value>
+  </data>
+  <data name="editor.find.replacement" xml:space="preserve">
+    <value>Reemplazar por</value>
+  </data>
+  <data name="editor.folder" xml:space="preserve">
+    <value>Carpeta</value>
+  </data>
+  <data name="editor.format.blockquote" xml:space="preserve">
+    <value>Cita</value>
+  </data>
+  <data name="editor.format.bold" xml:space="preserve">
+    <value>Negrita</value>
+  </data>
+  <data name="editor.format.bulletList" xml:space="preserve">
+    <value>Lista con viñetas</value>
+  </data>
+  <data name="editor.format.codeBlock" xml:space="preserve">
+    <value>Bloque de código</value>
+  </data>
+  <data name="editor.format.horizontalRule" xml:space="preserve">
+    <value>Línea divisoria</value>
+  </data>
+  <data name="editor.format.italic" xml:space="preserve">
+    <value>Cursiva</value>
+  </data>
+  <data name="editor.format.link" xml:space="preserve">
+    <value>Enlace</value>
+  </data>
+  <data name="editor.format.orderedList" xml:space="preserve">
+    <value>Lista numerada</value>
+  </data>
+  <data name="editor.format.strike" xml:space="preserve">
+    <value>Tachado</value>
+  </data>
+  <data name="editor.format.taskList" xml:space="preserve">
+    <value>Lista de tareas</value>
+  </data>
+  <data name="editor.formatting" xml:space="preserve">
+    <value>Formato</value>
+  </data>
+  <data name="editor.linkPrompt" xml:space="preserve">
+    <value>Dirección del enlace</value>
+  </data>
+  <data name="editor.loadLatest" xml:space="preserve">
+    <value>Cargar la última versión</value>
+  </data>
+  <data name="editor.markdownPlaceholder" xml:space="preserve">
+    <value>Escribe Markdown aquí…</value>
+  </data>
+  <data name="editor.mode.markdown" xml:space="preserve">
+    <value>Markdown</value>
+  </data>
+  <data name="editor.mode.read" xml:space="preserve">
+    <value>Lectura</value>
+  </data>
+  <data name="editor.mode.visual" xml:space="preserve">
+    <value>Visual</value>
+  </data>
+  <data name="editor.modes" xml:space="preserve">
+    <value>Forma de escribir (Ctrl+E)</value>
+  </data>
+  <data name="editor.noFolder" xml:space="preserve">
+    <value>Sin carpeta</value>
+  </data>
+  <data name="editor.paste" xml:space="preserve">
+    <value>Pegar</value>
+  </data>
+  <data name="editor.pin" xml:space="preserve">
+    <value>Fijar</value>
+  </data>
+  <data name="editor.preview" xml:space="preserve">
+    <value>Vista previa</value>
+  </data>
+  <data name="editor.print" xml:space="preserve">
+    <value>Imprimir</value>
+  </data>
+  <data name="editor.print.help" xml:space="preserve">
+    <value>Imprime la nota, o guárdala como PDF con la impresora Microsoft Print to PDF (Ctrl+P).</value>
+  </data>
+  <data name="editor.removeTag" xml:space="preserve">
+    <value>Quitar la etiqueta {name}</value>
+  </data>
+  <data name="editor.restore" xml:space="preserve">
+    <value>Restaurar</value>
+  </data>
+  <data name="editor.spelling.add" xml:space="preserve">
+    <value>Añadir al diccionario</value>
+  </data>
+  <data name="editor.status.notSaved" xml:space="preserve">
+    <value>No guardado</value>
+  </data>
+  <data name="editor.status.saved" xml:space="preserve">
+    <value>Guardado</value>
+  </data>
+  <data name="editor.status.saving" xml:space="preserve">
+    <value>Guardando…</value>
+  </data>
+  <data name="editor.status.unsaved" xml:space="preserve">
+    <value>Cambios sin guardar</value>
+  </data>
+  <data name="editor.style.heading1" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="editor.style.heading2" xml:space="preserve">
+    <value>Subtítulo</value>
+  </data>
+  <data name="editor.style.paragraph" xml:space="preserve">
+    <value>Texto</value>
+  </data>
+  <data name="editor.tags" xml:space="preserve">
+    <value>Etiquetas</value>
+  </data>
+  <data name="editor.textStyle" xml:space="preserve">
+    <value>Estilo de texto</value>
+  </data>
+  <data name="editor.title" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="editor.trash.notice" xml:space="preserve">
+    <value>Esta nota está en la papelera. Se eliminará para siempre el {date}.</value>
+  </data>
+  <data name="editor.unpin" xml:space="preserve">
+    <value>Desfijar</value>
+  </data>
+  <data name="editor.visualFailure" xml:space="preserve">
+    <value>Esta nota tiene algo que la forma visual no puede conservar, así que se abre como Markdown, donde no se pierde nada.</value>
+  </data>
+  <data name="editor.visualPlaceholder" xml:space="preserve">
+    <value>Empieza a escribir…</value>
+  </data>
+  <data name="error.DATABASE_TOO_NEW" xml:space="preserve">
+    <value>Estos datos los escribió una versión más nueva de Vanilla Notes. Actualiza la aplicación para abrirlos.</value>
+  </data>
+  <data name="error.FOLDER_EXISTS" xml:space="preserve">
+    <value>Ya existe una carpeta con ese nombre.</value>
+  </data>
+  <data name="error.HELLO_CANCELED" xml:space="preserve">
+    <value></value>
+    <comment>Empty: closing the window of Windows Hello is not a failure to show.</comment>
+  </data>
+  <data name="error.HELLO_KEY_LOST" xml:space="preserve">
+    <value>Windows Hello de este equipo ya no abre este perfil, así que se desactivó para él. Usa el código de recuperación.</value>
+  </data>
+  <data name="error.HELLO_UNAVAILABLE" xml:space="preserve">
+    <value>Windows Hello no está configurado en este equipo.</value>
+  </data>
+  <data name="error.NOT_FOUND" xml:space="preserve">
+    <value>Ya no existe.</value>
+  </data>
+  <data name="error.PROFILE_EXISTS" xml:space="preserve">
+    <value>Ya existe un perfil con ese nombre.</value>
+  </data>
+  <data name="error.STORAGE_FULL" xml:space="preserve">
+    <value>El disco está casi lleno, así que no se puede guardar nada nuevo. Libera espacio e inténtalo de nuevo.</value>
+  </data>
+  <data name="error.UNEXPECTED" xml:space="preserve">
+    <value>Algo salió mal. Inténtalo de nuevo.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR" xml:space="preserve">
+    <value>Algo de lo que escribiste no es válido.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR.backup" xml:space="preserve">
+    <value>Esa carpeta no es una copia de Vanilla Notes. Elige la carpeta que lleva por nombre el momento en que se hizo la copia.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR.content" xml:space="preserve">
+    <value>Una nota admite como máximo 100.000 caracteres.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR.exportFile" xml:space="preserve">
+    <value>Ese archivo no es el archivo de Datos de una exportación de Vanilla Notes.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR.file" xml:space="preserve">
+    <value>Un archivo no puede estar vacío y puede tener como máximo 5 MB.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR.fileName" xml:space="preserve">
+    <value>Un nombre de archivo tiene de 1 a 255 caracteres, sin barras.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR.folderId" xml:space="preserve">
+    <value>Esa carpeta ya no existe.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR.mimeType" xml:space="preserve">
+    <value>Una nota solo admite imágenes, documentos PDF y texto plano.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR.name" xml:space="preserve">
+    <value>Un nombre tiene de 1 a {max} caracteres.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR.password" xml:space="preserve">
+    <value>Una contraseña tiene de 8 a 72 caracteres.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR.tags" xml:space="preserve">
+    <value>Una nota lleva como máximo 10 etiquetas, cada una de 1 a 30 letras, dígitos, guiones o guiones bajos, y ninguna repetida.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR.text" xml:space="preserve">
+    <value>Busca de 1 a 100 caracteres.</value>
+  </data>
+  <data name="error.VALIDATION_ERROR.title" xml:space="preserve">
+    <value>Una nota necesita un título de 1 a 200 caracteres.</value>
+  </data>
+  <data name="error.VERSION_CONFLICT" xml:space="preserve">
+    <value>Esta nota se modificó en otro lugar, así que tus cambios no se guardaron.</value>
+  </data>
+  <data name="error.WRONG_PASSWORD" xml:space="preserve">
+    <value>La contraseña no es correcta.</value>
+  </data>
+  <data name="error.WRONG_RECOVERY_CODE" xml:space="preserve">
+    <value>El código de recuperación no es correcto.</value>
+  </data>
+  <data name="language.label" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="list.count.one" xml:space="preserve">
+    <value>{count} nota</value>
+  </data>
+  <data name="list.count.other" xml:space="preserve">
+    <value>{count} notas</value>
+  </data>
+  <data name="list.deletedAt" xml:space="preserve">
+    <value>Eliminada · {date}</value>
+  </data>
+  <data name="list.empty" xml:space="preserve">
+    <value>Las notas que añadas aparecerán aquí.</value>
+  </data>
+  <data name="list.emptyTrash" xml:space="preserve">
+    <value>Vaciar la papelera</value>
+  </data>
+  <data name="list.emptyTrashConfirm" xml:space="preserve">
+    <value>¿Eliminar para siempre todas las notas de la papelera, con sus adjuntos? Esta acción no se puede deshacer.</value>
+  </data>
+  <data name="list.justNow" xml:space="preserve">
+    <value>Ahora mismo</value>
+  </data>
+  <data name="list.loadMore" xml:space="preserve">
+    <value>Cargar más</value>
+  </data>
+  <data name="list.newNote" xml:space="preserve">
+    <value>Nueva nota</value>
+  </data>
+  <data name="list.newNote.help" xml:space="preserve">
+    <value>Nueva nota (Ctrl+N)</value>
+  </data>
+  <data name="list.noResults" xml:space="preserve">
+    <value>Ninguna nota tiene todas las palabras que buscaste.</value>
+  </data>
+  <data name="list.pinned" xml:space="preserve">
+    <value>Fijada</value>
+  </data>
+  <data name="list.trashEmpty" xml:space="preserve">
+    <value>La papelera está vacía. Las notas eliminadas se quedan aquí 30 días.</value>
+  </data>
+  <data name="login.forgotPassword" xml:space="preserve">
+    <value>¿Olvidaste tu contraseña?</value>
+  </data>
+  <data name="login.hidePassword" xml:space="preserve">
+    <value>Ocultar contraseña</value>
+  </data>
+  <data name="login.password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="login.passwordHint" xml:space="preserve">
+    <value>De 8 a 72 caracteres.</value>
+  </data>
+  <data name="login.reset.newPassword" xml:space="preserve">
+    <value>Nueva contraseña</value>
+  </data>
+  <data name="login.showPassword" xml:space="preserve">
+    <value>Mostrar contraseña</value>
+  </data>
+  <data name="newProfile.heading" xml:space="preserve">
+    <value>Crea un perfil</value>
+  </data>
+  <data name="newProfile.hello.hint" xml:space="preserve">
+    <value>Tu PIN, tu huella o tu rostro abren el perfil en este equipo, en lugar de la contraseña, y también si la olvidas.</value>
+  </data>
+  <data name="newProfile.name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="newProfile.password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="newProfile.submit" xml:space="preserve">
+    <value>Crear perfil</value>
+  </data>
+  <data name="newProfile.withPassword" xml:space="preserve">
+    <value>Con contraseña, las notas se cifran en el disco. Si la olvidas y pierdes el código de recuperación, nadie podrá volver a abrirlas.</value>
+  </data>
+  <data name="password.heading" xml:space="preserve">
+    <value>Abrir {name}</value>
+  </data>
+  <data name="password.hello" xml:space="preserve">
+    <value>Abrir con Windows Hello</value>
+  </data>
+  <data name="password.submit" xml:space="preserve">
+    <value>Abrir</value>
+  </data>
+  <data name="profiles.empty" xml:space="preserve">
+    <value>Todavía no hay ningún perfil en este equipo. Crea uno para empezar.</value>
+  </data>
+  <data name="profiles.heading" xml:space="preserve">
+    <value>¿Quién escribe?</value>
+  </data>
+  <data name="profiles.intro" xml:space="preserve">
+    <value>Elige tu perfil o crea uno. Cada perfil guarda sus propias notas.</value>
+  </data>
+  <data name="profiles.locked" xml:space="preserve">
+    <value>Tiene contraseña</value>
+  </data>
+  <data name="profiles.new" xml:space="preserve">
+    <value>Nuevo perfil</value>
+  </data>
+  <data name="profiles.public.name" xml:space="preserve">
+    <value>Público</value>
+  </data>
+  <data name="profiles.restore" xml:space="preserve">
+    <value>Restaurar una copia</value>
+  </data>
+  <data name="profiles.restore.confirm" xml:space="preserve">
+    <value>¿Restaurar la copia de {folder}? Ocupa el lugar de todos los datos de este equipo, todos los perfiles incluidos. Primero se hace una copia de los datos tal como están.</value>
+  </data>
+  <data name="profiles.restore.help" xml:space="preserve">
+    <value>Elige la carpeta de una copia, de este equipo o de cualquier otro lugar, como otro disco, para ponerla en lugar de todos los datos de aquí.</value>
+  </data>
+  <data name="profiles.restore.working" xml:space="preserve">
+    <value>Restaurando la copia…</value>
+  </data>
+  <data name="recover.back" xml:space="preserve">
+    <value>Volver</value>
+  </data>
+  <data name="recover.code" xml:space="preserve">
+    <value>Código de recuperación</value>
+  </data>
+  <data name="recover.heading" xml:space="preserve">
+    <value>Recupera {name}</value>
+  </data>
+  <data name="recover.hello.intro" xml:space="preserve">
+    <value>Windows Hello te pedirá tu PIN, tu huella o tu rostro. Después, la contraseña nueva protege el perfil, y tu código de recuperación sigue siendo el mismo.</value>
+  </data>
+  <data name="recover.hello.submit" xml:space="preserve">
+    <value>Confirmar con Windows Hello</value>
+  </data>
+  <data name="recover.intro" xml:space="preserve">
+    <value>Escribe el código de recuperación que recibiste al poner la contraseña y elige una contraseña nueva.</value>
+  </data>
+  <data name="recover.submit" xml:space="preserve">
+    <value>Poner la contraseña nueva</value>
+  </data>
+  <data name="recover.useCode" xml:space="preserve">
+    <value>Usar el código de recuperación</value>
+  </data>
+  <data name="recover.useHello" xml:space="preserve">
+    <value>Usar Windows Hello</value>
+  </data>
+  <data name="settings.appearance" xml:space="preserve">
+    <value>Apariencia</value>
+  </data>
+  <data name="settings.backup" xml:space="preserve">
+    <value>Copias de seguridad</value>
+  </data>
+  <data name="settings.backup.action" xml:space="preserve">
+    <value>Hacer una copia</value>
+  </data>
+  <data name="settings.backup.automatic" xml:space="preserve">
+    <value>Automática</value>
+  </data>
+  <data name="settings.backup.delete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="settings.backup.deleteConfirm" xml:space="preserve">
+    <value>¿Eliminar la copia del {date}? No se puede deshacer.</value>
+  </data>
+  <data name="settings.backup.done" xml:space="preserve">
+    <value>La copia se hizo.</value>
+  </data>
+  <data name="settings.backup.help" xml:space="preserve">
+    <value>Una copia de todos los datos de este equipo: cada perfil, con sus notas y sus adjuntos. La copia de un perfil con contraseña sigue cifrada, y se abre con la misma contraseña o el mismo código de recuperación. Restaurar una la pone en lugar de todos los datos que hay, después de hacer una copia de los datos tal como están, para que la restauración se pueda deshacer. La aplicación también hace una sola una vez al día, al arrancar, y guarda las siete más recientes de esas; nunca elimina una que hayas hecho tú.</value>
+  </data>
+  <data name="settings.backup.list" xml:space="preserve">
+    <value>Copias de este equipo</value>
+  </data>
+  <data name="settings.backup.none" xml:space="preserve">
+    <value>Todavía no hay copias.</value>
+  </data>
+  <data name="settings.backup.working" xml:space="preserve">
+    <value>Haciendo una copia…</value>
+  </data>
+  <data name="settings.cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="settings.data" xml:space="preserve">
+    <value>Tus notas y datos</value>
+  </data>
+  <data name="settings.dates" xml:space="preserve">
+    <value>Fechas</value>
+  </data>
+  <data name="settings.dates.exact" xml:space="preserve">
+    <value>Exactas</value>
+  </data>
+  <data name="settings.dates.help" xml:space="preserve">
+    <value>Relativas dice hace cuánto cambió una nota, por ejemplo hace 2 horas. Exactas muestra el día y la hora.</value>
+  </data>
+  <data name="settings.dates.relative" xml:space="preserve">
+    <value>Relativas</value>
+  </data>
+  <data name="settings.delete" xml:space="preserve">
+    <value>Eliminar perfil</value>
+  </data>
+  <data name="settings.delete.done" xml:space="preserve">
+    <value>El perfil se eliminó.</value>
+  </data>
+  <data name="settings.delete.help" xml:space="preserve">
+    <value>Elimina este perfil y todo lo que contiene: notas, carpetas, etiquetas, adjuntos y ajustes. Los demás perfiles no se tocan, y las copias que lo contienen lo conservan. No se puede deshacer, así que guarda antes tus notas si quieres conservarlas.</value>
+  </data>
+  <data name="settings.delete.open" xml:space="preserve">
+    <value>Eliminar este perfil</value>
+  </data>
+  <data name="settings.delete.submit" xml:space="preserve">
+    <value>Eliminar para siempre</value>
+  </data>
+  <data name="settings.delete.warning" xml:space="preserve">
+    <value>Esto elimina este perfil y todas sus notas para siempre. Un perfil con contraseña la pide para confirmar.</value>
+  </data>
+  <data name="settings.diagnostics" xml:space="preserve">
+    <value>Diagnóstico</value>
+  </data>
+  <data name="settings.diagnostics.action" xml:space="preserve">
+    <value>Copiar el diagnóstico</value>
+  </data>
+  <data name="settings.diagnostics.done" xml:space="preserve">
+    <value>El diagnóstico se copió. Pégalo donde informes del fallo.</value>
+  </data>
+  <data name="settings.diagnostics.help" xml:space="preserve">
+    <value>El registro de los fallos inesperados en este equipo, con la versión de la aplicación y de Windows. No contiene notas, contraseñas ni claves, y la aplicación nunca lo envía a ningún sitio: cópialo y pégalo donde informes del fallo.</value>
+  </data>
+  <data name="settings.done" xml:space="preserve">
+    <value>Listo</value>
+  </data>
+  <data name="settings.editor" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="settings.editorMode" xml:space="preserve">
+    <value>Las notas se abren en</value>
+  </data>
+  <data name="settings.editorMode.help" xml:space="preserve">
+    <value>Cómo se muestra una nota al abrirla. Visual oculta los símbolos de Markdown, Markdown los muestra junto a una vista previa y Lectura solo muestra el resultado. Puedes cambiarlo en cualquier nota.</value>
+  </data>
+  <data name="settings.export" xml:space="preserve">
+    <value>Tus notas</value>
+  </data>
+  <data name="settings.export.done" xml:space="preserve">
+    <value>Tus notas se guardaron.</value>
+  </data>
+  <data name="settings.export.download" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="settings.export.empty" xml:space="preserve">
+    <value>Todavía no tienes notas que guardar.</value>
+  </data>
+  <data name="settings.export.format" xml:space="preserve">
+    <value>Formato</value>
+  </data>
+  <data name="settings.export.format.html" xml:space="preserve">
+    <value>Página web</value>
+  </data>
+  <data name="settings.export.format.json" xml:space="preserve">
+    <value>Datos</value>
+  </data>
+  <data name="settings.export.format.markdown" xml:space="preserve">
+    <value>Markdown</value>
+  </data>
+  <data name="settings.export.help" xml:space="preserve">
+    <value>Guarda todas las notas de este perfil en el formato que elijas. Markdown conserva cada nota tal como la escribiste, con sus archivos adjuntos al lado. Página web da cada nota ya formateada, para leerla en cualquier navegador, con sus imágenes dentro. Ambas vienen en un archivo ZIP con una carpeta por carpeta. Datos es un solo archivo para otros programas. Para guardar una nota como PDF, imprímela.</value>
+  </data>
+  <data name="settings.export.working" xml:space="preserve">
+    <value>Preparando tus notas…</value>
+  </data>
+  <data name="settings.hello" xml:space="preserve">
+    <value>Windows Hello</value>
+  </data>
+  <data name="settings.hello.help" xml:space="preserve">
+    <value>Windows Hello (tu PIN, tu huella o tu rostro) abre el perfil en este equipo cada vez, en lugar de la contraseña, que sigue sirviendo. Si olvidas la contraseña, Hello abre el perfil y eliges una nueva. Solo funciona en este equipo y en esta cuenta de Windows; el código de recuperación funciona en cualquiera.</value>
+  </data>
+  <data name="settings.hello.off" xml:space="preserve">
+    <value>Desactivar</value>
+  </data>
+  <data name="settings.hello.on" xml:space="preserve">
+    <value>Activar</value>
+  </data>
+  <data name="settings.hello.submit" xml:space="preserve">
+    <value>Activar Windows Hello</value>
+  </data>
+  <data name="settings.hello.turnedOff" xml:space="preserve">
+    <value>Windows Hello ya no abre este perfil.</value>
+  </data>
+  <data name="settings.hello.turnedOn" xml:space="preserve">
+    <value>Windows Hello abre este perfil a partir de ahora.</value>
+  </data>
+  <data name="settings.help" xml:space="preserve">
+    <value>¿Qué es esto?</value>
+  </data>
+  <data name="settings.import" xml:space="preserve">
+    <value>Importar</value>
+  </data>
+  <data name="settings.import.action" xml:space="preserve">
+    <value>Elegir un archivo de datos</value>
+  </data>
+  <data name="settings.import.done.one" xml:space="preserve">
+    <value>Se trajo 1 nota.</value>
+  </data>
+  <data name="settings.import.done.other" xml:space="preserve">
+    <value>Se trajeron {count} notas.</value>
+  </data>
+  <data name="settings.import.help" xml:space="preserve">
+    <value>Trae notas a este perfil, de dos maneras. Un archivo de datos: el que la versión web de Vanilla Notes guarda desde sus ajustes, con sus carpetas, etiquetas y fechas; los archivos adjuntos no están en él, así que una imagen de la versión web muestra su texto en su lugar. Una carpeta: las notas de Obsidian, Typora o cualquier editor de Markdown, cada archivo una nota con su nombre como título, con la carpeta de su primer nivel y las imágenes que enlaza dentro de la carpeta; lo demás se deja fuera. Las notas que ya tienes no se tocan.</value>
+  </data>
+  <data name="settings.import.kinds" xml:space="preserve">
+    <value>Archivos de datos</value>
+  </data>
+  <data name="settings.import.working" xml:space="preserve">
+    <value>Trayendo tus notas…</value>
+  </data>
+  <data name="settings.importFolder.action" xml:space="preserve">
+    <value>Elegir una carpeta</value>
+  </data>
+  <data name="settings.importFolder.done" xml:space="preserve">
+    <value>Notas traídas: {notes}. Imágenes adjuntas: {images}. Archivos dejados fuera: {leftOut}.</value>
+  </data>
+  <data name="settings.language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="settings.language.help" xml:space="preserve">
+    <value>El idioma en que está escrita la interfaz. Tus notas no se traducen.</value>
+  </data>
+  <data name="settings.lock" xml:space="preserve">
+    <value>Cerrar si no se usa</value>
+  </data>
+  <data name="settings.lock.15" xml:space="preserve">
+    <value>15 min</value>
+  </data>
+  <data name="settings.lock.30" xml:space="preserve">
+    <value>30 min</value>
+  </data>
+  <data name="settings.lock.5" xml:space="preserve">
+    <value>5 min</value>
+  </data>
+  <data name="settings.lock.help" xml:space="preserve">
+    <value>Tras este tiempo sin hacer nada en la ventana, el perfil se cierra: lo que escribiste se guarda, y se vuelve a abrir con su contraseña o con Windows Hello. También se cierra al bloquear Windows, diga lo que diga este ajuste.</value>
+  </data>
+  <data name="settings.lock.never" xml:space="preserve">
+    <value>Nunca</value>
+  </data>
+  <data name="settings.name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="settings.name.changed" xml:space="preserve">
+    <value>El perfil cambió de nombre.</value>
+  </data>
+  <data name="settings.name.help" xml:space="preserve">
+    <value>El nombre con que este perfil aparece en la ventana de perfiles. De un perfil con contraseña, es lo único que esa ventana muestra.</value>
+  </data>
+  <data name="settings.name.submit" xml:space="preserve">
+    <value>Cambiar nombre</value>
+  </data>
+  <data name="settings.note" xml:space="preserve">
+    <value>Estos ajustes se guardan en este perfil. Cada perfil tiene los suyos.</value>
+  </data>
+  <data name="settings.noteList" xml:space="preserve">
+    <value>Lista de notas</value>
+  </data>
+  <data name="settings.open.help" xml:space="preserve">
+    <value>Ajustes (Ctrl+,)</value>
+  </data>
+  <data name="settings.order" xml:space="preserve">
+    <value>Orden de la lista</value>
+  </data>
+  <data name="settings.order.created" xml:space="preserve">
+    <value>Creación</value>
+  </data>
+  <data name="settings.order.help" xml:space="preserve">
+    <value>Cómo se ordena la lista de notas. Las notas que fijaste van siempre primero; una búsqueda se ordena por lo bien que coincide cada nota, y la papelera por cuándo se eliminó cada una.</value>
+  </data>
+  <data name="settings.order.title" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="settings.order.updated" xml:space="preserve">
+    <value>Última modificación</value>
+  </data>
+  <data name="settings.password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="settings.password.changed" xml:space="preserve">
+    <value>La contraseña se cambió.</value>
+  </data>
+  <data name="settings.password.current" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+  <data name="settings.password.help" xml:space="preserve">
+    <value>Una contraseña cifra las notas y los adjuntos de este perfil, y se pide cada vez que se abre. Al ponerla recibes un código de recuperación: sin la contraseña y sin el código, nadie puede abrir este perfil. Cambiar la contraseña conserva el mismo código. Una contraseña no se puede quitar. Ponerla en el perfil público lo vuelve privado, y el siguiente inicio crea un nuevo perfil público.</value>
+  </data>
+  <data name="settings.password.new" xml:space="preserve">
+    <value>Nueva contraseña</value>
+  </data>
+  <data name="settings.password.open" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="settings.password.set" xml:space="preserve">
+    <value>Poner una contraseña</value>
+  </data>
+  <data name="settings.password.setDone" xml:space="preserve">
+    <value>La contraseña se puso. Este perfil ahora está cifrado.</value>
+  </data>
+  <data name="settings.password.setSubmit" xml:space="preserve">
+    <value>Poner la contraseña</value>
+  </data>
+  <data name="settings.password.submit" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="settings.profile" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="settings.restore.action" xml:space="preserve">
+    <value>Restaurar</value>
+  </data>
+  <data name="settings.restore.confirm" xml:space="preserve">
+    <value>¿Restaurar la copia del {date}? Ocupa el lugar de todos los datos de este equipo, todos los perfiles incluidos. Primero se hace una copia de los datos tal como están. Este perfil se cierra.</value>
+  </data>
+  <data name="settings.restore.done" xml:space="preserve">
+    <value>La copia se restauró. Una copia de los datos tal como estaban está entre las copias.</value>
+  </data>
+  <data name="settings.spellcheck" xml:space="preserve">
+    <value>Corrector ortográfico</value>
+  </data>
+  <data name="settings.spellcheck.help" xml:space="preserve">
+    <value>Subraya las palabras que Windows cree mal escritas mientras escribes una nota.</value>
+  </data>
+  <data name="settings.switch.off" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="settings.switch.on" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="settings.textSize" xml:space="preserve">
+    <value>Tamaño del texto de las notas</value>
+  </data>
+  <data name="settings.textSize.help" xml:space="preserve">
+    <value>Qué tan grande se ve el texto de una nota donde la escribes y la lees. El resto de la interfaz conserva su tamaño.</value>
+  </data>
+  <data name="settings.textSize.large" xml:space="preserve">
+    <value>Grande</value>
+  </data>
+  <data name="settings.textSize.normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="settings.textSize.small" xml:space="preserve">
+    <value>Pequeño</value>
+  </data>
+  <data name="settings.theme" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="settings.theme.help" xml:space="preserve">
+    <value>Los colores de la interfaz. Hasta que elijas uno, sigue el modo claro u oscuro de Windows.</value>
+  </data>
+  <data name="settings.title" xml:space="preserve">
+    <value>Ajustes</value>
+  </data>
+  <data name="sidebar.addFolder" xml:space="preserve">
+    <value>Añadir</value>
+  </data>
+  <data name="sidebar.allNotes" xml:space="preserve">
+    <value>Todas las notas</value>
+  </data>
+  <data name="sidebar.deleteFolder" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="sidebar.deleteFolderConfirm" xml:space="preserve">
+    <value>¿Eliminar la carpeta "{name}"? Sus notas se conservan, sin carpeta.</value>
+  </data>
+  <data name="sidebar.folders" xml:space="preserve">
+    <value>Carpetas</value>
+  </data>
+  <data name="sidebar.newFolder" xml:space="preserve">
+    <value>Nueva carpeta</value>
+  </data>
+  <data name="sidebar.newFolderName" xml:space="preserve">
+    <value>Nombre de la nueva carpeta</value>
+  </data>
+  <data name="sidebar.noFolder" xml:space="preserve">
+    <value>Sin carpeta</value>
+  </data>
+  <data name="sidebar.renameFolder" xml:space="preserve">
+    <value>Renombrar</value>
+  </data>
+  <data name="sidebar.renamePrompt" xml:space="preserve">
+    <value>Nuevo nombre de la carpeta</value>
+  </data>
+  <data name="sidebar.searchHint" xml:space="preserve">
+    <value>Ctrl K</value>
+  </data>
+  <data name="sidebar.searchLabel" xml:space="preserve">
+    <value>Buscar notas</value>
+  </data>
+  <data name="sidebar.searchPlaceholder" xml:space="preserve">
+    <value>Buscar notas…</value>
+  </data>
+  <data name="sidebar.searchResults" xml:space="preserve">
+    <value>Resultados de la búsqueda</value>
+  </data>
+  <data name="sidebar.tags" xml:space="preserve">
+    <value>Etiquetas</value>
+  </data>
+  <data name="sidebar.trash" xml:space="preserve">
+    <value>Papelera</value>
+  </data>
+  <data name="size.bytes" xml:space="preserve">
+    <value>{size} B</value>
+  </data>
+  <data name="size.kilobytes" xml:space="preserve">
+    <value>{size} KB</value>
+  </data>
+  <data name="size.megabytes" xml:space="preserve">
+    <value>{size} MB</value>
+  </data>
+  <data name="theme.dark" xml:space="preserve">
+    <value>Oscuro</value>
+  </data>
+  <data name="theme.label" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="theme.light" xml:space="preserve">
+    <value>Claro</value>
+  </data>
+  <data name="theme.neutral" xml:space="preserve">
+    <value>Neutro</value>
+  </data>
+  <data name="workspace.discardConfirm" xml:space="preserve">
+    <value>¿Descartar los cambios sin guardar?</value>
+  </data>
+  <data name="workspace.noteUnavailable" xml:space="preserve">
+    <value>Esta nota ya no está disponible para ti.</value>
+  </data>
+  <data name="workspace.notesLabel" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="workspace.sidebarLabel" xml:space="preserve">
+    <value>Carpetas y etiquetas</value>
+  </data>
+  <data name="workspace.signOut" xml:space="preserve">
+    <value>Cerrar perfil</value>
+  </data>
+  <data name="workspace.untitledNote" xml:space="preserve">
+    <value>Nota sin título</value>
+  </data>
+</root>
