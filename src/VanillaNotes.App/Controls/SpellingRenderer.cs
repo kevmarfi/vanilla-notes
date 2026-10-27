@@ -61,8 +61,6 @@ public sealed class SpellingRenderer : IBackgroundRenderer
 
     public void Draw(TextView textView, DrawingContext drawingContext)
     {
-        System.IO.File.AppendAllText(@"C:\Users\kevma\AppData\Local\Temp\claude\C--Pesonal-Coding-github-c-sharp-vanilla-notes\03168691-bd31-4b73-ae03-0bb5f3f2a4a6\scratchpad\spelltrace.txt", $"DRAW spelling={_spelling is not null} valid={textView.VisualLinesValid} danger={_themed.TryFindResource("Danger")?.GetType().Name} lines={(textView.VisualLinesValid ? textView.VisualLines.Count : -1)}
-");
         if (_spelling is null || !textView.VisualLinesValid || _themed.TryFindResource("Danger") is not Brush brush)
         {
             return;
