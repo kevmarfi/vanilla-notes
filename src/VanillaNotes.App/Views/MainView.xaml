@@ -30,7 +30,7 @@
                                 ToolTip="{Binding [workspace.signOut], Source={StaticResource Texts}}" AutomationProperties.Name="{Binding [workspace.signOut], Source={StaticResource Texts}}">
                             <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconSignOut}" />
                         </Button>
-                        <Button Style="{StaticResource QuietButton}" Padding="{StaticResource CompactButtonPadding}" HorizontalContentAlignment="Left" Command="{Binding OpenSettingsCommand}"
+                        <Button Style="{StaticResource QuietButton}" Padding="{StaticResource CompactButtonPadding}" HorizontalContentAlignment="Left" Command="{Binding OpenSettingsCommand}" AutomationProperties.Name="{Binding [settings.title], Source={StaticResource Texts}}"
                                 ToolTip="{Binding [settings.open.help], Source={StaticResource Texts}}">
                             <StackPanel Orientation="Horizontal">
                                 <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconSettings}" Margin="{StaticResource GapRightSm}" />

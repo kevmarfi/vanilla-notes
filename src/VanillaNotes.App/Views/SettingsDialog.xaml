@@ -25,7 +25,7 @@
                     <TextBlock Text="{Binding [settings.theme], Source={StaticResource Texts}}" VerticalAlignment="Center" />
                     <ToggleButton x:Name="ThemeHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
                 </StackPanel>
-                <controls:TogglePicker Grid.Column="1" Options="{Binding Themes}" SelectedKey="{Binding Theme}" HorizontalAlignment="Left" />
+                <controls:TogglePicker AutomationProperties.Name="{Binding [settings.theme], Source={StaticResource Texts}}" Grid.Column="1" Options="{Binding Themes}" SelectedKey="{Binding Theme}" HorizontalAlignment="Left" />
                 <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=ThemeHelp, Converter={StaticResource Visible}}">
                     <TextBlock Text="{Binding [settings.theme.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
                 </Border>
@@ -43,7 +43,7 @@
                     <TextBlock Text="{Binding [settings.language], Source={StaticResource Texts}}" VerticalAlignment="Center" />
                     <ToggleButton x:Name="LanguageHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
                 </StackPanel>
-                <controls:TogglePicker Grid.Column="1" Options="{Binding Languages}" SelectedKey="{Binding Language}" HorizontalAlignment="Left" />
+                <controls:TogglePicker AutomationProperties.Name="{Binding [settings.language], Source={StaticResource Texts}}" Grid.Column="1" Options="{Binding Languages}" SelectedKey="{Binding Language}" HorizontalAlignment="Left" />
                 <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=LanguageHelp, Converter={StaticResource Visible}}">
                     <TextBlock Text="{Binding [settings.language.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
                 </Border>
@@ -61,7 +61,7 @@
                     <TextBlock Text="{Binding [settings.textSize], Source={StaticResource Texts}}" VerticalAlignment="Center" />
                     <ToggleButton x:Name="TextSizeHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
                 </StackPanel>
-                <controls:TogglePicker Grid.Column="1" Options="{Binding TextSizes}" SelectedKey="{Binding TextSize}" HorizontalAlignment="Left" />
+                <controls:TogglePicker AutomationProperties.Name="{Binding [settings.textSize], Source={StaticResource Texts}}" Grid.Column="1" Options="{Binding TextSizes}" SelectedKey="{Binding TextSize}" HorizontalAlignment="Left" />
                 <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=TextSizeHelp, Converter={StaticResource Visible}}">
                     <TextBlock Text="{Binding [settings.textSize.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
                 </Border>
@@ -83,7 +83,7 @@
                     <TextBlock Text="{Binding [settings.editorMode], Source={StaticResource Texts}}" VerticalAlignment="Center" />
                     <ToggleButton x:Name="EditorModeHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
                 </StackPanel>
-                <controls:TogglePicker Grid.Column="1" Options="{Binding EditorModes}" SelectedKey="{Binding EditorMode}" HorizontalAlignment="Left" />
+                <controls:TogglePicker AutomationProperties.Name="{Binding [settings.editorMode], Source={StaticResource Texts}}" Grid.Column="1" Options="{Binding EditorModes}" SelectedKey="{Binding EditorMode}" HorizontalAlignment="Left" />
                 <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=EditorModeHelp, Converter={StaticResource Visible}}">
                     <TextBlock Text="{Binding [settings.editorMode.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
                 </Border>
@@ -101,7 +101,7 @@
                     <TextBlock Text="{Binding [settings.spellcheck], Source={StaticResource Texts}}" VerticalAlignment="Center" />
                     <ToggleButton x:Name="SpellcheckHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
                 </StackPanel>
-                <controls:TogglePicker Grid.Column="1" Options="{Binding Switch}" SelectedKey="{Binding Spellcheck}" HorizontalAlignment="Left" />
+                <controls:TogglePicker AutomationProperties.Name="{Binding [settings.spellcheck], Source={StaticResource Texts}}" Grid.Column="1" Options="{Binding Switch}" SelectedKey="{Binding Spellcheck}" HorizontalAlignment="Left" />
                 <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=SpellcheckHelp, Converter={StaticResource Visible}}">
                     <TextBlock Text="{Binding [settings.spellcheck.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
                 </Border>
@@ -123,7 +123,7 @@
                     <TextBlock Text="{Binding [settings.dates], Source={StaticResource Texts}}" VerticalAlignment="Center" />
                     <ToggleButton x:Name="DatesHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
                 </StackPanel>
-                <controls:TogglePicker Grid.Column="1" Options="{Binding DateStyles}" SelectedKey="{Binding DateStyle}" HorizontalAlignment="Left" />
+                <controls:TogglePicker AutomationProperties.Name="{Binding [settings.dates], Source={StaticResource Texts}}" Grid.Column="1" Options="{Binding DateStyles}" SelectedKey="{Binding DateStyle}" HorizontalAlignment="Left" />
                 <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=DatesHelp, Converter={StaticResource Visible}}">
                     <TextBlock Text="{Binding [settings.dates.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
                 </Border>
@@ -141,7 +141,7 @@
                     <TextBlock Text="{Binding [settings.order], Source={StaticResource Texts}}" VerticalAlignment="Center" />
                     <ToggleButton x:Name="OrderHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
                 </StackPanel>
-                <controls:TogglePicker Grid.Column="1" Options="{Binding NoteOrders}" SelectedKey="{Binding NoteOrder}" HorizontalAlignment="Left" />
+                <controls:TogglePicker AutomationProperties.Name="{Binding [settings.order], Source={StaticResource Texts}}" Grid.Column="1" Options="{Binding NoteOrders}" SelectedKey="{Binding NoteOrder}" HorizontalAlignment="Left" />
                 <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=OrderHelp, Converter={StaticResource Visible}}">
                     <TextBlock Text="{Binding [settings.order.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
                 </Border>
@@ -201,7 +201,7 @@
                     <TextBlock Text="{Binding [newProfile.withPassword], Source={StaticResource Texts}}" TextWrapping="Wrap" FontSize="{StaticResource TextSm}" />
                 </Border>
                 <TextBlock Text="{Binding [settings.password.new], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
-                <PasswordBox controls:PasswordBoxBinding.Password="{Binding NewPassword}" />
+                <PasswordBox AutomationProperties.Name="{Binding [settings.password.new], Source={StaticResource Texts}}" controls:PasswordBoxBinding.Password="{Binding NewPassword}" />
                 <TextBlock Text="{Binding [login.passwordHint], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" Margin="{StaticResource HintMargin}" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Content="{Binding [settings.cancel], Source={StaticResource Texts}}" Command="{Binding CloseProfileFormCommand}" Margin="{StaticResource GapRightSm}" />
@@ -210,9 +210,9 @@
             </StackPanel>
             <StackPanel Style="{StaticResource SettingsForm}" Visibility="{Binding IsChangingPassword, Converter={StaticResource Visible}}">
                 <TextBlock Text="{Binding [settings.password.current], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
-                <PasswordBox controls:PasswordBoxBinding.Password="{Binding CurrentPassword}" Margin="{StaticResource GapBelowMd}" />
+                <PasswordBox AutomationProperties.Name="{Binding [settings.password.current], Source={StaticResource Texts}}" controls:PasswordBoxBinding.Password="{Binding CurrentPassword}" Margin="{StaticResource GapBelowMd}" />
                 <TextBlock Text="{Binding [settings.password.new], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
-                <PasswordBox controls:PasswordBoxBinding.Password="{Binding NewPassword}" />
+                <PasswordBox AutomationProperties.Name="{Binding [settings.password.new], Source={StaticResource Texts}}" controls:PasswordBoxBinding.Password="{Binding NewPassword}" />
                 <TextBlock Text="{Binding [login.passwordHint], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" Margin="{StaticResource HintMargin}" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Content="{Binding [settings.cancel], Source={StaticResource Texts}}" Command="{Binding CloseProfileFormCommand}" Margin="{StaticResource GapRightSm}" />
@@ -232,7 +232,7 @@
                     <TextBlock Text="{Binding [settings.lock], Source={StaticResource Texts}}" VerticalAlignment="Center" />
                     <ToggleButton x:Name="LockHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
                 </StackPanel>
-                <controls:TogglePicker Grid.Column="1" Options="{Binding LockTimes}" SelectedKey="{Binding LockAfter}" HorizontalAlignment="Left" />
+                <controls:TogglePicker AutomationProperties.Name="{Binding [settings.lock], Source={StaticResource Texts}}" Grid.Column="1" Options="{Binding LockTimes}" SelectedKey="{Binding LockAfter}" HorizontalAlignment="Left" />
                 <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=LockHelp, Converter={StaticResource Visible}}">
                     <TextBlock Text="{Binding [settings.lock.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
                 </Border>
@@ -263,7 +263,7 @@
             </Grid>
             <StackPanel Style="{StaticResource SettingsForm}" Visibility="{Binding IsTurningOnHello, Converter={StaticResource Visible}}">
                 <TextBlock Text="{Binding [settings.password.current], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
-                <PasswordBox controls:PasswordBoxBinding.Password="{Binding CurrentPassword}" Margin="{StaticResource GapBelowMd}" />
+                <PasswordBox AutomationProperties.Name="{Binding [settings.password.current], Source={StaticResource Texts}}" controls:PasswordBoxBinding.Password="{Binding CurrentPassword}" Margin="{StaticResource GapBelowMd}" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Content="{Binding [settings.cancel], Source={StaticResource Texts}}" Command="{Binding CloseProfileFormCommand}" Margin="{StaticResource GapRightSm}" />
                     <Button Content="{Binding [settings.hello.submit], Source={StaticResource Texts}}" Command="{Binding TurnOnHelloCommand}" Style="{StaticResource PrimaryButton}" />
@@ -295,7 +295,7 @@
                 </Border>
                 <StackPanel Visibility="{Binding HasPassword, Converter={StaticResource Visible}}">
                     <TextBlock Text="{Binding [settings.password.current], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
-                    <PasswordBox controls:PasswordBoxBinding.Password="{Binding CurrentPassword}" Margin="{StaticResource GapBelowMd}" />
+                    <PasswordBox AutomationProperties.Name="{Binding [settings.password.current], Source={StaticResource Texts}}" controls:PasswordBoxBinding.Password="{Binding CurrentPassword}" Margin="{StaticResource GapBelowMd}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Content="{Binding [settings.cancel], Source={StaticResource Texts}}" Command="{Binding CloseProfileFormCommand}" Margin="{StaticResource GapRightSm}" />
@@ -320,8 +320,8 @@
                     <ToggleButton x:Name="ExportHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Left">
-                    <controls:TogglePicker Options="{Binding ExportFormats}" SelectedKey="{Binding ExportChoice}" HorizontalAlignment="Left" />
-                    <Button Command="{Binding ExportCommand}" Padding="{StaticResource SmallButtonPadding}" Margin="{StaticResource GapAboveSm}" HorizontalAlignment="Left">
+                    <controls:TogglePicker AutomationProperties.Name="{Binding [settings.export], Source={StaticResource Texts}}" Options="{Binding ExportFormats}" SelectedKey="{Binding ExportChoice}" HorizontalAlignment="Left" />
+                    <Button Command="{Binding ExportCommand}" AutomationProperties.Name="{Binding [settings.export.download], Source={StaticResource Texts}}" Padding="{StaticResource SmallButtonPadding}" Margin="{StaticResource GapAboveSm}" HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                             <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconDownload}" Margin="{StaticResource GapRightSm}" />
                             <TextBlock Text="{Binding [settings.export.download], Source={StaticResource Texts}}" />
@@ -372,6 +372,11 @@
                 </Border>
             </Grid>
             <ItemsControl ItemsSource="{Binding Backups}" Focusable="False" AutomationProperties.Name="{Binding [settings.backup.list], Source={StaticResource Texts}}">
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="AutomationProperties.Name" Value="{Binding DateText}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <DockPanel Margin="{StaticResource GapBelowSm}">

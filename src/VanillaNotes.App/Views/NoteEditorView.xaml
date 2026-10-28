@@ -13,9 +13,9 @@
         </StackPanel>
         <DockPanel Margin="{StaticResource EditorMargin}" Visibility="{Binding HasNote, Converter={StaticResource Visible}}" controls:Dropping.FilesCommand="{Binding AttachFilesCommand}">
             <DockPanel DockPanel.Dock="Top" Margin="{StaticResource GapBelowMd}">
-                <controls:TogglePicker DockPanel.Dock="Left" Options="{Binding Modes}" SelectedKey="{Binding Mode}" ToolTip="{Binding [editor.modes], Source={StaticResource Texts}}"
+                <controls:TogglePicker DockPanel.Dock="Left" Options="{Binding Modes}" SelectedKey="{Binding Mode}" ToolTip="{Binding [editor.modes], Source={StaticResource Texts}}" AutomationProperties.Name="{Binding [editor.modes], Source={StaticResource Texts}}"
                                        Visibility="{Binding IsWritable, Converter={StaticResource Visible}}" />
-                <Button DockPanel.Dock="Right" Style="{StaticResource DangerButton}" Padding="{StaticResource ToolbarButtonPadding}" Command="{Binding DeleteCommand}"
+                <Button DockPanel.Dock="Right" Style="{StaticResource DangerButton}" Padding="{StaticResource ToolbarButtonPadding}" Command="{Binding DeleteCommand}" AutomationProperties.Name="{Binding [editor.delete], Source={StaticResource Texts}}"
                         Visibility="{Binding IsWritable, Converter={StaticResource Visible}}">
                     <StackPanel Orientation="Horizontal">
                         <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconTrash}" Margin="{StaticResource GapRightSm}" />
@@ -26,7 +26,7 @@
                         ToolTip="{Binding PinText}" AutomationProperties.Name="{Binding PinText}" Visibility="{Binding IsWritable, Converter={StaticResource Visible}}">
                     <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPin}" />
                 </Button>
-                <Button DockPanel.Dock="Right" Padding="{StaticResource ToolbarButtonPadding}" Margin="{StaticResource GapRightSm}" Command="{Binding PrintCommand}"
+                <Button DockPanel.Dock="Right" Padding="{StaticResource ToolbarButtonPadding}" Margin="{StaticResource GapRightSm}" Command="{Binding PrintCommand}" AutomationProperties.Name="{Binding [editor.print], Source={StaticResource Texts}}"
                         ToolTip="{Binding [editor.print.help], Source={StaticResource Texts}}">
                     <StackPanel Orientation="Horizontal">
                         <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPrinter}" Margin="{StaticResource GapRightSm}" />
@@ -66,7 +66,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <ItemsControl ItemsSource="{Binding Tags}" VerticalAlignment="Center">
+                <ItemsControl ItemsSource="{Binding Tags}" VerticalAlignment="Center" AutomationProperties.Name="{Binding [editor.tags], Source={StaticResource Texts}}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel />
@@ -88,7 +88,7 @@
                     <TextBlock Text="{Binding [editor.addTagPlaceholder], Source={StaticResource Texts}}" Foreground="{DynamicResource TextMuted}" FontSize="{StaticResource TextSm}" Margin="{StaticResource TagPlaceholderMargin}" VerticalAlignment="Center" IsHitTestVisible="False"
                                Visibility="{Binding Text.Length, ElementName=TagBox, Converter={StaticResource VisibleWhenZero}}" />
                 </Grid>
-                <Button Padding="{StaticResource SmallButtonPadding}" Margin="{StaticResource GapLeftSm}" VerticalAlignment="Center" Command="{Binding AttachCommand}"
+                <Button Padding="{StaticResource SmallButtonPadding}" Margin="{StaticResource GapLeftSm}" VerticalAlignment="Center" Command="{Binding AttachCommand}" AutomationProperties.Name="{Binding [editor.attach], Source={StaticResource Texts}}"
                         Visibility="{Binding IsReading, Converter={StaticResource Hidden}}">
                     <StackPanel Orientation="Horizontal">
                         <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPaperclip}" Margin="{StaticResource GapRightSm}" />

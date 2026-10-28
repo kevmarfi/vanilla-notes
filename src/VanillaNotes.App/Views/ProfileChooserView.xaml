@@ -20,7 +20,7 @@
                         <ItemsControl ItemsSource="{Binding Profiles}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource ProfileRow}" Command="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}">
+                                    <Button Style="{StaticResource ProfileRow}" AutomationProperties.Name="{Binding Name}" Command="{Binding DataContext.OpenCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}">
                                         <DockPanel>
                                             <Border DockPanel.Dock="Left" Width="{StaticResource AvatarSize}" Height="{StaticResource AvatarSize}" CornerRadius="{StaticResource RadiusPill}"
                                                     Background="{Binding Name, Converter={StaticResource TagColor}, ConverterParameter=Bg}" Margin="{StaticResource AvatarMargin}">
@@ -41,7 +41,7 @@
                 <TextBlock Text="{Binding [profiles.empty], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" TextAlignment="Center" Margin="{StaticResource GapBelowLg}"
                            Visibility="{Binding Profiles.Count, Converter={StaticResource VisibleWhenZero}}" />
                 <TextBlock Text="{Binding Failure}" Style="{StaticResource ErrorText}" Margin="{StaticResource GapBelowMd}" Visibility="{Binding HasFailure, Converter={StaticResource Visible}}" />
-                <Button Style="{StaticResource NewProfileButton}" Command="{Binding CreateCommand}" HorizontalAlignment="Stretch">
+                <Button Style="{StaticResource NewProfileButton}" Command="{Binding CreateCommand}" AutomationProperties.Name="{Binding [profiles.new], Source={StaticResource Texts}}" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal">
                         <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPlus}" Foreground="{DynamicResource Accent}" Margin="{StaticResource GapRightSm}" />
                         <TextBlock Text="{Binding [profiles.new], Source={StaticResource Texts}}" />

@@ -7,18 +7,18 @@
     <StackPanel Style="{StaticResource DialogBody}">
         <TextBlock Text="{Binding [newProfile.heading], Source={StaticResource Texts}}" Style="{StaticResource Heading}" Margin="{StaticResource GapBelowLg}" />
         <TextBlock Text="{Binding [newProfile.name], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
-        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource GapBelowMd}" />
+        <TextBox AutomationProperties.Name="{Binding [newProfile.name], Source={StaticResource Texts}}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource GapBelowMd}" />
         <TextBlock Text="{Binding [language.label], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
-        <controls:TogglePicker Options="{Binding Languages}" SelectedKey="{Binding Language}" HorizontalAlignment="Left" Margin="{StaticResource GapBelowMd}" />
+        <controls:TogglePicker AutomationProperties.Name="{Binding [language.label], Source={StaticResource Texts}}" Options="{Binding Languages}" SelectedKey="{Binding Language}" HorizontalAlignment="Left" Margin="{StaticResource GapBelowMd}" />
         <TextBlock Text="{Binding [newProfile.password], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
-        <PasswordBox controls:PasswordBoxBinding.Password="{Binding Password}" />
+        <PasswordBox AutomationProperties.Name="{Binding [newProfile.password], Source={StaticResource Texts}}" controls:PasswordBoxBinding.Password="{Binding Password}" />
         <TextBlock Text="{Binding [login.passwordHint], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" Margin="{StaticResource HintMargin}" />
         <Border Style="{StaticResource Notice}">
             <TextBlock Text="{Binding [newProfile.withPassword], Source={StaticResource Texts}}" TextWrapping="Wrap" FontSize="{StaticResource TextSm}" />
         </Border>
         <StackPanel Margin="{StaticResource GapAboveMd}" Visibility="{Binding IsHelloAvailable, Converter={StaticResource Visible}}">
             <TextBlock Text="{Binding [settings.hello], Source={StaticResource Texts}}" Style="{StaticResource FieldLabel}" />
-            <controls:TogglePicker Options="{Binding Switch}" SelectedKey="{Binding Hello}" HorizontalAlignment="Left" />
+            <controls:TogglePicker AutomationProperties.Name="{Binding [settings.hello], Source={StaticResource Texts}}" Options="{Binding Switch}" SelectedKey="{Binding Hello}" HorizontalAlignment="Left" />
             <TextBlock Text="{Binding [newProfile.hello.hint], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" Margin="{StaticResource GapAboveXs}" />
         </StackPanel>
         <TextBlock Text="{Binding Failure}" Style="{StaticResource ErrorText}" Margin="{StaticResource GapAboveMd}" Visibility="{Binding HasFailure, Converter={StaticResource Visible}}" />

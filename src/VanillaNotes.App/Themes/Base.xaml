@@ -6,6 +6,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit">
 
+    <!-- The mark of what has the keyboard, for the elements that show nothing of their own when they have it: drawn only when the keyboard took it there, not on a click. -->
+    <Style x:Key="KeyboardFocus">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderBrush="{DynamicResource Accent}" BorderThickness="2" CornerRadius="{StaticResource Radius}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- Every window of the application: the background, the typeface, and the colour of the text. -->
     <Style x:Key="AppWindow" TargetType="Window">
         <Setter Property="Background" Value="{DynamicResource Bg}" />
@@ -163,7 +174,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="10,5" />
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource KeyboardFocus}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">

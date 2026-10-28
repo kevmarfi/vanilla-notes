@@ -1,9 +1,10 @@
-<!-- A row of buttons for the values of one choice, with the one chosen marked. -->
+<!-- A row of buttons for the values of one choice, with the one chosen marked. The name a screen reader gives the choice is the one given to the picker. -->
 <UserControl x:Class="VanillaNotes.App.Controls.TogglePicker"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Name="Root">
     <ListBox Style="{StaticResource Toggle}"
+             AutomationProperties.Name="{Binding (AutomationProperties.Name), ElementName=Root}"
              ItemsSource="{Binding Options, ElementName=Root}"
              DisplayMemberPath="Value"
              SelectedValuePath="Key"

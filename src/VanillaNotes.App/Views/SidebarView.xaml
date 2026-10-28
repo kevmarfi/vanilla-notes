@@ -10,6 +10,7 @@
                 <DockPanel>
                     <ContentControl DockPanel.Dock="Left" Style="{StaticResource IconSm}" Content="{StaticResource IconSearch}" Foreground="{DynamicResource TextMuted}" />
                     <Button DockPanel.Dock="Right" Style="{StaticResource IconButton}" Padding="{StaticResource TinyButtonPadding}" Command="{Binding ClearSearchCommand}"
+                            ToolTip="{Binding [sidebar.clearSearch], Source={StaticResource Texts}}"
                             Visibility="{Binding IsSearching, Converter={StaticResource Visible}}">
                         <ContentControl Style="{StaticResource IconXs}" Content="{StaticResource IconClose}" />
                     </Button>
@@ -25,28 +26,34 @@
                 </DockPanel>
             </Border>
 
-            <ListBox Style="{StaticResource BareList}" ItemContainerStyle="{StaticResource NavItem}">
-                <ListBoxItem IsSelected="{Binding IsAllSelected, Mode=OneWay}">
+            <ListBox Style="{StaticResource BareList}" ItemContainerStyle="{StaticResource NavItem}" AutomationProperties.Name="{Binding [sidebar.notes], Source={StaticResource Texts}}">
+                <ListBoxItem IsSelected="{Binding IsAllSelected, Mode=OneWay}" AutomationProperties.Name="{Binding [sidebar.allNotes], Source={StaticResource Texts}}">
                     <ListBoxItem.InputBindings>
                         <MouseBinding Gesture="LeftClick" Command="{Binding ChooseAllCommand}" />
+                        <KeyBinding Key="Enter" Command="{Binding ChooseAllCommand}" />
+                        <KeyBinding Key="Space" Command="{Binding ChooseAllCommand}" />
                     </ListBoxItem.InputBindings>
                     <StackPanel Orientation="Horizontal">
                         <ContentControl Style="{StaticResource Icon}" Content="{StaticResource IconNotes}" Foreground="{DynamicResource TextMuted}" Margin="{StaticResource GapRightMd}" />
                         <TextBlock Text="{Binding [sidebar.allNotes], Source={StaticResource Texts}}" />
                     </StackPanel>
                 </ListBoxItem>
-                <ListBoxItem IsSelected="{Binding IsNoFolderSelected, Mode=OneWay}" controls:Dropping.NoteCommand="{Binding DropNoteCommand}">
+                <ListBoxItem IsSelected="{Binding IsNoFolderSelected, Mode=OneWay}" AutomationProperties.Name="{Binding [sidebar.noFolder], Source={StaticResource Texts}}" controls:Dropping.NoteCommand="{Binding DropNoteCommand}">
                     <ListBoxItem.InputBindings>
                         <MouseBinding Gesture="LeftClick" Command="{Binding ChooseNoFolderCommand}" />
+                        <KeyBinding Key="Enter" Command="{Binding ChooseNoFolderCommand}" />
+                        <KeyBinding Key="Space" Command="{Binding ChooseNoFolderCommand}" />
                     </ListBoxItem.InputBindings>
                     <StackPanel Orientation="Horizontal">
                         <ContentControl Style="{StaticResource Icon}" Content="{StaticResource IconFolder}" Foreground="{DynamicResource TextMuted}" Margin="{StaticResource GapRightMd}" />
                         <TextBlock Text="{Binding [sidebar.noFolder], Source={StaticResource Texts}}" />
                     </StackPanel>
                 </ListBoxItem>
-                <ListBoxItem IsSelected="{Binding IsTrashSelected, Mode=OneWay}">
+                <ListBoxItem IsSelected="{Binding IsTrashSelected, Mode=OneWay}" AutomationProperties.Name="{Binding [sidebar.trash], Source={StaticResource Texts}}">
                     <ListBoxItem.InputBindings>
                         <MouseBinding Gesture="LeftClick" Command="{Binding ChooseTrashCommand}" />
+                        <KeyBinding Key="Enter" Command="{Binding ChooseTrashCommand}" />
+                        <KeyBinding Key="Space" Command="{Binding ChooseTrashCommand}" />
                     </ListBoxItem.InputBindings>
                     <StackPanel Orientation="Horizontal">
                         <ContentControl Style="{StaticResource Icon}" Content="{StaticResource IconTrash}" Foreground="{DynamicResource TextMuted}" Margin="{StaticResource GapRightMd}" />
@@ -59,11 +66,11 @@
                 <Button DockPanel.Dock="Right" Style="{StaticResource IconButton}" Command="{Binding ToggleAddFolderCommand}" ToolTip="{Binding [sidebar.newFolder], Source={StaticResource Texts}}">
                     <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPlus}" />
                 </Button>
-                <TextBlock Text="{Binding [sidebar.folders], Source={StaticResource Texts}}" Style="{StaticResource SectionHeading}" VerticalAlignment="Center" />
+                <TextBlock x:Name="FoldersHeading" Text="{Binding [sidebar.folders], Source={StaticResource Texts}}" Style="{StaticResource SectionHeading}" VerticalAlignment="Center" />
             </DockPanel>
             <DockPanel Margin="{StaticResource InlineFormMargin}" Visibility="{Binding IsAddingFolder, Converter={StaticResource Visible}}">
                 <Button DockPanel.Dock="Right" Content="{Binding [sidebar.addFolder], Source={StaticResource Texts}}" Command="{Binding AddFolderCommand}" Padding="{StaticResource SmallButtonPadding}" Margin="{StaticResource GapLeftSm}" />
-                <TextBox Text="{Binding NewFolderName, UpdateSourceTrigger=PropertyChanged}" Padding="{StaticResource CompactButtonPadding}" AutomationProperties.Name="{Binding [sidebar.newFolderName], Source={StaticResource Texts}}">
+                <TextBox Text="{Binding NewFolderName, UpdateSourceTrigger=PropertyChanged}" controls:FocusOnShow.IsOn="True" Padding="{StaticResource CompactButtonPadding}" AutomationProperties.Name="{Binding [sidebar.newFolderName], Source={StaticResource Texts}}">
                     <TextBox.InputBindings>
                         <KeyBinding Key="Enter" Command="{Binding AddFolderCommand}" />
                         <KeyBinding Key="Escape" Command="{Binding ToggleAddFolderCommand}" />
@@ -71,9 +78,14 @@
                 </TextBox>
             </DockPanel>
             <TextBlock Text="{Binding Failure}" Style="{StaticResource ErrorText}" Margin="{StaticResource SidebarFailureMargin}" Visibility="{Binding HasFailure, Converter={StaticResource Visible}}" />
-            <ListBox Style="{StaticResource BareList}" ItemsSource="{Binding Folders}" SelectedItem="{Binding SelectedFolder}">
+            <ListBox Style="{StaticResource BareList}" ItemsSource="{Binding Folders}" SelectedItem="{Binding SelectedFolder}" AutomationProperties.LabeledBy="{Binding ElementName=FoldersHeading}">
+                <ListBox.InputBindings>
+                    <KeyBinding Key="F2" Command="{Binding StartRenameCommand}" CommandParameter="{Binding SelectedFolder}" />
+                    <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedFolder}" />
+                </ListBox.InputBindings>
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem" BasedOn="{StaticResource NavItem}">
+                        <Setter Property="AutomationProperties.Name" Value="{Binding Name}" />
                         <Setter Property="controls:Dropping.NoteCommand" Value="{Binding DataContext.DropNoteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
                         <Setter Property="controls:Dropping.NoteTarget" Value="{Binding}" />
                     </Style>
@@ -96,7 +108,7 @@
                                 <ContentControl Style="{StaticResource Icon}" Content="{StaticResource IconFolder}" Margin="{StaticResource GapRightMd}" />
                                 <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
                             </DockPanel>
-                            <TextBox Text="{Binding NewName, UpdateSourceTrigger=PropertyChanged}" Padding="{StaticResource InlineBoxPadding}"
+                            <TextBox Text="{Binding NewName, UpdateSourceTrigger=PropertyChanged}" Padding="{StaticResource InlineBoxPadding}" controls:FocusOnShow.IsOn="True"
                                      Visibility="{Binding IsRenaming, Converter={StaticResource Visible}}">
                                 <TextBox.InputBindings>
                                     <KeyBinding Key="Enter" Command="{Binding DataContext.RenameCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
@@ -117,9 +129,13 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
-            <TextBlock Text="{Binding [sidebar.tags], Source={StaticResource Texts}}" Style="{StaticResource SectionHeading}" Margin="{StaticResource SectionHeadingMargin}" />
-            <ListBox Style="{StaticResource BareList}" ItemContainerStyle="{StaticResource NavItem}"
-                     ItemsSource="{Binding Tags}" SelectedItem="{Binding SelectedTag}">
+            <TextBlock x:Name="TagsHeading" Text="{Binding [sidebar.tags], Source={StaticResource Texts}}" Style="{StaticResource SectionHeading}" Margin="{StaticResource SectionHeadingMargin}" />
+            <ListBox Style="{StaticResource BareList}" ItemsSource="{Binding Tags}" SelectedItem="{Binding SelectedTag}" AutomationProperties.LabeledBy="{Binding ElementName=TagsHeading}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource NavItem}">
+                        <Setter Property="AutomationProperties.Name" Value="{Binding Name}" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="{x:Type vm:TagItemViewModel}">
                         <DockPanel>

@@ -38,6 +38,6 @@
                 <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconHorizontalRule}" />
             </Button>
         </StackPanel>
-        <RichTextBox x:Name="Box" Style="{StaticResource VisualBox}" IsDocumentEnabled="False" />
+        <RichTextBox x:Name="Box" Style="{StaticResource VisualBox}" IsDocumentEnabled="False" AutomationProperties.Name="{Binding [editor.content], Source={StaticResource Texts}}" />
     </DockPanel>
 </UserControl>

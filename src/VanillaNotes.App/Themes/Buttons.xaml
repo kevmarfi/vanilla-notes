@@ -68,9 +68,10 @@
         <Setter Property="Foreground" Value="{DynamicResource TextMuted}" />
     </Style>
 
-    <!-- A button that holds only an icon. -->
+    <!-- A button that holds only an icon. Its tooltip is the name a screen reader gives it, so every one has a tooltip. -->
     <Style x:Key="IconButton" TargetType="Button" BasedOn="{StaticResource QuietButton}">
         <Setter Property="Padding" Value="6" />
+        <Setter Property="AutomationProperties.Name" Value="{Binding ToolTip, RelativeSource={RelativeSource Self}}" />
     </Style>
 
     <!-- What can be done with an attached file: a small word in the accent, on a muted background under the pointer. -->
@@ -127,6 +128,7 @@
 
     <!-- The round button with a question mark that shows the explanation of a setting, in the accent while it is shown. -->
     <Style x:Key="HelpToggle" TargetType="ToggleButton">
+        <Setter Property="AutomationProperties.Name" Value="{Binding ToolTip, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Foreground" Value="{DynamicResource TextMuted}" />
         <Setter Property="Padding" Value="4" />
         <Setter Property="Margin" Value="4,0,0,0" />
@@ -182,14 +184,15 @@
         </Setter>
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
-                <!-- One option: muted, and on a soft accent once chosen. -->
+                <!-- One option: muted, and on a soft accent once chosen. A screen reader reads it by its text. -->
                 <Style TargetType="ListBoxItem">
+                    <Setter Property="AutomationProperties.Name" Value="{Binding Value}" />
                     <Setter Property="Foreground" Value="{DynamicResource TextMuted}" />
                     <Setter Property="FontSize" Value="{StaticResource TextSm}" />
                     <Setter Property="Padding" Value="12,3" />
                     <Setter Property="Margin" Value="0,0,4,0" />
                     <Setter Property="Cursor" Value="Hand" />
-                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                    <Setter Property="FocusVisualStyle" Value="{StaticResource KeyboardFocus}" />
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">

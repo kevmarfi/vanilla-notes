@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:VanillaNotes.App.ViewModels">
     <StackPanel Style="{StaticResource DialogBody}">
         <TextBlock Text="{Binding Text}" TextWrapping="Wrap" />
-        <TextBox Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource GapAboveMd}"
+        <TextBox Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="{Binding Text}" Margin="{StaticResource GapAboveMd}"
                  Visibility="{Binding HasInput, Converter={StaticResource Visible}}" />
         <StackPanel Style="{StaticResource DialogButtons}">
             <Button Content="{Binding CancelText}" Command="{Binding CancelCommand}" IsCancel="True" Margin="{StaticResource GapRightSm}"

@@ -253,10 +253,15 @@ public sealed partial class SidebarViewModel : ObservableObject
         Refresh();
     });
 
-    /// <summary>Opens the name of a folder to be changed in its row.</summary>
+    /// <summary>Opens the name of a folder to be changed in its row; nothing when no folder is chosen, as with the key of renaming.</summary>
     [RelayCommand]
-    private void StartRename(FolderItemViewModel folder)
+    private void StartRename(FolderItemViewModel? folder)
     {
+        if (folder is null)
+        {
+            return;
+        }
+
         Failure = "";
         folder.NewName = folder.Name;
         folder.IsRenaming = true;
@@ -276,11 +281,11 @@ public sealed partial class SidebarViewModel : ObservableObject
     [RelayCommand]
     private void CancelRename(FolderItemViewModel folder) => folder.IsRenaming = false;
 
-    /// <summary>Deletes a folder, once the person agrees; its notes are kept, in no folder.</summary>
+    /// <summary>Deletes a folder, once the person agrees; its notes are kept, in no folder. Nothing when no folder is chosen, as with the key of deleting.</summary>
     [RelayCommand]
-    private void Delete(FolderItemViewModel folder)
+    private void Delete(FolderItemViewModel? folder)
     {
-        if (!_dialogs.Confirm(_texts.Format("sidebar.deleteFolderConfirm", ("name", folder.Name)), "sidebar.deleteFolder", isDanger: true))
+        if (folder is null || !_dialogs.Confirm(_texts.Format("sidebar.deleteFolderConfirm", ("name", folder.Name)), "sidebar.deleteFolder", isDanger: true))
         {
             return;
         }

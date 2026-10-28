@@ -6,21 +6,21 @@
         xmlns:vm="clr-namespace:VanillaNotes.App.ViewModels">
     <DockPanel Margin="{StaticResource NoteListMargin}">
         <DockPanel DockPanel.Dock="Top" Margin="{StaticResource ListHeaderMargin}">
-            <Button DockPanel.Dock="Right" Style="{StaticResource DangerButton}" Padding="{StaticResource SmallButtonPadding}" Command="{Binding EmptyTrashCommand}"
+            <Button DockPanel.Dock="Right" Style="{StaticResource DangerButton}" Padding="{StaticResource SmallButtonPadding}" Command="{Binding EmptyTrashCommand}" AutomationProperties.Name="{Binding [list.emptyTrash], Source={StaticResource Texts}}"
                     Visibility="{Binding CanEmptyTrash, Converter={StaticResource Visible}}">
                 <StackPanel Orientation="Horizontal">
                     <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconTrash}" Margin="{StaticResource GapRightSm}" />
                     <TextBlock Text="{Binding [list.emptyTrash], Source={StaticResource Texts}}" FontSize="{StaticResource TextSm}" />
                 </StackPanel>
             </Button>
-            <Button DockPanel.Dock="Right" Style="{StaticResource PrimaryButton}" Padding="{StaticResource SmallButtonPadding}" Command="{Binding NewNoteCommand}"
+            <Button DockPanel.Dock="Right" Style="{StaticResource PrimaryButton}" Padding="{StaticResource SmallButtonPadding}" Command="{Binding NewNoteCommand}" AutomationProperties.Name="{Binding [list.newNote], Source={StaticResource Texts}}"
                     ToolTip="{Binding [list.newNote.help], Source={StaticResource Texts}}" Visibility="{Binding IsTrash, Converter={StaticResource Hidden}}">
                 <StackPanel Orientation="Horizontal">
                     <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPlus}" Margin="{StaticResource GapRightSm}" />
                     <TextBlock Text="{Binding [list.newNote], Source={StaticResource Texts}}" FontSize="{StaticResource TextSm}" />
                 </StackPanel>
             </Button>
-            <TextBlock Text="{Binding Heading}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+            <TextBlock x:Name="Heading" Text="{Binding Heading}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
         </DockPanel>
         <TextBlock DockPanel.Dock="Top" Text="{Binding CountText}" Style="{StaticResource MutedText}" Margin="{StaticResource CaptionMargin}" />
         <TextBlock DockPanel.Dock="Top" Text="{Binding Failure}" Style="{StaticResource ErrorText}" Margin="{StaticResource CaptionMargin}" Visibility="{Binding HasFailure, Converter={StaticResource Visible}}" />
@@ -33,9 +33,10 @@
         </Border>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="{StaticResource ScrollGutterPadding}">
             <StackPanel>
-                <ListBox Style="{StaticResource BareList}" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
+                <ListBox Style="{StaticResource BareList}" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" AutomationProperties.LabeledBy="{Binding ElementName=Heading}">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem" BasedOn="{StaticResource NoteCard}">
+                            <Setter Property="AutomationProperties.Name" Value="{Binding Title}" />
                             <Setter Property="controls:Dropping.Note" Value="{Binding Id}" />
                         </Style>
                     </ListBox.ItemContainerStyle>

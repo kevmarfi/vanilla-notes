@@ -10,18 +10,18 @@
         <Border Background="{DynamicResource CodeBg}" CornerRadius="{StaticResource Radius}" Padding="{StaticResource PanelPadding}">
             <DockPanel>
                 <Button DockPanel.Dock="Right" Style="{StaticResource QuietButton}" Content="{Binding [code.copy], Source={StaticResource Texts}}" Command="{Binding CopyCommand}" VerticalAlignment="Center" />
-                <TextBox Text="{Binding Code, Mode=OneWay}" IsReadOnly="True" Style="{StaticResource BareTextBox}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                <TextBox Text="{Binding Code, Mode=OneWay}" IsReadOnly="True" AutomationProperties.Name="{Binding [recover.code], Source={StaticResource Texts}}" Style="{StaticResource BareTextBox}" HorizontalAlignment="Center" VerticalAlignment="Center"
                          FontFamily="{StaticResource FontMono}" FontSize="{StaticResource TextLg}" FontWeight="SemiBold" />
             </DockPanel>
         </Border>
         <UniformGrid Columns="2" Margin="{StaticResource GapAboveMd}">
-            <Button Command="{Binding SaveCommand}" Margin="{StaticResource GapRightSm}">
+            <Button Command="{Binding SaveCommand}" AutomationProperties.Name="{Binding [code.save], Source={StaticResource Texts}}" Margin="{StaticResource GapRightSm}">
                 <StackPanel Orientation="Horizontal">
                     <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconDownload}" Margin="{StaticResource GapRightSm}" />
                     <TextBlock Text="{Binding [code.save], Source={StaticResource Texts}}" />
                 </StackPanel>
             </Button>
-            <Button Command="{Binding EmailCommand}">
+            <Button Command="{Binding EmailCommand}" AutomationProperties.Name="{Binding [code.email], Source={StaticResource Texts}}">
                 <StackPanel Orientation="Horizontal">
                     <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconMail}" Margin="{StaticResource GapRightSm}" />
                     <TextBlock Text="{Binding [code.email], Source={StaticResource Texts}}" />

@@ -838,6 +838,9 @@
   <data name="sidebar.allNotes" xml:space="preserve">
     <value>Todas las notas</value>
   </data>
+  <data name="sidebar.clearSearch" xml:space="preserve">
+    <value>Borrar la búsqueda</value>
+  </data>
   <data name="sidebar.deleteFolder" xml:space="preserve">
     <value>Eliminar</value>
   </data>
@@ -855,6 +858,9 @@
   </data>
   <data name="sidebar.noFolder" xml:space="preserve">
     <value>Sin carpeta</value>
+  </data>
+  <data name="sidebar.notes" xml:space="preserve">
+    <value>Notas</value>
   </data>
   <data name="sidebar.renameFolder" xml:space="preserve">
     <value>Renombrar</value>
