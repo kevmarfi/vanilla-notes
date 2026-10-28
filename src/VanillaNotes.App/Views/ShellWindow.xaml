@@ -9,6 +9,11 @@
     <Grid>
         <ContentControl Content="{Binding Page}" Focusable="False" IsEnabled="{Binding IsPageActive}" />
         <ItemsControl ItemsSource="{Binding Dialogs}" Focusable="False">
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="AutomationProperties.Name" Value="{Binding [dialog.label], Source={StaticResource Texts}}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid />

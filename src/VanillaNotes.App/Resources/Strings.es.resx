@@ -75,6 +75,9 @@
   <data name="dialog.confirm" xml:space="preserve">
     <value>Continuar</value>
   </data>
+  <data name="dialog.label" xml:space="preserve">
+    <value>Diálogo</value>
+  </data>
   <data name="dialog.ok" xml:space="preserve">
     <value>Aceptar</value>
   </data>
