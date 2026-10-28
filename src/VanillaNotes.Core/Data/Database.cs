@@ -1,4 +1,5 @@
 using Microsoft.Data.Sqlite;
+using VanillaNotes.Core.Errors;
 
 namespace VanillaNotes.Core.Data;
 
@@ -11,6 +12,12 @@ public sealed class Database : IDisposable
 {
     /// <summary>The error of the engine for a file it cannot read: encrypted with another key, or not encrypted when a key was given.</summary>
     private const int _notADatabase = 26;
+
+    /// <summary>The error of the engine for a file whose contents are damaged.</summary>
+    private const int _corrupt = 11;
+
+    /// <summary>The one row the engine answers a check of the file with when it finds nothing damaged.</summary>
+    private const string _intact = "ok";
 
     /// <summary>The text the engine takes a key in, before its hexadecimal digits, to use it as it is instead of stretching it as a passphrase.</summary>
     private const string _rawKeyPrefix = "raw:";
@@ -28,9 +35,10 @@ public sealed class Database : IDisposable
     }
 
     /// <summary>
-    /// Opens the database in a file, making it if it does not exist, and applies the migrations of
-    /// its kind it has not received. A database with a key is encrypted with it; one without is a
-    /// plain file.
+    /// Opens the database in a file, making it if it does not exist, checks that its file is not
+    /// damaged, and applies the migrations of its kind it has not received. A database with a key
+    /// is encrypted with it; one without is a plain file. A damaged file is refused before anything
+    /// is written to it, so that it can be put back from a backup as it was.
     /// </summary>
     /// <param name="migrationSet">Which kind of database it is: the catalog or a profile, as the migrator names them.</param>
     /// <param name="key">The key of the profile, or nothing for a database that is not encrypted.</param>
@@ -41,8 +49,14 @@ public sealed class Database : IDisposable
         {
             using SqliteConnection connection = database.Connect();
             WriteAhead(connection);
+            CheckIntact(connection);
             Migrator.Apply(connection, migrationSet);
             return database;
+        }
+        catch (SqliteException exception) when ((exception.SqliteErrorCode & 0xFF) == _corrupt)
+        {
+            database.Dispose();
+            throw Damaged();
         }
         catch
         {
@@ -197,6 +211,24 @@ public sealed class Database : IDisposable
 
         return builder.ToString();
     }
+
+    /// <summary>
+    /// Has the engine read the whole file and refuses it when a page, a row, or an index of it is
+    /// damaged. The quick check is taken over the full one: it finds the damage a crash or a disk
+    /// leaves, in a fraction of the time, which is paid each time a profile is opened.
+    /// </summary>
+    private static void CheckIntact(SqliteConnection connection)
+    {
+        using SqliteCommand command = connection.CreateCommand();
+        command.CommandText = "PRAGMA quick_check;";
+        if (command.ExecuteScalar() is not _intact)
+        {
+            throw Damaged();
+        }
+    }
+
+    private static StorageException Damaged() =>
+        new(ErrorCodes.DatabaseDamaged, "The file of the database is damaged.");
 
     /// <summary>Puts a database in a file in write-ahead mode, which lets a search read while a save writes.</summary>
     private static void WriteAhead(SqliteConnection connection)

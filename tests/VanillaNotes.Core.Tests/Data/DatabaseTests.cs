@@ -3,18 +3,25 @@ using System.Text;
 using Microsoft.Data.Sqlite;
 using Xunit;
 using VanillaNotes.Core.Data;
+using VanillaNotes.Core.Errors;
 using VanillaNotes.Core.Security;
 
 namespace VanillaNotes.Core.Tests.Data;
 
 /// <summary>
-/// A database in a file, opened with its key or as a plain file, and encrypted or decrypted in
-/// place with the notes it already has.
+/// A database in a file, opened with its key or as a plain file, encrypted or decrypted in place
+/// with the notes it already has, and refused when its file is damaged.
 /// </summary>
 public sealed class DatabaseTests : IDisposable
 {
     /// <summary>A title looked for in the bytes of the file, to tell whether the file can be read without the key.</summary>
     private const string _title = "Groceries for the weekend";
+
+    /// <summary>The size of a page of the file, the default of the engine, which the migrations do not change.</summary>
+    private const int _pageSize = 4096;
+
+    /// <summary>How many notes are written to make a file of many pages, so that one in the middle can be damaged.</summary>
+    private const int _manyNotes = 200;
 
     /// <summary>The folder of the test, removed after it.</summary>
     private readonly DirectoryInfo _folder = Directory.CreateTempSubdirectory("vanilla-notes-tests-");
@@ -86,6 +93,29 @@ public sealed class DatabaseTests : IDisposable
     }
 
     [Fact]
+    public void ADamagedFileIsRefused()
+    {
+        WriteManyNotes(Database.Open(FilePath, Migrator.Profile));
+        DamageMiddlePage();
+
+        var failure = Assert.Throws<StorageException>(() => Database.Open(FilePath, Migrator.Profile).Dispose());
+
+        Assert.Equal(ErrorCodes.DatabaseDamaged, failure.Code);
+    }
+
+    [Fact]
+    public void ADamagedEncryptedFileIsRefused()
+    {
+        byte[] key = KeyWrapper.CreateKey();
+        WriteManyNotes(Database.Open(FilePath, Migrator.Profile, key));
+        DamageMiddlePage();
+
+        var failure = Assert.Throws<StorageException>(() => Database.Open(FilePath, Migrator.Profile, key).Dispose());
+
+        Assert.Equal(ErrorCodes.DatabaseDamaged, failure.Code);
+    }
+
+    [Fact]
     public void EveryConnectionEnforcesForeignKeys()
     {
         using Database database = Database.Open(FilePath, Migrator.Profile);
@@ -107,6 +137,35 @@ public sealed class DatabaseTests : IDisposable
             command.Parameters.AddWithValue("$title", _title);
             command.ExecuteNonQuery();
         }
+    }
+
+    /// <summary>Writes enough notes to fill many pages, and lets go of the database, so that its file can be changed.</summary>
+    private static void WriteManyNotes(Database database)
+    {
+        using (database)
+        using (SqliteConnection connection = database.Connect())
+        using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = "INSERT INTO notes (title, content) VALUES ($title, $content)";
+            SqliteParameter title = command.Parameters.Add("$title", SqliteType.Text);
+            command.Parameters.AddWithValue("$content", new string('x', _pageSize / 2));
+            for (int index = 0; index < _manyNotes; index++)
+            {
+                title.Value = string.Create(CultureInfo.InvariantCulture, $"Note {index}");
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+
+    /// <summary>Writes over a page in the middle of the file, as a failing disk would.</summary>
+    private void DamageMiddlePage()
+    {
+        using FileStream file = File.Open(FilePath, FileMode.Open, FileAccess.ReadWrite);
+        long pages = file.Length / _pageSize;
+        file.Position = pages / 2 * _pageSize;
+        byte[] garbage = new byte[_pageSize];
+        Array.Fill(garbage, (byte)0xA5);
+        file.Write(garbage);
     }
 
     private static long CountNotes(Database database)

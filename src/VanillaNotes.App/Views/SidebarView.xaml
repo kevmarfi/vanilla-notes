@@ -16,7 +16,7 @@
                     <TextBlock DockPanel.Dock="Right" Text="{Binding [sidebar.searchHint], Source={StaticResource Texts}}" FontSize="{StaticResource TextXs}" Foreground="{DynamicResource TextMuted}"
                                Margin="{StaticResource GapRightSm}" VerticalAlignment="Center" Visibility="{Binding IsSearching, Converter={StaticResource Hidden}}" />
                     <Grid>
-                        <TextBox x:Name="SearchBox" Style="{StaticResource BareTextBox}" Padding="{StaticResource SearchBoxPadding}" controls:Shortcuts.FocusKey="Ctrl+K"
+                        <TextBox x:Name="SearchBox" Style="{StaticResource BareTextBox}" Padding="{StaticResource SearchBoxPadding}" controls:Shortcuts.FocusKeys="Ctrl+K Ctrl+Shift+F"
                                  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                  AutomationProperties.Name="{Binding [sidebar.searchLabel], Source={StaticResource Texts}}" />
                         <TextBlock Text="{Binding [sidebar.searchPlaceholder], Source={StaticResource Texts}}" Foreground="{DynamicResource TextMuted}" Margin="{StaticResource SearchPlaceholderMargin}" IsHitTestVisible="False"

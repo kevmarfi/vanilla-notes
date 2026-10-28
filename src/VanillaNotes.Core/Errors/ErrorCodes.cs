@@ -42,4 +42,7 @@ public static class ErrorCodes
 
     /// <summary>A database was written by a newer release of the application, and this one must not change it.</summary>
     public const string DatabaseTooNew = "DATABASE_TOO_NEW";
+
+    /// <summary>The file of a database is damaged, so it is not opened and must be put back from a backup.</summary>
+    public const string DatabaseDamaged = "DATABASE_DAMAGED";
 }

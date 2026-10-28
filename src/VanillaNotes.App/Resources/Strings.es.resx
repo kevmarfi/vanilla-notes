@@ -297,6 +297,9 @@
   <data name="editor.visualPlaceholder" xml:space="preserve">
     <value>Empieza a escribir…</value>
   </data>
+  <data name="error.DATABASE_DAMAGED" xml:space="preserve">
+    <value>Estos datos están dañados y no se pueden abrir. Restaura una copia de seguridad desde la ventana de perfiles.</value>
+  </data>
   <data name="error.DATABASE_TOO_NEW" xml:space="preserve">
     <value>Estos datos los escribió una versión más nueva de Vanilla Notes. Actualiza la aplicación para abrirlos.</value>
   </data>

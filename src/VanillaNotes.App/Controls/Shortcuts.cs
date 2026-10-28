@@ -9,7 +9,7 @@ namespace VanillaNotes.App.Controls;
 /// by the window, so that they work before anything has the keyboard, and they are tried before the
 /// control that has it, so that the editor of a note does not keep a key of the application for one
 /// of its own (the visual editor centers a paragraph on the key that changes the way of writing).
-/// A page lends its key bindings to the window this way, and a box can be given a key that takes
+/// A page lends its key bindings to the window this way, and a box can be given keys that take
 /// the keyboard to it, as the search is. Nothing happens while a dialog is open, since the page
 /// behind it is disabled.
 /// </summary>
@@ -22,12 +22,18 @@ public static class Shortcuts
         typeof(Shortcuts),
         new PropertyMetadata(false, OnChanged));
 
-    /// <summary>The key that takes the keyboard to a box from anywhere in the window, written as Windows writes it ("Ctrl+K").</summary>
-    public static readonly DependencyProperty FocusKeyProperty = DependencyProperty.RegisterAttached(
-        "FocusKey",
-        typeof(KeyGesture),
+    /// <summary>
+    /// The keys that take the keyboard to a box from anywhere in the window, each written as Windows
+    /// writes it ("Ctrl+K") and separated by spaces, which no key has in its name.
+    /// </summary>
+    public static readonly DependencyProperty FocusKeysProperty = DependencyProperty.RegisterAttached(
+        "FocusKeys",
+        typeof(string),
         typeof(Shortcuts),
         new PropertyMetadata(null, OnChanged));
+
+    /// <summary>What reads a key written as Windows writes it.</summary>
+    private static readonly KeyGestureConverter _keyReader = new();
 
     /// <summary>The window that hears the keys of an element, and what it runs, while the element is shown.</summary>
     private static readonly DependencyProperty _listeningProperty = DependencyProperty.RegisterAttached(
@@ -41,11 +47,11 @@ public static class Shortcuts
     /// <summary>Sets whether the key bindings of an element are heard by the whole window.</summary>
     public static void SetIsAhead(DependencyObject element, bool value) => element.SetValue(IsAheadProperty, value);
 
-    /// <summary>The key that takes the keyboard to a box.</summary>
-    public static KeyGesture? GetFocusKey(DependencyObject box) => (KeyGesture?)box.GetValue(FocusKeyProperty);
+    /// <summary>The keys that take the keyboard to a box.</summary>
+    public static string? GetFocusKeys(DependencyObject box) => (string?)box.GetValue(FocusKeysProperty);
 
-    /// <summary>Sets the key that takes the keyboard to a box.</summary>
-    public static void SetFocusKey(DependencyObject box, KeyGesture? value) => box.SetValue(FocusKeyProperty, value);
+    /// <summary>Sets the keys that take the keyboard to a box.</summary>
+    public static void SetFocusKeys(DependencyObject box, string? value) => box.SetValue(FocusKeysProperty, value);
 
     private static void OnChanged(DependencyObject target, DependencyPropertyChangedEventArgs change)
     {
@@ -57,7 +63,7 @@ public static class Shortcuts
         element.Loaded -= Listen;
         element.Unloaded -= StopListening;
         StopListening(element, null);
-        if (GetIsAhead(element) || GetFocusKey(element) is not null)
+        if (GetIsAhead(element) || GetFocusKeys(element) is not null)
         {
             element.Loaded += Listen;
             element.Unloaded += StopListening;
@@ -95,6 +101,7 @@ public static class Shortcuts
     /// <summary>
     /// Does what the key pressed asks of an element that is shown and enabled: runs the key binding
     /// of it that matches, or takes the keyboard to it and selects its text, so it can be typed over.
+    /// A key written wrong fails here, the first time a key is pressed in the window.
     /// </summary>
     private static void Run(FrameworkElement element, KeyEventArgs key)
     {
@@ -103,7 +110,7 @@ public static class Shortcuts
             return;
         }
 
-        if (GetFocusKey(element) is KeyGesture focusKey && element is TextBox box && focusKey.Matches(box, key))
+        if (element is TextBox box && FocusKeysOf(box).Any(focusKey => focusKey.Matches(box, key)))
         {
             box.Focus();
             box.SelectAll();
@@ -126,6 +133,11 @@ public static class Shortcuts
             }
         }
     }
+
+    private static IEnumerable<KeyGesture> FocusKeysOf(TextBox box) =>
+        (GetFocusKeys(box) ?? "")
+            .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+            .Select(written => (KeyGesture)_keyReader.ConvertFromInvariantString(written)!);
 
     /// <summary>The window that hears the keys of an element, and what it runs, so that it can stop.</summary>
     private sealed record Listening(Window Window, KeyEventHandler Heard);

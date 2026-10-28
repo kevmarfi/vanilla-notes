@@ -1,8 +1,8 @@
 namespace VanillaNotes.Core.Errors;
 
 /// <summary>
-/// The data on disk cannot be used as asked: the disk is running out of space, or a database
-/// was written by a newer release of the application.
+/// The data on disk cannot be used as asked: the disk is running out of space, a database was
+/// written by a newer release of the application, or the file of a database is damaged.
 /// </summary>
 public sealed class StorageException : AppException
 {
