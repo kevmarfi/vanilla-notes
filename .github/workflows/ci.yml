@@ -26,6 +26,5 @@ jobs:
       - uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ steps.sdk.outputs.version }}
-      # Exit code 8 means no test ran, as before the first tests of Core created.
-      - run: dotnet build tests/VanillaNotes.Core.Tests
-      - run: dotnet test --project tests/VanillaNotes.Core.Tests --no-build --ignore-exit-code 8
+      - run: dotnet build VanillaNotes.slnx
+      - run: dotnet test --solution VanillaNotes.slnx --no-build
