@@ -1,0 +1,77 @@
+VANILLA NOTES
+THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
+
+Vanilla Notes is made with the software listed below. Each component is
+distributed under its own license; the full text of each license, with the
+notices of the components it carries in turn, is in the file named beside it,
+in the folder "licenses". The licenses of these components apply to them only,
+not to Vanilla Notes.
+
+
+1. .NET Runtime 10.0
+   https://github.com/dotnet/runtime
+   The platform the application runs on, carried inside it.
+   Copyright (c) .NET Foundation and Contributors
+   License: MIT                          licenses/dotnet-runtime.txt
+   Its own third-party notices:          licenses/dotnet-runtime-notices.txt
+
+2. Windows Presentation Foundation (WPF) 10.0
+   https://github.com/dotnet/wpf
+   The window and its controls.
+   Copyright (c) .NET Foundation and Contributors
+   License: MIT                          licenses/wpf.txt
+   Its own third-party notices:          licenses/wpf-notices.txt
+
+3. Microsoft.Data.Sqlite.Core 10.0.13
+   https://github.com/dotnet/efcore
+   Reads and writes the databases of the notes.
+   Copyright (c) .NET Foundation and Contributors
+   License: MIT                          licenses/microsoft-data-sqlite.txt
+
+4. SQLitePCLRaw.core 3.0.2
+   https://github.com/ericsink/SQLitePCL.raw
+   Joins the database engine to .NET.
+   Copyright 2014-2025 SourceGear, LLC
+   License: Apache-2.0                   licenses/sqlitepclraw.txt
+
+5. SQLite3 Multiple Ciphers 2.6.1
+   https://github.com/utelle/SQLite3MultipleCiphers
+   The database engine, with the encryption of profiles with a password.
+   Copyright (c) 2019-2026 Ulrich Telle
+   License: MIT                          licenses/sqlite3mc.txt
+
+6. SQLite3MC.PCLRaw.bundle, SQLite3MC.PCLRaw.lib, SQLite3MC.PCLRaw.provider 2.6.1
+   https://github.com/utelle/SQLite3MultipleCiphers-NuGet
+   The packages that bring that engine to .NET.
+   Copyright (c) 2023-2025 Ulrich Telle
+   License: MIT                          licenses/sqlite3mc-nuget.txt
+
+7. SQLite
+   https://www.sqlite.org
+   The engine SQLite3 Multiple Ciphers is built on.
+   Public domain                         licenses/sqlite.txt
+
+8. Markdig 1.4.0
+   https://github.com/xoofx/markdig
+   Reads the Markdown of the notes.
+   Copyright (c) 2016-2026, Alexandre Mutel
+   License: BSD-2-Clause                 licenses/markdig.txt
+
+9. AvalonEdit 6.3.1.120
+   https://github.com/icsharpcode/AvalonEdit
+   The editor of the Markdown source.
+   Copyright (c) AvalonEdit Contributors
+   License: MIT                          licenses/avalonedit.txt
+
+10. ColorCode.Core 2.0.15
+    https://github.com/CommunityToolkit/ColorCode-Universal
+    Colors the code written in notes.
+    Copyright (c) .NET Foundation and Contributors
+    License: MIT                         licenses/colorcode.txt
+
+11. CommunityToolkit.Mvvm 8.4.2
+    https://github.com/CommunityToolkit/dotnet
+    Connects the window to what it shows.
+    Copyright (c) .NET Foundation and Contributors
+    License: MIT                         licenses/communitytoolkit-mvvm.txt
+    Its own third-party notices:         licenses/communitytoolkit-mvvm-notices.txt
