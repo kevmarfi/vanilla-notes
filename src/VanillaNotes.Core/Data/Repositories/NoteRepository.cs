@@ -145,26 +145,25 @@ public sealed class NoteRepository
     {
         using SqliteConnection connection = _database.Connect();
         using SqliteTransaction transaction = connection.BeginTransaction();
-        long id;
-        using (SqliteCommand command = connection.CreateCommand())
-        {
-            string now = Rows.Now();
-            command.CommandText = """
-                INSERT INTO notes (folder_id, title, content, created_at, updated_at)
-                VALUES ($folderId, $title, $content, $createdAt, $updatedAt)
-                RETURNING id
-                """;
-            command.Parameters.AddWithValue("$folderId", (object?)folderId ?? DBNull.Value);
-            command.Parameters.AddWithValue("$title", title);
-            command.Parameters.AddWithValue("$content", content);
-            command.Parameters.AddWithValue("$createdAt", createdAt is DateTimeOffset created ? Rows.Text(created) : now);
-            command.Parameters.AddWithValue("$updatedAt", updatedAt is DateTimeOffset updated ? Rows.Text(updated) : now);
-            id = (long)command.ExecuteScalar()!;
-        }
-
-        WriteTags(connection, id, tags);
+        long id = Insert(connection, title, content, folderId, tags, createdAt, updatedAt);
         transaction.Commit();
         return Find(connection, id)!;
+    }
+
+    /// <summary>
+    /// Adds many notes brought in from elsewhere, each with its tags, its folder, and its dates,
+    /// all in one step: either every one is added or none is.
+    /// </summary>
+    public void CreateMany(IReadOnlyList<(ExportedNote Note, long? FolderId)> notes)
+    {
+        using SqliteConnection connection = _database.Connect();
+        using SqliteTransaction transaction = connection.BeginTransaction();
+        foreach ((ExportedNote note, long? folderId) in notes)
+        {
+            Insert(connection, note.Title, note.Content, folderId, note.Tags, note.CreatedAt, note.UpdatedAt);
+        }
+
+        transaction.Commit();
     }
 
     /// <summary>
@@ -337,6 +336,31 @@ public sealed class NoteRepository
         }
 
         return filters.ToString();
+    }
+
+    /// <summary>Adds one note with its tags, inside the transaction of the caller.</summary>
+    /// <returns>The number of the note.</returns>
+    private static long Insert(SqliteConnection connection, string title, string content, long? folderId, IReadOnlyList<string> tags, DateTimeOffset? createdAt, DateTimeOffset? updatedAt)
+    {
+        long id;
+        using (SqliteCommand command = connection.CreateCommand())
+        {
+            string now = Rows.Now();
+            command.CommandText = """
+                INSERT INTO notes (folder_id, title, content, created_at, updated_at)
+                VALUES ($folderId, $title, $content, $createdAt, $updatedAt)
+                RETURNING id
+                """;
+            command.Parameters.AddWithValue("$folderId", (object?)folderId ?? DBNull.Value);
+            command.Parameters.AddWithValue("$title", title);
+            command.Parameters.AddWithValue("$content", content);
+            command.Parameters.AddWithValue("$createdAt", createdAt is DateTimeOffset created ? Rows.Text(created) : now);
+            command.Parameters.AddWithValue("$updatedAt", updatedAt is DateTimeOffset updated ? Rows.Text(updated) : now);
+            id = (long)command.ExecuteScalar()!;
+        }
+
+        WriteTags(connection, id, tags);
+        return id;
     }
 
     private static Note? Find(SqliteConnection connection, long id)

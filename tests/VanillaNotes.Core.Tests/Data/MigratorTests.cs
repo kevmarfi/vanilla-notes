@@ -49,7 +49,7 @@ public sealed class MigratorTests
 
         Migrator.Apply(connection, Migrator.Profile);
 
-        Assert.Equal(4, Scalar(connection, "SELECT COUNT(*) FROM schema_migrations"));
+        Assert.Equal(5, Scalar(connection, "SELECT COUNT(*) FROM schema_migrations"));
     }
 
     [Fact]

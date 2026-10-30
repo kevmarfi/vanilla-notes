@@ -36,8 +36,9 @@ public sealed class ImportService
 
     /// <summary>
     /// Brings in the notes of a data file. Every note is checked before any is written, so that a
-    /// file with one note that breaks a rule brings in none. Nothing is brought in while the disk
-    /// is running out of space.
+    /// file with one note that breaks a rule brings in none, and the notes are written in one step,
+    /// so that an import cut short brings in none either. Nothing is brought in while the disk is
+    /// running out of space.
     /// </summary>
     /// <returns>How many notes were brought in.</returns>
     public int Import(byte[] file)
@@ -57,13 +58,12 @@ public sealed class ImportService
         }
 
         // The names of folders are told apart regardless of case, as the database tells them apart.
+        // The folders are made before the notes, which are then written in one step.
         Dictionary<string, long> folderIds = _folders.List().ToDictionary(folder => folder.Name, folder => folder.Id, StringComparer.OrdinalIgnoreCase);
-        foreach (ExportedNote note in accepted)
-        {
-            long? folderId = note.Folder is null ? null : FolderIdOf(note.Folder, folderIds);
-            _notes.Create(note.Title, note.Content, folderId, note.Tags, note.CreatedAt, note.UpdatedAt);
-        }
-
+        List<(ExportedNote, long?)> placed = accepted
+            .Select(note => (note, note.Folder is null ? (long?)null : FolderIdOf(note.Folder, folderIds)))
+            .ToList();
+        _notes.CreateMany(placed);
         return accepted.Count;
     }
 
