@@ -17,7 +17,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets/app.ico" />
-    <EmbeddedResource Include="../../docs/legal/third-party-notices.txt" LogicalName="third-party-notices.txt" />
+    <EmbeddedResource Include="../../NOTICE" LogicalName="legal/NOTICE" />
+    <EmbeddedResource Include="../../LICENSE" LogicalName="legal/LICENSE" />
+    <EmbeddedResource Include="../../docs/legal/third-party-notices.txt" LogicalName="legal/third-party-notices.txt" />
+    <EmbeddedResource Include="../../docs/legal/licenses/*.txt" LogicalName="legal/licenses/%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../VanillaNotes.Core/VanillaNotes.Core.csproj" />

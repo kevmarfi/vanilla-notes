@@ -526,8 +526,17 @@
   <data name="settings.about" xml:space="preserve">
     <value>Acerca de</value>
   </data>
-  <data name="settings.about.author" xml:space="preserve">
-    <value>Hecho por Kev Martínez.</value>
+  <data name="settings.about.copyright" xml:space="preserve">
+    <value>Copyright © 2026 Kev Martínez</value>
+  </data>
+  <data name="settings.about.license" xml:space="preserve">
+    <value>Software libre bajo la GNU Affero General Public License, versión 3 o posterior. Se ofrece sin ninguna garantía.</value>
+  </data>
+  <data name="settings.about.licenseText" xml:space="preserve">
+    <value>Licencia</value>
+  </data>
+  <data name="settings.about.source" xml:space="preserve">
+    <value>Código fuente: https://github.com/kevmarfi/vanilla-notes</value>
   </data>
   <data name="settings.about.notices" xml:space="preserve">
     <value>Software de terceros</value>

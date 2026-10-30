@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using VanillaNotes.App.Services;
@@ -18,7 +19,7 @@ namespace VanillaNotes.App.ViewModels;
 /// changed; the profile: its name, its password, and deleting it; and the notes and the data:
 /// taking every note out, bringing in the notes of the web version, and the backups of this
 /// machine; copying the record of failures, for a person who reports a fault; and what the
-/// application is: its version, who made it, and the software it is made with.
+/// application is: its version, its copyright, its license, and the software it is made with.
 /// Taking the notes out and making a backup run off the thread of the window. This view model
 /// departs from the reference rules by naming the forms of an export, which live in Core/Export.
 /// </summary>
@@ -72,13 +73,44 @@ public sealed partial class SettingsViewModel : ObservableObject
 
     private readonly Func<string, string, RecoveryCodeViewModel> _recoveryCode;
 
-    /// <summary>The notices of the software the application is made with, read from inside the application the first time they are shown.</summary>
+    /// <summary>Where the notice of the application is inside it: its copyright, its license, and the terms added to the license.</summary>
+    private const string _noticeResource = "legal/NOTICE";
+
+    /// <summary>Where the license of the application is inside it: the GNU Affero General Public License, version 3.</summary>
+    private const string _licenseResource = "legal/LICENSE";
+
+    /// <summary>A line that sets one text apart from the next, as wide as the texts of the licenses.</summary>
+    private static readonly string _rule = new('=', 78);
+
+    /// <summary>Where the notices of third parties are inside the application: the list of the software, then a file per license.</summary>
+    private const string _noticesResource = "legal/third-party-notices.txt";
+
+    /// <summary>What the name of the file of each license starts with inside the application.</summary>
+    private const string _licensesPrefix = "legal/licenses/";
+
+    /// <summary>
+    /// The notices of the software the application is made with, read from inside the application
+    /// the first time they are shown: the list of the software, then the text of each license under
+    /// the name of its file, as the list names it.
+    /// </summary>
     private static readonly Lazy<string> _thirdPartyNotices = new(() =>
     {
-        using Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("third-party-notices.txt")
-            ?? throw new InvalidOperationException("The notices of third parties are not inside the application.");
-        using var reader = new StreamReader(stream);
-        return reader.ReadToEnd();
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        var notices = new StringBuilder(ReadResource(assembly, _noticesResource));
+        foreach (string license in assembly.GetManifestResourceNames().Where(name => name.StartsWith(_licensesPrefix, StringComparison.Ordinal)).Order(StringComparer.Ordinal))
+        {
+            string file = license["legal/".Length..];
+            notices.Append($"\n\n{_rule}\n{file}\n{_rule}\n\n").Append(ReadResource(assembly, license));
+        }
+
+        return notices.ToString();
+    });
+
+    /// <summary>The notice and the license of the application, read from inside it the first time they are shown.</summary>
+    private static readonly Lazy<string> _license = new(() =>
+    {
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        return $"{ReadResource(assembly, _noticeResource)}\n\n{_rule}\n\n{ReadResource(assembly, _licenseResource)}";
     });
 
     /// <summary>The settings as they were last stored.</summary>
@@ -291,6 +323,17 @@ public sealed partial class SettingsViewModel : ObservableObject
 
     /// <summary>The notices of the software the application is made with, and the full text of their licenses, which travel inside the application.</summary>
     public string ThirdPartyNotices => _thirdPartyNotices.Value;
+
+    /// <summary>The notice of the application, with the terms added to its license, and then the license itself, as they travel inside it.</summary>
+    public string License => _license.Value;
+
+    private static string ReadResource(Assembly assembly, string name)
+    {
+        using Stream stream = assembly.GetManifestResourceStream(name)
+            ?? throw new InvalidOperationException($"{name} is not inside the application.");
+        using var reader = new StreamReader(stream);
+        return reader.ReadToEnd();
+    }
 
     /// <summary>Whether the profile has no password.</summary>
     public bool HasNoPassword => !HasPassword;

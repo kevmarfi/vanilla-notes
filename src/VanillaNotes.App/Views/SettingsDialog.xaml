@@ -427,7 +427,25 @@
                 <Run Text="{Binding [app.name], Source={StaticResource Texts}, Mode=OneWay}" />
                 <Run Text="{Binding Version, Mode=OneWay}" />
             </TextBlock>
-            <TextBlock Text="{Binding [settings.about.author], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+            <TextBlock Text="{Binding [settings.about.copyright], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+            <TextBlock Text="{Binding [settings.about.license], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" TextWrapping="Wrap" />
+            <TextBox Text="{Binding [settings.about.source], Source={StaticResource Texts}, Mode=OneWay}" IsReadOnly="True" Style="{StaticResource BareTextBox}" Foreground="{DynamicResource TextMuted}"
+                     AutomationProperties.Name="{Binding [settings.about.source], Source={StaticResource Texts}}" />
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.about.licenseText], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="LicenseHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <Border Grid.Row="1" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=LicenseHelp, Converter={StaticResource Visible}}">
+                    <TextBox Text="{Binding License, Mode=OneWay}" IsReadOnly="True" TextWrapping="NoWrap" FontFamily="{StaticResource FontMono}" FontSize="{StaticResource TextSm}"
+                             MaxHeight="{StaticResource NoticesMaxHeight}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                             AutomationProperties.Name="{Binding [settings.about.licenseText], Source={StaticResource Texts}}" />
+                </Border>
+            </Grid>
             <Grid Style="{StaticResource SettingRow}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
