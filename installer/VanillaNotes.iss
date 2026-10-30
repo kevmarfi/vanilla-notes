@@ -52,7 +52,7 @@ ArchitecturesInstallIn64BitMode=x64compatible
 #endif
 ; Windows 10 version 2004 (build 19041) or later, and Windows 11: the oldest that has the Windows Hello the application uses.
 MinVersion=10.0.19041
-LicenseFile=..\LICENSE.md
+LicenseFile=..\LICENSE
 ; The lock the application holds while it runs: the installer asks for it to be closed first.
 AppMutex=VanillaNotes.Desktop.SingleCopy
 CloseApplications=yes
