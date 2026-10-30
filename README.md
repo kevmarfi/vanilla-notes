@@ -1,4 +1,4 @@
-<img src=".github/cover.svg" alt="Vanilla Notes for Windows. Product Overview and Developer Guide. Public. Document version 1.0.0, 2026-10-30." width="100%">
+<img src="assets/images/cover.svg" alt="Vanilla Notes for Windows. Product Overview and Developer Guide. Public. Document version 1.0.0, 2026-10-30." width="100%">
 
 ## Content
 
@@ -20,6 +20,8 @@ Vanilla Notes is a Markdown notes application for Windows. Notes are stored on t
 > [!IMPORTANT]
 > Version 1.0.0 is a pre-release and is not yet published.
 
+<br>
+
 ## 2 Key Capabilities
 
 | Area | Capability |
@@ -31,6 +33,8 @@ Vanilla Notes is a Markdown notes application for Windows. Notes are stored on t
 | Exchange | Attachments, export to Markdown or web pages, printing, and import of `.md` files |
 | Interface | English and Spanish; light, neutral, dark, and high-contrast themes |
 
+<br>
+
 ## 3 System Requirements
 
 | Item | Requirement |
@@ -38,6 +42,8 @@ Vanilla Notes is a Markdown notes application for Windows. Notes are stored on t
 | Operating system | Windows 10 version 2004 (build 19041) or later |
 | Processor | x64 or Arm64 |
 | To build | The .NET SDK pinned in `global.json` |
+
+<br>
 
 ## 4 Getting Started
 
@@ -50,6 +56,8 @@ Vanilla Notes is a Markdown notes application for Windows. Notes are stored on t
 > [!NOTE]
 > A copy run from source uses the same data folder as an installed copy, `%APPDATA%\Vanilla Notes\`.
 
+<br>
+
 ## 5 Documentation
 
 | Topic | Reference |
@@ -59,6 +67,8 @@ Vanilla Notes is a Markdown notes application for Windows. Notes are stored on t
 | Architecture | [docs/03-architecture/overview.md](docs/03-architecture/overview.md) |
 | Changes by version | [docs/CHANGELOG.md](docs/CHANGELOG.md) |
 
+<br>
+
 ## 6 Document History
 
 | Version | Date | Change |
@@ -66,6 +76,8 @@ Vanilla Notes is a Markdown notes application for Windows. Notes are stored on t
 | 1.0.0 | 2026-10-30 | First version of this document |
 
 ---
+
+<br>
 
 ## Important Disclaimers and Legal Information
 
