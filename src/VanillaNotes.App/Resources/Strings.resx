@@ -707,7 +707,7 @@
     <value>{count} notes were brought in.</value>
   </data>
   <data name="settings.import.help" xml:space="preserve">
-    <value>Brings notes into this profile, in one of two ways. A data file: the one the web version of Vanilla Notes saves from its settings, with its folders, tags, and dates; the files attached to them are not in it, so an image of the web version shows its text instead. A folder: the notes of Obsidian, Typora, or any editor of Markdown, each file a note titled by its name, with the folder of its first level and the images it points at inside the folder; anything else is left out. The notes you already have are not touched.</value>
+    <value>Brings notes into this profile, in one of two ways. A data file: a Vanilla Notes data file, with its folders, tags, and dates; the files attached to the notes are not in it, so an image in those notes shows its text instead. A folder: the notes of Obsidian, Typora, or any editor of Markdown, each file a note titled by its name, with the folder of its first level and the images it points at inside the folder; anything else is left out. The notes you already have are not touched.</value>
   </data>
   <data name="settings.import.kinds" xml:space="preserve">
     <value>Data files</value>

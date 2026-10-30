@@ -707,7 +707,7 @@
     <value>Se trajeron {count} notas.</value>
   </data>
   <data name="settings.import.help" xml:space="preserve">
-    <value>Trae notas a este perfil, de dos maneras. Un archivo de datos: el que la versión web de Vanilla Notes guarda desde sus ajustes, con sus carpetas, etiquetas y fechas; los archivos adjuntos no están en él, así que una imagen de la versión web muestra su texto en su lugar. Una carpeta: las notas de Obsidian, Typora o cualquier editor de Markdown, cada archivo una nota con su nombre como título, con la carpeta de su primer nivel y las imágenes que enlaza dentro de la carpeta; lo demás se deja fuera. Las notas que ya tienes no se tocan.</value>
+    <value>Trae notas a este perfil, de dos maneras. Un archivo de datos: un archivo de datos de Vanilla Notes, con sus carpetas, etiquetas y fechas; los archivos adjuntos a las notas no están en él, así que una imagen de esas notas muestra su texto en su lugar. Una carpeta: las notas de Obsidian, Typora o cualquier editor de Markdown, cada archivo una nota con su nombre como título, con la carpeta de su primer nivel y las imágenes que enlaza dentro de la carpeta; lo demás se deja fuera. Las notas que ya tienes no se tocan.</value>
   </data>
   <data name="settings.import.kinds" xml:space="preserve">
     <value>Archivos de datos</value>
