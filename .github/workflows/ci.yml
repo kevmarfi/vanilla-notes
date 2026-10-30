@@ -23,7 +23,7 @@ jobs:
       - id: sdk
         shell: pwsh
         run: '"version=$((Get-Content global.json | ConvertFrom-Json).sdk.version)" >> $env:GITHUB_OUTPUT'
-      - uses: actions/setup-dotnet@v5
+      - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: ${{ steps.sdk.outputs.version }}
       - run: dotnet build VanillaNotes.slnx
