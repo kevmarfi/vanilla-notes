@@ -1,0 +1,99 @@
+VANILLA NOTES FOR WINDOWS
+PRIVACY POLICY
+
+Last updated: October 29, 2026
+
+Vanilla Notes keeps your notes on your computer. It has no account, no server,
+and no analytics. It does not collect, send, sell, or share any information
+about you or what you write.
+
+
+WHAT THE APPLICATION KEEPS, AND WHERE
+
+Everything stays on your computer, in the folders of your Windows account.
+
+- Your notes, folders, tags, attachments, and settings (one database per
+  profile)
+  Where:      %APPDATA%\Vanilla Notes\profiles\
+  Encrypted:  Yes, for password-protected profiles
+
+- The list of profiles and, for password-protected profiles, their keys,
+  locked by the password and the recovery code
+  Where:      %APPDATA%\Vanilla Notes\profiles.db
+  Encrypted:  The keys are locked; profile names are not
+
+- Backups of all of the above
+  Where:      %APPDATA%\Vanilla Notes\backups\
+  Encrypted:  Same as the profiles they copy
+
+- Window position and size
+  Where:      %LOCALAPPDATA%\Vanilla Notes\window.json
+  Encrypted:  No
+
+- A log of unexpected errors
+  Where:      %LOCALAPPDATA%\Vanilla Notes\logs\
+  Encrypted:  No
+
+Your password is not stored anywhere, in any form. It unlocks the profile key
+while the profile is open and is then discarded. Without the password or the
+recovery code, nobody can read an encrypted profile, including the author of
+the application.
+
+Windows Hello, when you turn it on for a profile, is handled by Windows. The
+application never sees your face, fingerprint, or PIN.
+
+The error log records the time, type, and location in the code of each
+unexpected error. It never contains notes, passwords, or keys, and your Windows
+account name is removed from it. It stays on your computer; "Copy diagnostics"
+in Settings copies it to the clipboard so you can share it if you choose.
+
+
+WHAT LEAVES YOUR COMPUTER
+
+The application opens no network connections and listens on no ports.
+Information leaves your computer only when you do one of the following:
+
+- Clicking a link in a note opens it in your web browser.
+- Sending a recovery code by email opens your email program with the code
+  filled in; you decide whether to send it.
+- Exporting, backing up to another disk, or printing writes a file where you
+  choose. Exports are not encrypted, even from a password-protected profile.
+
+
+THE MICROSOFT STORE
+
+Vanilla Notes is installed and updated through the Microsoft Store. The Store,
+and Windows, may collect information about installs, updates, and crashes under
+the Microsoft Privacy Statement:
+
+    https://privacy.microsoft.com/privacystatement
+
+The application sends nothing to them.
+
+
+DELETING YOUR INFORMATION
+
+- Deleting a note moves it to the trash; it is permanently deleted after 30
+  days, or when you empty the trash.
+- Deleting a profile from its settings deletes its database and attachments.
+  Earlier backups keep their copy until you delete them in Settings.
+- Uninstalling the application leaves your notes in place, so they are not
+  lost by accident. To remove everything, delete the folders
+  %APPDATA%\Vanilla Notes and %LOCALAPPDATA%\Vanilla Notes.
+
+
+CHILDREN
+
+The application collects nothing from anyone, children included.
+
+
+CHANGES TO THIS POLICY
+
+Any update to this policy is published with the application release that
+requires it, and the date above is updated.
+
+
+CONTACT
+
+[Pending: the public place to write to is decided by "What a release on GitHub
+holds", still open in decisions.md (F4 of product-status.md).]
