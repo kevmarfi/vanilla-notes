@@ -1,0 +1,45 @@
+Vanilla Notes
+Copyright (C) 2026 Kev Martínez
+https://github.com/kevmarfi/vanilla-notes
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program, in the file LICENSE.  If not, see
+<https://www.gnu.org/licenses/>.
+
+
+ADDITIONAL TERMS UNDER SECTION 7 OF THE LICENSE
+
+The following terms are added to the GNU Affero General Public License for
+this program, as its section 7 allows. They apply to every copy of it, and to
+every modified version of it and every work based on it.
+
+a) Attribution, under section 7(b). Every work that contains this program, or
+   any part of it, in source or in object form, must preserve this attribution:
+
+       Based on Vanilla Notes, by Kev Martínez
+       https://github.com/kevmarfi/vanilla-notes
+
+   It must appear in the documentation of the work, and in the Appropriate
+   Legal Notices the work displays, such as its "About" screen, as visibly as
+   the other notices shown there.
+
+b) Marking of modified versions, under section 7(c). A modified version must
+   be marked in a reasonable way as different from the original, and must not
+   be presented as the original or as made by its author.
+
+
+THIRD-PARTY SOFTWARE
+
+This program includes software by others, under their own licenses, listed in
+docs/legal/third-party-notices.txt with the full text of each license in
+docs/legal/licenses/.
