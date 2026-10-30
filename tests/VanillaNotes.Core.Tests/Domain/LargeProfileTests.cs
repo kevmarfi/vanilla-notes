@@ -12,8 +12,8 @@ namespace VanillaNotes.Core.Tests.Domain;
 /// How long the application takes with ten thousand notes in a profile with a password, the
 /// heaviest case: each piece of work against a limit it must stay under. A measure is taken a few
 /// times and the middle one kept, so that one slow run of the machine does not decide it. The
-/// limits are about three times what was measured on the machine of the owner, to leave room for
-/// the slower machines of the continuous integration; each measure is written to the output of the
+/// limits are at least four times what was measured on the machine of the owner, to leave room
+/// for the slower machines of the continuous integration; each measure is written to the output of the
 /// test, to be compared over time.
 /// </summary>
 public sealed class LargeProfileTests : IClassFixture<LargeProfile>
@@ -22,25 +22,25 @@ public sealed class LargeProfileTests : IClassFixture<LargeProfile>
     private const int _runs = 5;
 
     /// <summary>The longest bringing in ten thousand notes from a data file may take.</summary>
-    private static readonly TimeSpan _importLimit = TimeSpan.FromSeconds(45);
+    private static readonly TimeSpan _importLimit = TimeSpan.FromSeconds(10);
 
     /// <summary>The longest opening the profile may take, the stretching of the password included.</summary>
-    private static readonly TimeSpan _openLimit = TimeSpan.FromSeconds(2);
+    private static readonly TimeSpan _openLimit = TimeSpan.FromSeconds(1);
 
     /// <summary>The longest showing a page of the list may take: what the person waits for on every click of a folder.</summary>
-    private static readonly TimeSpan _listLimit = TimeSpan.FromMilliseconds(400);
+    private static readonly TimeSpan _listLimit = TimeSpan.FromMilliseconds(25);
 
     /// <summary>The longest a search may take: it runs as the person types.</summary>
-    private static readonly TimeSpan _searchLimit = TimeSpan.FromMilliseconds(300);
+    private static readonly TimeSpan _searchLimit = TimeSpan.FromMilliseconds(150);
 
     /// <summary>The longest saving a note may take: it happens while the person writes.</summary>
     private static readonly TimeSpan _saveLimit = TimeSpan.FromMilliseconds(50);
 
     /// <summary>The longest a backup of all the data may take.</summary>
-    private static readonly TimeSpan _backupLimit = TimeSpan.FromSeconds(5);
+    private static readonly TimeSpan _backupLimit = TimeSpan.FromSeconds(2);
 
     /// <summary>The longest an export of every note to a data file may take.</summary>
-    private static readonly TimeSpan _exportLimit = TimeSpan.FromSeconds(5);
+    private static readonly TimeSpan _exportLimit = TimeSpan.FromSeconds(2);
 
     private readonly LargeProfile _large;
 
