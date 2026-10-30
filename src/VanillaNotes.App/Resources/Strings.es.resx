@@ -523,6 +523,15 @@
   <data name="recover.useHello" xml:space="preserve">
     <value>Usar Windows Hello</value>
   </data>
+  <data name="settings.about" xml:space="preserve">
+    <value>Acerca de</value>
+  </data>
+  <data name="settings.about.author" xml:space="preserve">
+    <value>Hecho por Kev Martínez.</value>
+  </data>
+  <data name="settings.about.notices" xml:space="preserve">
+    <value>Software de terceros</value>
+  </data>
   <data name="settings.appearance" xml:space="preserve">
     <value>Apariencia</value>
   </data>
@@ -909,6 +918,45 @@
   </data>
   <data name="theme.neutral" xml:space="preserve">
     <value>Neutro</value>
+  </data>
+  <data name="welcome.content" xml:space="preserve">
+    <value>Tus notas se quedan en este equipo, escritas en Markdown. Borra esta nota cuando quieras.
+
+## Tres formas de escribir
+
+Pulsa **Ctrl+E** para pasar de una a la siguiente:
+
+- **Visual**: la nota con formato mientras escribes, con una barra de herramientas.
+- **Markdown**: el texto tal como se guarda, *coloreado*. Enter sigue una lista y Tab anida un elemento.
+- **Lectura**: la nota con formato, sin nada que cambiar por error.
+
+## Markdown en un minuto
+
+- `# Título`, `## Título menor`
+- `**negrita**`, `*cursiva*`, `~~tachado~~`, `` `código` ``
+- `- elemento`, `1. elemento`, `- [ ] tarea`
+- `&gt; cita`
+- `[texto](https://example.com)`
+
+## Teclas
+
+| Tecla | Qué hace |
+|---|---|
+| Ctrl+N | Nota nueva |
+| Ctrl+S | Guardar ya (también se guarda sola) |
+| Ctrl+K | Buscar en todas las notas |
+| Ctrl+F, Ctrl+H | Buscar, y reemplazar, en la nota |
+| Ctrl+P | Imprimir la nota |
+| Ctrl+, | Ajustes |
+
+## Tus notas a salvo
+
+- Una nota que borras va a la **papelera** durante 30 días.
+- Cada día se hace una **copia de seguridad** de todo y se guardan las siete últimas. Desde los ajustes puedes hacer una o restaurarla.
+- Un **perfil con contraseña** está cifrado en el disco. Guarda su código de recuperación en un lugar seguro: sin la contraseña ni el código nadie puede abrirlo, ni siquiera tú.</value>
+  </data>
+  <data name="welcome.title" xml:space="preserve">
+    <value>Te damos la bienvenida a Vanilla Notes</value>
   </data>
   <data name="workspace.discardConfirm" xml:space="preserve">
     <value>¿Descartar los cambios sin guardar?</value>

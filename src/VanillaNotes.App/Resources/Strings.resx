@@ -523,6 +523,15 @@
   <data name="recover.useHello" xml:space="preserve">
     <value>Use Windows Hello instead</value>
   </data>
+  <data name="settings.about" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="settings.about.author" xml:space="preserve">
+    <value>Made by Kev Martínez.</value>
+  </data>
+  <data name="settings.about.notices" xml:space="preserve">
+    <value>Third-party software</value>
+  </data>
   <data name="settings.appearance" xml:space="preserve">
     <value>Appearance</value>
   </data>
@@ -909,6 +918,45 @@
   </data>
   <data name="theme.neutral" xml:space="preserve">
     <value>Neutral</value>
+  </data>
+  <data name="welcome.content" xml:space="preserve">
+    <value>Your notes stay on this computer, written in Markdown. Delete this note whenever you like.
+
+## Three ways to write
+
+Press **Ctrl+E** to go from one to the next:
+
+- **Visual**: the note formatted as you write, with a toolbar.
+- **Markdown**: the text as it is stored, *colored*. Enter goes on with a list, and Tab nests an item.
+- **Read**: the note formatted, with nothing to change by mistake.
+
+## Markdown in a minute
+
+- `# Heading`, `## Smaller heading`
+- `**bold**`, `*italic*`, `~~struck~~`, `` `code` ``
+- `- item`, `1. item`, `- [ ] task`
+- `&gt; quote`
+- `[text](https://example.com)`
+
+## Keys
+
+| Key | What it does |
+|---|---|
+| Ctrl+N | New note |
+| Ctrl+S | Save now (it also saves on its own) |
+| Ctrl+K | Search every note |
+| Ctrl+F, Ctrl+H | Find, and replace, in the note |
+| Ctrl+P | Print the note |
+| Ctrl+, | Settings |
+
+## Keeping your notes safe
+
+- A note you delete goes to the **trash** for 30 days.
+- A **backup** of everything is made each day, and the last seven are kept. You can make one, or restore one, from the settings.
+- A **profile with a password** is encrypted on the disk. Keep its recovery code somewhere safe: without the password or the code, nobody can open it, not even you.</value>
+  </data>
+  <data name="welcome.title" xml:space="preserve">
+    <value>Welcome to Vanilla Notes</value>
   </data>
   <data name="workspace.discardConfirm" xml:space="preserve">
     <value>Discard your unsaved changes?</value>
