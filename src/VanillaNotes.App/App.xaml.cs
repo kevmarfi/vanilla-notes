@@ -9,7 +9,7 @@ namespace VanillaNotes.App;
 /// <summary>
 /// The start of the application: one running copy, the data folder through the wiring, the
 /// texts every view reads, the first page of the window, which is the workspace of the public profile, or
-/// the window of profiles when that one cannot be opened, and the backup of the day. A failure nothing else caught ends here:
+/// the window of profiles when there is none or it cannot be opened, and the backup of the day. A failure nothing else caught ends here:
 /// it is written to the record of failures, and the person is told only that something went wrong.
 /// </summary>
 public partial class App
@@ -45,8 +45,14 @@ public partial class App
         Resources["Texts"] = _services.Texts;
         try
         {
-            MainViewModel workspace = _services.OpenPublicWorkspace();
-            _services.Dialogs.Show(workspace, workspace.Leave);
+            if (_services.OpenPublicWorkspace() is MainViewModel workspace)
+            {
+                _services.Dialogs.Show(workspace, workspace.Leave);
+            }
+            else
+            {
+                _services.Dialogs.Show(_services.CreateProfileChooser());
+            }
         }
         catch (AppException failure)
         {

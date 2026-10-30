@@ -467,7 +467,7 @@
     <value>Abrir</value>
   </data>
   <data name="profiles.empty" xml:space="preserve">
-    <value>Todavía no hay ningún perfil en este equipo. Crea uno para empezar.</value>
+    <value>Todavía no hay ningún perfil en este equipo. Empieza sin contraseña o crea un perfil con una.</value>
   </data>
   <data name="profiles.heading" xml:space="preserve">
     <value>¿Quién escribe?</value>
@@ -483,6 +483,12 @@
   </data>
   <data name="profiles.public.name" xml:space="preserve">
     <value>Público</value>
+  </data>
+  <data name="profiles.public.start" xml:space="preserve">
+    <value>Empezar sin contraseña</value>
+  </data>
+  <data name="profiles.public.start.help" xml:space="preserve">
+    <value>Las notas sin contraseña no se cifran: cualquiera que use esta cuenta de Windows puede leerlas.</value>
   </data>
   <data name="profiles.restore" xml:space="preserve">
     <value>Restaurar una copia</value>

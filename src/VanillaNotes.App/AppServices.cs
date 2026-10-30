@@ -106,29 +106,23 @@ public sealed class AppServices : IDisposable
             Texts,
             () => new NewProfileViewModel(_profiles, Dialogs, Texts, Failures, SettingsOf, RecoveryCode),
             profile => new ProfilePasswordViewModel(profile, _profiles, Dialogs, Texts, Failures, RecoveryCode),
+            StartPublicProfile,
             OpenWorkspace);
     }
 
     /// <summary>
-    /// The workspace of the public profile, the one the application starts in. The first start
-    /// makes it, named in the language of Windows, which it then takes as its own, with a note of
-    /// welcome in that language that shows the ways of writing, the keys, and how the notes are
-    /// kept safe; the person deletes it as any other.
+    /// The workspace of the public profile, the one the application starts in; nothing when the
+    /// person has not started one, and the window of profiles is shown instead.
     /// </summary>
-    public MainViewModel OpenPublicWorkspace()
+    public MainViewModel? OpenPublicWorkspace()
     {
         Texts.Use(LanguageService.WindowsLanguage);
-        if (_profiles.FindPublic() is Profile existing)
+        if (_profiles.FindPublic() is not Profile existing)
         {
-            _startSession = _profiles.Open(existing.Id);
-            return OpenWorkspace(_startSession);
+            return null;
         }
 
-        _startSession = _profiles.Open(_profiles.Create(Texts["profiles.public.name"]).Id);
-        SettingsOf(_startSession).Update(ProfileSettings.Default with { Language = LanguageService.WindowsLanguage });
-        Database database = _startSession.Database;
-        new NoteService(new NoteRepository(database), new FolderRepository(database), new AttachmentRepository(database), _startSession, _diskSpace)
-            .Create(Texts["welcome.title"], Texts["welcome.content"]);
+        _startSession = _profiles.Open(existing.Id);
         return OpenWorkspace(_startSession);
     }
 
@@ -191,6 +185,22 @@ public sealed class AppServices : IDisposable
     /// belongs to this machine and not to the data, which no backup carries.
     /// </summary>
     private static string LocalFolder => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), _dataFolderName);
+
+    /// <summary>
+    /// Makes the public profile and opens it, when the person chooses to start without a password.
+    /// It is named in the language of Windows, which it then takes as its own, and holds a note of
+    /// welcome in that language that shows the ways of writing, the keys, and how the notes are
+    /// kept safe; the person deletes it as any other.
+    /// </summary>
+    private ProfileSession StartPublicProfile()
+    {
+        ProfileSession session = _profiles.Open(_profiles.Create(Texts["profiles.public.name"]).Id);
+        SettingsOf(session).Update(ProfileSettings.Default with { Language = LanguageService.WindowsLanguage });
+        Database database = session.Database;
+        new NoteService(new NoteRepository(database), new FolderRepository(database), new AttachmentRepository(database), session, _diskSpace)
+            .Create(Texts["welcome.title"], Texts["welcome.content"]);
+        return session;
+    }
 
     private static SettingsService SettingsOf(ProfileSession session) => new(new ProfileSettingsRepository(session.Database));
 

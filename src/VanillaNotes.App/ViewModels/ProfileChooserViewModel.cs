@@ -9,8 +9,9 @@ using VanillaNotes.Core.Models;
 namespace VanillaNotes.App.ViewModels;
 
 /// <summary>
-/// The window of profiles, reached from the workspace or when the public profile cannot be opened
-/// at the start: the profiles of this machine, opening one, and making a new one; and
+/// The window of profiles, reached from the workspace, or at the start when there is no public
+/// profile or it cannot be opened: the profiles of this machine, opening one, starting without a
+/// password while there is no public profile, and making a new one; and
 /// restoring a backup, which is how the data of another machine, or of a clean data folder, is
 /// brought back. Once a profile is open, its workspace takes the place of this page in the window.
 /// </summary>
@@ -30,6 +31,8 @@ public sealed partial class ProfileChooserViewModel : ObservableObject
 
     private readonly Func<Profile, ProfilePasswordViewModel> _askPassword;
 
+    private readonly Func<ProfileSession> _startPublic;
+
     private readonly Func<ProfileSession, MainViewModel> _openWorkspace;
 
     /// <summary>What went wrong the last time a profile was opened.</summary>
@@ -40,8 +43,12 @@ public sealed partial class ProfileChooserViewModel : ObservableObject
     /// <summary>Whether a backup is being restored, which nothing else may start meanwhile.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsIdle))]
-    [NotifyCanExecuteChangedFor(nameof(OpenCommand), nameof(CreateCommand), nameof(RestoreBackupCommand))]
+    [NotifyCanExecuteChangedFor(nameof(OpenCommand), nameof(StartPublicCommand), nameof(CreateCommand), nameof(RestoreBackupCommand))]
     private bool _isRestoring;
+
+    /// <summary>Whether there is no public profile, which is when starting without a password is offered.</summary>
+    [ObservableProperty]
+    private bool _canStartPublic;
 
     public ProfileChooserViewModel(
         ProfileService profiles,
@@ -51,6 +58,7 @@ public sealed partial class ProfileChooserViewModel : ObservableObject
         LanguageService texts,
         Func<NewProfileViewModel> newProfile,
         Func<Profile, ProfilePasswordViewModel> askPassword,
+        Func<ProfileSession> startPublic,
         Func<ProfileSession, MainViewModel> openWorkspace)
     {
         _profiles = profiles;
@@ -60,8 +68,10 @@ public sealed partial class ProfileChooserViewModel : ObservableObject
         _texts = texts;
         _newProfile = newProfile;
         _askPassword = askPassword;
+        _startPublic = startPublic;
         _openWorkspace = openWorkspace;
         Profiles = new ObservableCollection<Profile>(profiles.List());
+        CanStartPublic = profiles.FindPublic() is null;
     }
 
     /// <summary>The profiles of this machine, by name.</summary>
@@ -95,6 +105,21 @@ public sealed partial class ProfileChooserViewModel : ObservableObject
             {
                 Enter(session);
             }
+        }
+        catch (AppException failure)
+        {
+            Failure = _failures.Text(failure);
+        }
+    }
+
+    /// <summary>Makes the public profile, which has no password, and goes to its workspace.</summary>
+    [RelayCommand(CanExecute = nameof(IsIdle))]
+    private void StartPublic()
+    {
+        Failure = "";
+        try
+        {
+            Enter(_startPublic());
         }
         catch (AppException failure)
         {
@@ -147,6 +172,8 @@ public sealed partial class ProfileChooserViewModel : ObservableObject
         {
             Profiles.Add(profile);
         }
+
+        CanStartPublic = _profiles.FindPublic() is null;
     }
 
     private void Enter(ProfileSession session)

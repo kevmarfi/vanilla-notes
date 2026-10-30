@@ -114,7 +114,7 @@
         <Setter Property="Padding" Value="10,8" />
     </Style>
 
-    <!-- The button that makes a profile: a plain button while there are profiles to choose, and the main action once there are none. -->
+    <!-- The buttons that make a profile: plain buttons while there are profiles to choose, and the main actions once there are none. -->
     <Style x:Key="NewProfileButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Padding" Value="16,10" />

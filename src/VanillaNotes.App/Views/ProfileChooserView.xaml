@@ -1,4 +1,4 @@
-<!-- The first page: the profiles of this machine, opening one, and making one, and restoring a backup; a card on the background, as the sign-in of the web version. -->
+<!-- The first page: the profiles of this machine, opening one, starting without a password while there is no public profile, making one, and restoring a backup; a card on the background, as the sign-in of the web version. -->
 <UserControl x:Class="VanillaNotes.App.Views.ProfileChooserView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -41,6 +41,15 @@
                 <TextBlock Text="{Binding [profiles.empty], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" TextAlignment="Center" Margin="{StaticResource GapBelowLg}"
                            Visibility="{Binding Profiles.Count, Converter={StaticResource VisibleWhenZero}}" />
                 <TextBlock Text="{Binding Failure}" Style="{StaticResource ErrorText}" Margin="{StaticResource GapBelowMd}" Visibility="{Binding HasFailure, Converter={StaticResource Visible}}" />
+                <StackPanel Margin="{StaticResource GapBelowMd}" Visibility="{Binding CanStartPublic, Converter={StaticResource Visible}}">
+                    <Button Style="{StaticResource NewProfileButton}" Command="{Binding StartPublicCommand}" AutomationProperties.Name="{Binding [profiles.public.start], Source={StaticResource Texts}}" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal">
+                            <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPencil}" Foreground="{DynamicResource Accent}" Margin="{StaticResource GapRightSm}" />
+                            <TextBlock Text="{Binding [profiles.public.start], Source={StaticResource Texts}}" />
+                        </StackPanel>
+                    </Button>
+                    <TextBlock Text="{Binding [profiles.public.start.help], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" TextAlignment="Center" TextWrapping="Wrap" Margin="{StaticResource GapAboveSm}" />
+                </StackPanel>
                 <Button Style="{StaticResource NewProfileButton}" Command="{Binding CreateCommand}" AutomationProperties.Name="{Binding [profiles.new], Source={StaticResource Texts}}" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal">
                         <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPlus}" Foreground="{DynamicResource Accent}" Margin="{StaticResource GapRightSm}" />
