@@ -8,6 +8,8 @@ CREATE TABLE folders (
   created_at TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
 ) STRICT;
 
+-- A note with a deleted_at is in the trash, kept until it is put back or deleted for good.
+-- A note pinned comes first in the list of its profile.
 CREATE TABLE notes (
   id         INTEGER PRIMARY KEY AUTOINCREMENT,
   folder_id  INTEGER REFERENCES folders(id) ON DELETE SET NULL,
@@ -15,7 +17,9 @@ CREATE TABLE notes (
   content    TEXT    NOT NULL DEFAULT '' CHECK (length(content) <= 100000),
   version    INTEGER NOT NULL DEFAULT 1 CHECK (version >= 1),
   created_at TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
-  updated_at TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+  updated_at TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+  deleted_at TEXT,
+  pinned     INTEGER NOT NULL DEFAULT 0 CHECK (pinned IN (0, 1))
 ) STRICT;
 
 CREATE TABLE tags (
@@ -45,10 +49,30 @@ CREATE TABLE settings (
   updated_at TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
 ) STRICT;
 
+-- Where the person was in the workspace of the profile when it was last left: the note open,
+-- and the folder chosen in the sidebar, or the notes in no folder.
+CREATE TABLE workspace (
+  id             INTEGER PRIMARY KEY CHECK (id = 1),
+  note_id        INTEGER REFERENCES notes(id)   ON DELETE SET NULL,
+  folder_id      INTEGER REFERENCES folders(id) ON DELETE SET NULL,
+  without_folder INTEGER NOT NULL DEFAULT 0 CHECK (without_folder IN (0, 1)),
+  updated_at     TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+  CHECK (folder_id IS NULL OR without_folder = 0)
+) STRICT;
+
 CREATE INDEX idx_notes_updated    ON notes (updated_at DESC);
 CREATE INDEX idx_notes_folder     ON notes (folder_id);
 CREATE INDEX idx_note_tags_tag    ON note_tags (tag_id);
 CREATE INDEX idx_attachments_note ON attachments (note_id);
+
+-- The list of notes, out of the trash, in each order it can be asked for: the pinned first.
+-- Without them a page of the list reads and sorts every note of the profile. The trash has an
+-- index of its own, over the deleted notes only: one over every note was taken by the engine for
+-- the list too, since "not in the trash" looked rare to it, and the list was sorted again.
+CREATE INDEX idx_notes_trash        ON notes (deleted_at DESC, id DESC) WHERE deleted_at IS NOT NULL;
+CREATE INDEX idx_notes_list_updated ON notes (pinned DESC, updated_at DESC, id DESC) WHERE deleted_at IS NULL;
+CREATE INDEX idx_notes_list_created ON notes (pinned DESC, created_at DESC, id DESC) WHERE deleted_at IS NULL;
+CREATE INDEX idx_notes_list_title   ON notes (pinned DESC, title COLLATE NOCASE, id DESC) WHERE deleted_at IS NULL;
 
 CREATE VIRTUAL TABLE notes_fts USING fts5(
   title,

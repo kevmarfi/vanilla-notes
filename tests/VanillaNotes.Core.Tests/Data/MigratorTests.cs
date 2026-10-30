@@ -16,7 +16,7 @@ public sealed class MigratorTests
         using SqliteConnection connection = database.Connect();
 
         Assert.Equal(["profiles", "schema_migrations"], Tables(connection));
-        Assert.Equal(2, Scalar(connection, "SELECT COUNT(*) FROM schema_migrations"));
+        Assert.Equal(1, Scalar(connection, "SELECT COUNT(*) FROM schema_migrations"));
     }
 
     [Fact]
@@ -49,7 +49,7 @@ public sealed class MigratorTests
 
         Migrator.Apply(connection, Migrator.Profile);
 
-        Assert.Equal(5, Scalar(connection, "SELECT COUNT(*) FROM schema_migrations"));
+        Assert.Equal(1, Scalar(connection, "SELECT COUNT(*) FROM schema_migrations"));
     }
 
     [Fact]
