@@ -61,7 +61,11 @@
             </Border>
             <TextBox DockPanel.Dock="Top" Style="{StaticResource BareTextBox}" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
                      FontSize="{StaticResource TextXl}" FontWeight="SemiBold" Margin="{StaticResource GapBelowMd}" AutomationProperties.Name="{Binding [editor.title], Source={StaticResource Texts}}"
-                     IsReadOnly="{Binding IsReading}" />
+                     IsReadOnly="{Binding IsReading}" controls:FocusOnShow.Request="{Binding TitleFocusRequest}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding GoToTextCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
             <WrapPanel DockPanel.Dock="Top" Margin="{StaticResource GapBelowLg}" Orientation="Horizontal" IsEnabled="{Binding IsWritable}">
                 <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconFolder}" Foreground="{DynamicResource TextMuted}" Margin="{StaticResource GapRightSm}" VerticalAlignment="Center" />
                 <ComboBox ItemsSource="{Binding FolderOptions}" SelectedItem="{Binding SelectedFolder}" MinWidth="{StaticResource FolderPickerMinWidth}" Margin="{StaticResource GapRightLg}"
@@ -129,9 +133,9 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <Grid>
-                <controls:SourceEditor Text="{Binding Content, Mode=TwoWay}" AskLink="{Binding AskLink}" PasteImage="{Binding PasteImage}" Spellcheck="{Binding Spellcheck}" ImageOf="{Binding ImageOf}" ImageToInsert="{Binding ImageToInsert}"
+                <controls:SourceEditor FocusRequest="{Binding TextFocusRequest}" Text="{Binding Content, Mode=TwoWay}" AskLink="{Binding AskLink}" PasteImage="{Binding PasteImage}" Spellcheck="{Binding Spellcheck}" ImageOf="{Binding ImageOf}" ImageToInsert="{Binding ImageToInsert}"
                                        Visibility="{Binding IsMarkdown, Converter={StaticResource Visible}}" />
-                <controls:VisualEditor Markdown="{Binding Content, Mode=TwoWay}" AskLink="{Binding AskLink}" PasteImage="{Binding PasteImage}" Spellcheck="{Binding Spellcheck}" ImageOf="{Binding ImageOf}" ImageToInsert="{Binding ImageToInsert}"
+                <controls:VisualEditor FocusRequest="{Binding TextFocusRequest}" Markdown="{Binding Content, Mode=TwoWay}" AskLink="{Binding AskLink}" PasteImage="{Binding PasteImage}" Spellcheck="{Binding Spellcheck}" ImageOf="{Binding ImageOf}" ImageToInsert="{Binding ImageToInsert}"
                                        IsVisualAllowed="{Binding IsVisualAllowed, Mode=OneWayToSource}"
                                        Visibility="{Binding IsVisual, Converter={StaticResource Visible}}" />
                 <Border BorderBrush="{DynamicResource Border}" BorderThickness="1" CornerRadius="{StaticResource Radius}" Padding="{StaticResource PanelPadding}"

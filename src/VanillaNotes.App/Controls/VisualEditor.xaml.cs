@@ -42,6 +42,10 @@ public partial class VisualEditor
     /// <summary>What takes an image pasted, as the bytes of a PNG file, to attach it to the note and write it where the cursor is.</summary>
     public static readonly DependencyProperty PasteImageProperty = DependencyProperty.Register(nameof(PasteImage), typeof(Action<byte[]>), typeof(VisualEditor));
 
+    /// <summary>A number that, each time it changes, tells the editor shown to take the keyboard.</summary>
+    public static readonly DependencyProperty FocusRequestProperty = DependencyProperty.Register(
+        nameof(FocusRequest), typeof(int), typeof(VisualEditor), new PropertyMetadata(0, (editor, _) => ((VisualEditor)editor).TakeKeyboard()));
+
     /// <summary>An attached image to put where the cursor is; the editor puts it only while it is the one shown.</summary>
     public static readonly DependencyProperty ImageToInsertProperty = DependencyProperty.Register(
         nameof(ImageToInsert), typeof(AttachmentItemViewModel), typeof(VisualEditor), new PropertyMetadata(null, (editor, change) => ((VisualEditor)editor).Insert(change.NewValue as AttachmentItemViewModel)));
@@ -75,6 +79,7 @@ public partial class VisualEditor
         };
         Box.LostKeyboardFocus += (_, _) => WriteBack();
         Box.PreviewKeyDown += OnKey;
+        Box.PreviewMouseLeftButtonUp += OnClick;
         Box.PreviewTextInput += (_, _) => _isTouched = true;
         DataObject.AddPastingHandler(Box, OnPaste);
         SpellCheck.SetIsEnabled(Box, Spellcheck);
@@ -122,6 +127,13 @@ public partial class VisualEditor
         set => SetValue(PasteImageProperty, value);
     }
 
+    /// <summary>The number that, each time it changes, tells the editor shown to take the keyboard.</summary>
+    public int FocusRequest
+    {
+        get => (int)GetValue(FocusRequestProperty);
+        set => SetValue(FocusRequestProperty, value);
+    }
+
     /// <summary>An attached image to put where the cursor is.</summary>
     public AttachmentItemViewModel? ImageToInsert
     {
@@ -165,6 +177,29 @@ public partial class VisualEditor
         _isWriting = true;
         Markdown = markdown;
         _isWriting = false;
+    }
+
+    /// <summary>Takes the keyboard, once the way of writing that was just chosen is laid out, if this is the editor shown.</summary>
+    private void TakeKeyboard() => Dispatcher.BeginInvoke(() =>
+    {
+        if (IsVisible)
+        {
+            Box.Focus();
+        }
+    }, DispatcherPriority.Input);
+
+    /// <summary>
+    /// A click below the last line, which the box leaves to the area around the text, puts the cursor
+    /// at the end of the note. Without it, only the first line of an empty note could be clicked.
+    /// A click on the scroll bar is left alone.
+    /// </summary>
+    private void OnClick(object sender, MouseButtonEventArgs click)
+    {
+        if (!Box.IsKeyboardFocusWithin && click.GetPosition(Box).X <= Box.ViewportWidth)
+        {
+            Box.Focus();
+            Box.CaretPosition = Box.Document.ContentEnd;
+        }
     }
 
     /// <summary>Puts an attached image where the cursor is, and writes the note back with it.</summary>

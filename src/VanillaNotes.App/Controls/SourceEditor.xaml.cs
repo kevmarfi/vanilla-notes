@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
@@ -38,6 +39,10 @@ public partial class SourceEditor
 
     /// <summary>What takes an image pasted, as the bytes of a PNG file, to attach it to the note and write it where the cursor is.</summary>
     public static readonly DependencyProperty PasteImageProperty = DependencyProperty.Register(nameof(PasteImage), typeof(Action<byte[]>), typeof(SourceEditor));
+
+    /// <summary>A number that, each time it changes, tells the editor shown to take the keyboard.</summary>
+    public static readonly DependencyProperty FocusRequestProperty = DependencyProperty.Register(
+        nameof(FocusRequest), typeof(int), typeof(SourceEditor), new PropertyMetadata(0, (editor, _) => ((SourceEditor)editor).TakeKeyboard()));
 
     /// <summary>An attached image to write where the cursor is; the box writes it only while it is the one shown.</summary>
     public static readonly DependencyProperty ImageToInsertProperty = DependencyProperty.Register(
@@ -126,6 +131,13 @@ public partial class SourceEditor
         set => SetValue(ImageOfProperty, value);
     }
 
+    /// <summary>The number that, each time it changes, tells the editor shown to take the keyboard.</summary>
+    public int FocusRequest
+    {
+        get => (int)GetValue(FocusRequestProperty);
+        set => SetValue(FocusRequestProperty, value);
+    }
+
     /// <summary>An attached image to write where the cursor is.</summary>
     public AttachmentItemViewModel? ImageToInsert
     {
@@ -197,6 +209,15 @@ public partial class SourceEditor
         Source.Select(caret, 0);
         Source.Focus();
     }
+
+    /// <summary>Takes the keyboard, once the way of writing that was just chosen is laid out, if this is the editor shown.</summary>
+    private void TakeKeyboard() => Dispatcher.BeginInvoke(() =>
+    {
+        if (IsVisible)
+        {
+            Source.Focus();
+        }
+    }, DispatcherPriority.Input);
 
     private void OnFormat(object sender, RoutedEventArgs click)
     {

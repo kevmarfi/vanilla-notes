@@ -152,6 +152,14 @@ public sealed partial class NoteEditorViewModel : ObservableObject
         _saveTimer.Tick += (_, _) => Save();
     }
 
+    /// <summary>A number that changes each time the title is to take the keyboard.</summary>
+    [ObservableProperty]
+    private int _titleFocusRequest;
+
+    /// <summary>A number that changes each time the text of the note is to take the keyboard.</summary>
+    [ObservableProperty]
+    private int _textFocusRequest;
+
     /// <summary>Told when the title or the text of the note was saved.</summary>
     public event Action? Saved;
 
@@ -607,6 +615,13 @@ public sealed partial class NoteEditorViewModel : ObservableObject
         Save();
         _printer.Print(Title, Content, ImageOf);
     }
+
+    /// <summary>Takes the keyboard to the title, with it selected, so that a new note can be named by typing.</summary>
+    public void FocusTitle() => TitleFocusRequest++;
+
+    /// <summary>Takes the keyboard from the title to the text of the note.</summary>
+    [RelayCommand]
+    private void GoToText() => TextFocusRequest++;
 
     /// <summary>Moves the note to the trash, once what was typed is saved; it can be put back from there.</summary>
     [RelayCommand]

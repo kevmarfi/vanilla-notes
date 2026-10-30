@@ -269,6 +269,7 @@ public sealed partial class MainViewModel : ObservableObject
                 looking.Tag is null ? null : [looking.Tag]);
             Sidebar.Refresh();
             Editor.Open(note.Id);
+            Editor.FocusTitle();
             _ = ReloadList();
         }
         catch (AppException failure)
