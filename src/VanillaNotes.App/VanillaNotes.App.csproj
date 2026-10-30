@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets/app.ico" />
+    <EmbeddedResource Include="../../docs/legal/third-party-notices.txt" LogicalName="third-party-notices.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../VanillaNotes.Core/VanillaNotes.Core.csproj" />

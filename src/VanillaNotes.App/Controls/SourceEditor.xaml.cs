@@ -69,6 +69,9 @@ public partial class SourceEditor
         Source.Options.EnableHyperlinks = false;
         Source.Options.EnableEmailHyperlinks = false;
         Source.Options.AllowScrollBelowDocument = false;
+
+        // Spaces read the same in every program a note is opened in; a tab does not.
+        Source.Options.ConvertTabsToSpaces = true;
         Source.TextArea.SetResourceReference(TextArea.SelectionBrushProperty, "AccentSoft");
         Source.TextArea.SelectionForeground = null;
         Source.TextArea.SelectionBorder = null;
@@ -286,12 +289,45 @@ public partial class SourceEditor
         }
     }
 
+    // -- Lists -- //
+
+    /// <summary>
+    /// Enter on an item of a list or a line of a quote starts the next one, or ends it when it was
+    /// left empty; Tab on an item moves the whole line in. Anywhere else, and with a selection that
+    /// spans lines, both keys do what the editor always does.
+    /// </summary>
+    /// <returns>Whether the key was taken.</returns>
+    private bool OnListKey(KeyEventArgs key)
+    {
+        if (Keyboard.Modifiers != ModifierKeys.None || key.Key is not (Key.Enter or Key.Tab))
+        {
+            return false;
+        }
+
+        int caret = Source.CaretOffset;
+        (string Text, int Caret)? done = key.Key == Key.Enter
+            ? Source.SelectionLength == 0 ? ListContinuation.Enter(Source.Text, caret) : null
+            : Source.SelectedText.Contains('\n', StringComparison.Ordinal) ? null : ListContinuation.Indent(Source.Text, caret);
+        if (done is not (string text, int newCaret))
+        {
+            return false;
+        }
+
+        Write(text);
+        Source.Select(newCaret, 0);
+        return true;
+    }
+
     // -- Finding and replacing -- //
 
-    /// <summary>The keys of finding, in the editor: Ctrl+F and Ctrl+H open the bar, F3 goes to the next match, Shift+F3 to the one before.</summary>
+    /// <summary>The keys of the editor: Enter and Tab on a list; Ctrl+F and Ctrl+H open the find bar, F3 goes to the next match, Shift+F3 to the one before.</summary>
     private void OnEditorKey(object sender, KeyEventArgs key)
     {
-        if (Keyboard.Modifiers == ModifierKeys.Control && key.Key is Key.F or Key.H)
+        if (OnListKey(key))
+        {
+            key.Handled = true;
+        }
+        else if (Keyboard.Modifiers == ModifierKeys.Control && key.Key is Key.F or Key.H)
         {
             OpenFind();
             key.Handled = true;

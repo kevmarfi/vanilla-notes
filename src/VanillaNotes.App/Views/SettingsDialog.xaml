@@ -1,4 +1,4 @@
-<!-- The settings of the open profile, each with a button that shows its explanation: how the interface looks, how notes are written, and the list of notes; the profile, with forms that open under its rows; then taking the notes out, bringing in the notes of the web version, and the backups of this machine. -->
+<!-- The settings of the open profile, each with a button that shows its explanation: how the interface looks, how notes are written, and the list of notes; the profile, with forms that open under its rows; then taking the notes out, bringing in the notes of the web version, and the backups of this machine; last, what the application is. -->
 <UserControl x:Class="VanillaNotes.App.Views.SettingsDialog"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -419,6 +419,30 @@
             <TextBlock Text="{Binding Outcome}" Style="{StaticResource MutedText}" Margin="{StaticResource GapAboveMd}" Visibility="{Binding HasOutcome, Converter={StaticResource Visible}}" />
 
             <TextBlock Text="{Binding Failure}" Style="{StaticResource ErrorText}" Margin="{StaticResource GapAboveMd}" Visibility="{Binding HasFailure, Converter={StaticResource Visible}}" />
+
+            <Border Style="{StaticResource SettingsSection}">
+                <TextBlock Text="{Binding [settings.about], Source={StaticResource Texts}}" Style="{StaticResource SectionHeading}" />
+            </Border>
+            <TextBlock>
+                <Run Text="{Binding [app.name], Source={StaticResource Texts}, Mode=OneWay}" />
+                <Run Text="{Binding Version, Mode=OneWay}" />
+            </TextBlock>
+            <TextBlock Text="{Binding [settings.about.author], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" />
+            <Grid Style="{StaticResource SettingRow}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding [settings.about.notices], Source={StaticResource Texts}}" VerticalAlignment="Center" />
+                    <ToggleButton x:Name="NoticesHelp" Style="{StaticResource HelpToggle}" ToolTip="{Binding [settings.help], Source={StaticResource Texts}}" />
+                </StackPanel>
+                <Border Grid.Row="1" Style="{StaticResource SettingHelp}" Visibility="{Binding IsChecked, ElementName=NoticesHelp, Converter={StaticResource Visible}}">
+                    <TextBox Text="{Binding ThirdPartyNotices, Mode=OneWay}" IsReadOnly="True" TextWrapping="NoWrap" FontFamily="{StaticResource FontMono}" FontSize="{StaticResource TextSm}"
+                             MaxHeight="{StaticResource NoticesMaxHeight}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                             AutomationProperties.Name="{Binding [settings.about.notices], Source={StaticResource Texts}}" />
+                </Border>
+            </Grid>
             <TextBlock Text="{Binding [settings.note], Source={StaticResource Texts}}" Style="{StaticResource MutedText}" Margin="{StaticResource GapAboveMd}" />
             <StackPanel Style="{StaticResource DialogButtons}">
                 <Button Content="{Binding [settings.done], Source={StaticResource Texts}}" Command="{Binding DoneCommand}" IsCancel="True" IsDefault="True" />

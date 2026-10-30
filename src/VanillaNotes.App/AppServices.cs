@@ -111,7 +111,9 @@ public sealed class AppServices : IDisposable
 
     /// <summary>
     /// The workspace of the public profile, the one the application starts in. The first start
-    /// makes it, named in the language of Windows, which it then takes as its own.
+    /// makes it, named in the language of Windows, which it then takes as its own, with a note of
+    /// welcome in that language that shows the ways of writing, the keys, and how the notes are
+    /// kept safe; the person deletes it as any other.
     /// </summary>
     public MainViewModel OpenPublicWorkspace()
     {
@@ -124,6 +126,9 @@ public sealed class AppServices : IDisposable
 
         _startSession = _profiles.Open(_profiles.Create(Texts["profiles.public.name"]).Id);
         SettingsOf(_startSession).Update(ProfileSettings.Default with { Language = LanguageService.WindowsLanguage });
+        Database database = _startSession.Database;
+        new NoteService(new NoteRepository(database), new FolderRepository(database), new AttachmentRepository(database), _startSession, _diskSpace)
+            .Create(Texts["welcome.title"], Texts["welcome.content"]);
         return OpenWorkspace(_startSession);
     }
 

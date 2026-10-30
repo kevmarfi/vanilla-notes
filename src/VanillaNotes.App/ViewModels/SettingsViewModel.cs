@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Reflection;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using VanillaNotes.App.Services;
@@ -15,7 +17,8 @@ namespace VanillaNotes.App.ViewModels;
 /// list of notes shows its dates, each stored in the profile and in effect the moment it is
 /// changed; the profile: its name, its password, and deleting it; and the notes and the data:
 /// taking every note out, bringing in the notes of the web version, and the backups of this
-/// machine; and copying the record of failures, for a person who reports a fault.
+/// machine; copying the record of failures, for a person who reports a fault; and what the
+/// application is: its version, who made it, and the software it is made with.
 /// Taking the notes out and making a backup run off the thread of the window. This view model
 /// departs from the reference rules by naming the forms of an export, which live in Core/Export.
 /// </summary>
@@ -68,6 +71,15 @@ public sealed partial class SettingsViewModel : ObservableObject
     private readonly Func<string> _diagnosticReport;
 
     private readonly Func<string, string, RecoveryCodeViewModel> _recoveryCode;
+
+    /// <summary>The notices of the software the application is made with, read from inside the application the first time they are shown.</summary>
+    private static readonly Lazy<string> _thirdPartyNotices = new(() =>
+    {
+        using Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("third-party-notices.txt")
+            ?? throw new InvalidOperationException("The notices of third parties are not inside the application.");
+        using var reader = new StreamReader(stream);
+        return reader.ReadToEnd();
+    });
 
     /// <summary>The settings as they were last stored.</summary>
     private ProfileSettings _stored;
@@ -273,6 +285,12 @@ public sealed partial class SettingsViewModel : ObservableObject
 
     /// <summary>The backups of this machine, newest first.</summary>
     public ObservableCollection<BackupItemViewModel> Backups { get; } = [];
+
+    /// <summary>The version of the application, as its number of three parts.</summary>
+    public string Version { get; } = Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "";
+
+    /// <summary>The notices of the software the application is made with, and the full text of their licenses, which travel inside the application.</summary>
+    public string ThirdPartyNotices => _thirdPartyNotices.Value;
 
     /// <summary>Whether the profile has no password.</summary>
     public bool HasNoPassword => !HasPassword;

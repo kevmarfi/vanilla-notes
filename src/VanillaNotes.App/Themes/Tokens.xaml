@@ -144,6 +144,8 @@
     <sys:Double x:Key="FolderPickerMinWidth">160</sys:Double>
     <!-- The least width of the box of a new tag. -->
     <sys:Double x:Key="TagBoxMinWidth">110</sys:Double>
+    <!-- The most the notices of third parties take in the settings before they scroll: about fifteen lines. -->
+    <sys:Double x:Key="NoticesMaxHeight">240</sys:Double>
     <!-- The most a fragment of a search takes in the list: two lines. -->
     <sys:Double x:Key="SnippetMaxHeight">36</sys:Double>
     <!-- The width the window opens at. -->
