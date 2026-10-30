@@ -12,39 +12,45 @@
             <TextBlock Text="{Binding Failure}" Style="{StaticResource ErrorText}" HorizontalAlignment="Center" Margin="{StaticResource GapAboveMd}" Visibility="{Binding HasFailure, Converter={StaticResource Visible}}" />
         </StackPanel>
         <DockPanel Margin="{StaticResource EditorMargin}" Visibility="{Binding HasNote, Converter={StaticResource Visible}}" controls:Dropping.FilesCommand="{Binding AttachFilesCommand}">
-            <DockPanel DockPanel.Dock="Top" Margin="{StaticResource GapBelowMd}">
-                <controls:TogglePicker DockPanel.Dock="Left" Options="{Binding Modes}" SelectedKey="{Binding Mode}" ToolTip="{Binding [editor.modes], Source={StaticResource Texts}}" AutomationProperties.Name="{Binding [editor.modes], Source={StaticResource Texts}}"
+            <DockPanel DockPanel.Dock="Top" Margin="{StaticResource GapBelowSm}">
+                <controls:TogglePicker DockPanel.Dock="Left" VerticalAlignment="Top" Margin="{StaticResource GapBelowSm}" Options="{Binding Modes}" SelectedKey="{Binding Mode}" ToolTip="{Binding [editor.modes], Source={StaticResource Texts}}" AutomationProperties.Name="{Binding [editor.modes], Source={StaticResource Texts}}"
                                        Visibility="{Binding IsWritable, Converter={StaticResource Visible}}" />
-                <Button DockPanel.Dock="Right" Style="{StaticResource DangerButton}" Padding="{StaticResource ToolbarButtonPadding}" Command="{Binding DeleteCommand}" AutomationProperties.Name="{Binding [editor.delete], Source={StaticResource Texts}}"
-                        Visibility="{Binding IsWritable, Converter={StaticResource Visible}}">
-                    <StackPanel Orientation="Horizontal">
-                        <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconTrash}" Margin="{StaticResource GapRightSm}" />
-                        <TextBlock Text="{Binding [editor.delete], Source={StaticResource Texts}}" />
-                    </StackPanel>
-                </Button>
-                <Button DockPanel.Dock="Right" Style="{StaticResource IconButton}" Margin="{StaticResource GapRightSm}" Command="{Binding TogglePinCommand}"
-                        ToolTip="{Binding PinText}" AutomationProperties.Name="{Binding PinText}" Visibility="{Binding IsWritable, Converter={StaticResource Visible}}">
-                    <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPin}" />
-                </Button>
-                <Button DockPanel.Dock="Right" Padding="{StaticResource ToolbarButtonPadding}" Margin="{StaticResource GapRightSm}" Command="{Binding PrintCommand}" AutomationProperties.Name="{Binding [editor.print], Source={StaticResource Texts}}"
-                        ToolTip="{Binding [editor.print.help], Source={StaticResource Texts}}">
-                    <StackPanel Orientation="Horizontal">
-                        <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPrinter}" Margin="{StaticResource GapRightSm}" />
-                        <TextBlock Text="{Binding [editor.print], Source={StaticResource Texts}}" />
-                    </StackPanel>
-                </Button>
-                <TextBlock Text="{Binding Status}" Style="{StaticResource MutedText}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="{StaticResource GapRightMd}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+                <!-- The actions wrap onto a second line when the editor is too narrow to hold them on one. -->
+                <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding Status}" Style="{StaticResource MutedText}" VerticalAlignment="Center" Margin="{StaticResource ToolbarItemMargin}" TextWrapping="NoWrap" />
+                    <Button Padding="{StaticResource ToolbarButtonPadding}" Margin="{StaticResource ToolbarItemMargin}" Command="{Binding PrintCommand}" AutomationProperties.Name="{Binding [editor.print], Source={StaticResource Texts}}"
+                            ToolTip="{Binding [editor.print.help], Source={StaticResource Texts}}">
+                        <StackPanel Orientation="Horizontal">
+                            <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPrinter}" Margin="{StaticResource GapRightSm}" />
+                            <TextBlock Text="{Binding [editor.print], Source={StaticResource Texts}}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource IconButton}" Margin="{StaticResource ToolbarItemMargin}" Command="{Binding TogglePinCommand}"
+                            ToolTip="{Binding PinText}" AutomationProperties.Name="{Binding PinText}" Visibility="{Binding IsWritable, Converter={StaticResource Visible}}">
+                        <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconPin}" />
+                    </Button>
+                    <Button Style="{StaticResource DangerButton}" Padding="{StaticResource ToolbarButtonPadding}" Margin="{StaticResource ToolbarItemMargin}" Command="{Binding DeleteCommand}" AutomationProperties.Name="{Binding [editor.delete], Source={StaticResource Texts}}"
+                            Visibility="{Binding IsWritable, Converter={StaticResource Visible}}">
+                        <StackPanel Orientation="Horizontal">
+                            <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconTrash}" Margin="{StaticResource GapRightSm}" />
+                            <TextBlock Text="{Binding [editor.delete], Source={StaticResource Texts}}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Padding="{StaticResource ToolbarButtonPadding}" Margin="{StaticResource ToolbarItemMargin}" Command="{Binding RestoreCommand}"
+                            Content="{Binding [editor.restore], Source={StaticResource Texts}}" Visibility="{Binding IsInTrash, Converter={StaticResource Visible}}" />
+                    <Button Style="{StaticResource DangerButton}" Padding="{StaticResource ToolbarButtonPadding}" Margin="{StaticResource ToolbarItemMargin}" Command="{Binding DeleteForeverCommand}" AutomationProperties.Name="{Binding [editor.deleteForever], Source={StaticResource Texts}}"
+                            Visibility="{Binding IsInTrash, Converter={StaticResource Visible}}">
+                        <StackPanel Orientation="Horizontal">
+                            <ContentControl Style="{StaticResource IconSm}" Content="{StaticResource IconTrash}" Margin="{StaticResource GapRightSm}" />
+                            <TextBlock Text="{Binding [editor.deleteForever], Source={StaticResource Texts}}" />
+                        </StackPanel>
+                    </Button>
+                </WrapPanel>
             </DockPanel>
-            <Border DockPanel.Dock="Top" Style="{StaticResource Notice}" Margin="{StaticResource GapBelowMd}"
-                    Visibility="{Binding IsInTrash, Converter={StaticResource Visible}}">
-                <DockPanel>
-                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                        <Button Content="{Binding [editor.restore], Source={StaticResource Texts}}" Command="{Binding RestoreCommand}" Padding="{StaticResource ToolbarButtonPadding}" Margin="{StaticResource GapRightSm}" />
-                        <Button Style="{StaticResource DangerButton}" Content="{Binding [editor.deleteForever], Source={StaticResource Texts}}" Command="{Binding DeleteForeverCommand}" Padding="{StaticResource ToolbarButtonPadding}" />
-                    </StackPanel>
-                    <TextBlock Text="{Binding TrashNotice}" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="{StaticResource TextSm}" />
-                </DockPanel>
-            </Border>
+            <DockPanel DockPanel.Dock="Top" Margin="{StaticResource GapBelowMd}" Visibility="{Binding IsInTrash, Converter={StaticResource Visible}}">
+                <ContentControl DockPanel.Dock="Left" Style="{StaticResource IconSm}" Content="{StaticResource IconTrash}" Foreground="{DynamicResource TextMuted}" Margin="{StaticResource GapRightSm}" VerticalAlignment="Top" />
+                <TextBlock Text="{Binding TrashNotice}" Style="{StaticResource MutedText}" />
+            </DockPanel>
             <Border DockPanel.Dock="Top" Style="{StaticResource Notice}" Background="{DynamicResource DangerSoft}" Margin="{StaticResource GapBelowMd}"
                     Visibility="{Binding HasFailure, Converter={StaticResource Visible}}">
                 <DockPanel>

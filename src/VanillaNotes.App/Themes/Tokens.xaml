@@ -108,6 +108,8 @@
     <Thickness x:Key="SmallButtonPadding">12,4</Thickness>
     <!-- The room inside a button of the bar of the open note. -->
     <Thickness x:Key="ToolbarButtonPadding">10,5</Thickness>
+    <!-- The room around an item of the bar of the open note, apart from the one before it and from the line below when the bar wraps. -->
+    <Thickness x:Key="ToolbarItemMargin">8,0,0,8</Thickness>
     <!-- The room inside a button that holds only a small icon, in a row. -->
     <Thickness x:Key="TinyButtonPadding">2</Thickness>
     <!-- The room inside a framed panel: the preview, the read way, a code. -->

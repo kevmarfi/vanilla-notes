@@ -255,6 +255,7 @@ public sealed class DialogService
         }
 
         _window = new ShellWindow { DataContext = _shell };
+        // The window opens where it was, at the size it had when not maximized: it never opens maximized, which the person does when they want it.
         if (_lastPlacement() is WindowPlacement placement && IsOnScreen(placement))
         {
             _window.WindowStartupLocation = WindowStartupLocation.Manual;
@@ -262,10 +263,6 @@ public sealed class DialogService
             _window.Top = placement.Top;
             _window.Width = Math.Max(placement.Width, _window.MinWidth);
             _window.Height = Math.Max(placement.Height, _window.MinHeight);
-            if (placement.IsMaximized)
-            {
-                _window.WindowState = WindowState.Maximized;
-            }
         }
 
         // Where the window is is kept while it is still there to say: once closed, it no longer says it was maximized.
