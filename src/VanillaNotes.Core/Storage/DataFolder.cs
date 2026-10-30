@@ -24,6 +24,9 @@ public sealed class DataFolder
     /// <summary>The name of the folder that holds one folder per backup.</summary>
     private const string _backupsFolder = "backups";
 
+    /// <summary>The name of the folder a backup is copied into, beside the data, before it takes the place of the data.</summary>
+    private const string _restoringFolder = "restoring";
+
     /// <summary>The two files SQLite keeps beside a database while it is in use.</summary>
     private static readonly string[] _databaseCompanions = ["-wal", "-shm"];
 
@@ -53,9 +56,27 @@ public sealed class DataFolder
 
     /// <summary>
     /// Makes the folder of the data, and the folders it always has, when they are not there yet.
+    /// What the application left halfway when it was cut short is dealt with first: a restore whose
+    /// copy was complete is finished, and a copy that was not, of a restore or of a backup, is
+    /// deleted.
     /// </summary>
     public void Prepare()
     {
+        FinishRestore();
+        string partialRestore = Path.Combine(Root, _restoringFolder) + PartialSuffix;
+        if (Directory.Exists(partialRestore))
+        {
+            Directory.Delete(partialRestore, recursive: true);
+        }
+
+        if (Directory.Exists(BackupsFolder))
+        {
+            foreach (string partial in Directory.EnumerateDirectories(BackupsFolder, "*" + PartialSuffix))
+            {
+                Directory.Delete(partial, recursive: true);
+            }
+        }
+
         Directory.CreateDirectory(Path.Combine(Root, _profilesFolder));
         Directory.CreateDirectory(BackupsFolder);
     }
@@ -242,9 +263,22 @@ public sealed class DataFolder
     /// <summary>
     /// Puts the data of a backup in place of the data there is: the catalog and the folder of
     /// every profile are replaced, and the backups are left as they are. No database of the data
-    /// may be open while it is done.
+    /// may be open while it is done. The backup is first copied whole beside the data, and only
+    /// then moved into its place, so that a restore cut short either leaves the data as it was or
+    /// is finished at the next start.
     /// </summary>
     public void RestoreFrom(string name)
+    {
+        StageRestore(name);
+        FinishRestore();
+    }
+
+    /// <summary>
+    /// The first half of a restore: copies the data of a backup beside the data there is, under a
+    /// partial name, and gives the copy its own name once it is complete. Until then the data is
+    /// untouched.
+    /// </summary>
+    public void StageRestore(string name)
     {
         string backup = BackupFolder(name);
         if (!File.Exists(CatalogPathIn(backup)))
@@ -252,19 +286,59 @@ public sealed class DataFolder
             throw new DirectoryNotFoundException($"There is no backup named {name}.");
         }
 
-        string profiles = Path.Combine(Root, _profilesFolder);
-        if (Directory.Exists(profiles))
+        string staged = Path.Combine(Root, _restoringFolder);
+        string partial = staged + PartialSuffix;
+        if (Directory.Exists(partial))
         {
-            Directory.Delete(profiles, recursive: true);
+            Directory.Delete(partial, recursive: true);
         }
 
-        foreach (string suffix in _databaseCompanions.Prepend(""))
+        CopyFolder(backup, partial);
+
+        // A backup made when there was no profile has no folder of profiles, and still takes the
+        // place of the ones there are.
+        Directory.CreateDirectory(Path.Combine(partial, _profilesFolder));
+        Directory.Move(partial, staged);
+    }
+
+    /// <summary>
+    /// The second half of a restore: moves the complete copy of a backup into the place of the
+    /// data, the profiles first and then the catalog, and deletes what is left of the copy. Each
+    /// step is done only while its part of the copy is still there, so that a restore cut short
+    /// anywhere in it is finished by doing this again. Nothing is done when there is no copy.
+    /// </summary>
+    public void FinishRestore()
+    {
+        string staged = Path.Combine(Root, _restoringFolder);
+        if (!Directory.Exists(staged))
         {
-            File.Delete(CatalogPath + suffix);
+            return;
         }
 
-        File.Copy(CatalogPathIn(backup), CatalogPath);
-        CopyFolder(Path.Combine(backup, _profilesFolder), profiles);
+        string stagedProfiles = Path.Combine(staged, _profilesFolder);
+        if (Directory.Exists(stagedProfiles))
+        {
+            string profiles = Path.Combine(Root, _profilesFolder);
+            if (Directory.Exists(profiles))
+            {
+                Directory.Delete(profiles, recursive: true);
+            }
+
+            Directory.Move(stagedProfiles, profiles);
+        }
+
+        string stagedCatalog = CatalogPathIn(staged);
+        if (File.Exists(stagedCatalog))
+        {
+            foreach (string suffix in _databaseCompanions.Prepend(""))
+            {
+                File.Delete(CatalogPath + suffix);
+            }
+
+            File.Move(stagedCatalog, CatalogPath);
+        }
+
+        Directory.Delete(staged, recursive: true);
     }
 
     private static void CopyFolder(string source, string target)

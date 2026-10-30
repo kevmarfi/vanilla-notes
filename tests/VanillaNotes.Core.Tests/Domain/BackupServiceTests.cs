@@ -2,6 +2,7 @@ using System.Globalization;
 using VanillaNotes.Core.Domain;
 using VanillaNotes.Core.Errors;
 using VanillaNotes.Core.Models;
+using VanillaNotes.Core.Storage;
 using VanillaNotes.Core.Tests.Helpers;
 using Xunit;
 
@@ -205,5 +206,59 @@ public sealed class BackupServiceTests : IDisposable
         {
             folder.Delete(recursive: true);
         }
+    }
+
+    // -- Cut short -- //
+
+    [Fact]
+    public void ARestoreCutShortAfterItsCopyIsFinishedAtTheNextStart()
+    {
+        TestApplication.OpenProfile ana = _app.CreateProfile("Ana");
+        long noteId = ana.Notes.Create("Groceries", "Bread").Id;
+        ana.Session.Dispose();
+        BackupInfo backup = _app.Backups.Create(open: null);
+        _app.CreateProfile("Zoe").Session.Dispose();
+        _app.Catalog.CloseConnections();
+
+        // The application stops once the copy is complete, with the data it replaces half gone.
+        _app.DataFolder.StageRestore(backup.Name);
+        File.Delete(_app.DataFolder.CatalogPath);
+        Directory.Delete(_app.DataFolder.ProfileFolder(ana.Id), recursive: true);
+
+        _app.DataFolder.Prepare();
+
+        Assert.Equal(["Ana"], _app.ProfileService.List().Select(profile => profile.Name));
+        Assert.Equal("Bread", _app.Open(ana.Id).Notes.Get(noteId).Content);
+    }
+
+    [Fact]
+    public void ARestoreCutShortDuringItsCopyLeavesTheDataAsItWas()
+    {
+        _app.CreateProfile("Ana").Session.Dispose();
+        BackupInfo backup = _app.Backups.Create(open: null);
+        _app.CreateProfile("Zoe").Session.Dispose();
+        _app.Catalog.CloseConnections();
+
+        // The application stops before the copy is complete, so the copy keeps its partial name.
+        _app.DataFolder.StageRestore(backup.Name);
+        string staged = Path.Combine(_app.DataFolder.Root, "restoring");
+        Directory.Move(staged, staged + DataFolder.PartialSuffix);
+
+        _app.DataFolder.Prepare();
+
+        Assert.Equal(["Ana", "Zoe"], _app.ProfileService.List().Select(profile => profile.Name));
+        Assert.False(Directory.Exists(staged + DataFolder.PartialSuffix));
+    }
+
+    [Fact]
+    public void ABackupCutShortIsDeletedAtTheNextStart()
+    {
+        string partial = _app.DataFolder.StartBackup("2000-01-01T00-00-00-000Z");
+        File.WriteAllBytes(Path.Combine(partial, "profiles.db"), [1, 2, 3]);
+
+        _app.DataFolder.Prepare();
+
+        Assert.False(Directory.Exists(partial));
+        Assert.Empty(_app.Backups.List());
     }
 }
